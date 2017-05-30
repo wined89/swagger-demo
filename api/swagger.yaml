@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   description: "Documentación de la definición de los servicios NoLogin,Multiva,Legosoft" 
   version: "0.1.0"
-  title: "Grupo Financiero Multivaa"
+  title: "Grupo Financiero Multiva"
 host: "200.39.24.141"
 basePath: "/"
 tags:
