@@ -15,7 +15,7 @@ paths:
   /LoginEstatico:
     post:
       tags:
-      - "Login"
+      - "Cliente"
       summary: "/Login"
       description: "Login por primera vez"
       operationId: "loginEstaticoPOST"
@@ -40,7 +40,7 @@ paths:
   /LoginDinamico:
     post:
       tags:
-      - "Login"
+      - "Mail"
       summary: "/Login"
       description: "Login por primera vez"
       operationId: "loginDinamicoPOST"
@@ -64,7 +64,7 @@ paths:
   /ValidacionDeLoginDinamico:
     post:
       tags:
-      - "Login"
+      - "OTP"
       summary: "/LoginValidacionDinamico"
       description: "Valida Login dinamico"
       operationId: "validacionDeLoginDinamicoPOST"
@@ -88,7 +88,7 @@ paths:
   /CuentasPropias:
     post:
       tags:
-      - "Login"
+      - "Contraseña"
       summary: "/Login"
       description: "Login por primera vez"
       operationId: "cuentasPropiasPOST"
@@ -112,7 +112,7 @@ paths:
   /CuentasATerceros:
     post:
       tags:
-      - "Login"
+      - "Contrato"
       summary: "/Login"
       description: "Login por primera vez"
       operationId: "cuentasATercerosPOST"
@@ -136,7 +136,7 @@ paths:
   /ConsultaOrdenesPago:
     post:
       tags:
-      - "Login"
+      - "Contrato"
       summary: "/Login"
       description: "Login por primera vez"
       operationId: "consultaOrdenesPagoPOST"
@@ -160,7 +160,7 @@ paths:
   /CuentasInterbancarias:
     post:
       tags:
-      - "Login"
+      - "Contrato"
       summary: "/Login"
       description: "Login por primera vez"
       operationId: "cuentasInterbancariasPOST"
@@ -184,7 +184,7 @@ paths:
   /ConsultaOrdenesInternacionales:
     post:
       tags:
-      - "Login"
+      - "Contrato"
       summary: "/Login"
       description: "Login por primera vez"
       operationId: "consultaOrdenesInternacionalesPOST"
@@ -208,7 +208,7 @@ paths:
   /ConsultaEstablecimiento:
     post:
       tags:
-      - "Login"
+      - "Contrato"
       summary: "/Login"
       description: "Login por primera vez"
       operationId: "consultaEstablecimientoPOST"
@@ -232,7 +232,7 @@ paths:
   /Logout:
     post:
       tags:
-      - "Login"
+      - "Contrato"
       summary: "/Login"
       description: "Login por primera vez"
       operationId: "logoutPOST"
@@ -256,7 +256,7 @@ paths:
   /GeneraArchivo:
     post:
       tags:
-      - "ReportFile"
+      - "Contrato"
       summary: "/GeneraArchivo"
       description: "Servicio que realiza una consulta a la bd"
       operationId: "generaArchivoPOST"
@@ -282,7 +282,7 @@ paths:
   /Minio:
     get:
       tags:
-      - "Minio"
+      - "Contrato"
       summary: "/Minio"
       description: "Servicio rest que nos trae las credenciales para el acceso a minio."
       operationId: "minioGET"
@@ -305,7 +305,7 @@ paths:
   /nomina/layout:
     post:
       tags:
-      - "Nomina"
+      - "Contrato"
       summary: "/nomina"
       description: "Servicio que realiza una consulta de los diferentes layout de nomina."
       operationId: "layout"
@@ -330,7 +330,7 @@ paths:
   /facultamiento/menu:
     post:
       tags:
-      - "Facultamiento"
+      - "Contrato"
       summary: "/menu"
       description: "menu bancanet"
       operationId: "menu"
@@ -355,7 +355,7 @@ paths:
   /nomina/sendLayout:
     post:
       tags:
-        - "Nomina"
+        - "Contrato"
       operationId: "sendLayout"
       summary: "/nomina"
       description: ''
