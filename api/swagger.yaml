@@ -12,6 +12,7 @@ tags:
     description: "Primer Login"
     url: "http://200.39.24.141:9092/docs"
 paths: 
+
   /Cliente:
     post:
       tags:
@@ -68,8 +69,109 @@ paths:
           schema:
             $ref: "#/definitions/ErrorContratoModificacion"            
       x-swagger-router-controller: "Contrato"
-      
+   
+  /validaOTP:
+    post:
+      tags:
+      - "OTP"
+      description: "Se requiere la validacion en VACMAN del usuario y su OTP, si la operación de OTP fue exitosa, el valor del blob que es generado que es generado por vacman se actualizara en el LDAP"
+      operationId: "validaOTP"
+      parameters:
+      - in: "body"
+        name: "validaOTP"
+        description: "Se requiere la validacion de VACMAN del usuario y su OTP"
+        required: true
+        schema:
+          $ref: "#/definitions/OTP-in"
+      responses:
+        200:
+          description: "Usuario correcto y token correcto: 0"
+          schema:
+            $ref: "#/definitions/usuarioCorrecto-Token-Correcto-res"
+        241:
+          description: "Usuario correcto y OTP incorrecto: 41"
+          schema:
+            $ref: "#/definitions/usuario-correcto-y-OTP-incorrecto-res"
+        232:
+          description: "Usuario correcto y OTP incorrecto: 32"
+          schema:
+            $ref: "#/definitions/token-no-asignado-res"
+        245:
+          description: "Token asignado pero no activo: 45"
+          schema:
+            $ref: "#/definitions/token-asignado-pero-no-activo-res"
+        404:
+          description: "Error"
+          schema:
+            $ref: "#/definitions/ErrorOTP"
+    x-swagger-router-controller: "validaOTP"
+  /cambioPwd:
+    post:
+      tags:
+      - "Contraseña"
+      description: "Se requiere la validacion de la contraseña actual despues que se compare la nueva contraseña si los dos pasos son exitoso se requiere realizar una modificacion al atributo userPassword en LDAP para el numero del cleinte (uid=$numCliente,ou=people,dc=multiva,dc=mx) previamente obtenido en la entradas y se coloca el nuevo password proporcionado."
+      operationId: "cambioPwd"
+      parameters:
+      - in: "body"
+        name: "cambioPwd"
+        description: "Se requiere la validacion de la contraseña actual  "
+        required: true
+        schema:
+          $ref: "#/definitions/contraseña-in"
+      responses:
+        200:
+          description: "Cambio de contraseña exitoso: 0"
+          schema:
+            $ref: "#/definitions/cambio-de-contraseña-exitoso-res"
+        249:
+          description: "Contraseña actual errónea: 49"
+          schema:
+            $ref: "#/definitions/contraseña-actual-errónea-res"
+        248:
+          description: "No coinciden las nuevas contraseñas: 48"
+          schema:
+            $ref: "#/definitions/no-coinciden-las-nuevas-contraseñas-res"
+        404:
+          description: "No se modificó la contraseña valor de la operación en LDAP"
+          schema:
+            $ref: "#/definitions/ErrorCambioPwd"
+    x-swagger-router-controller: "cambioPwd"
+  /contrato:
+    post:
+      tags:
+      - "Contrato"
+      description: "Se requiere obtener el dato del atributo contratoAceptado: en LDAP por medio de un ldapsearch -h ip-server -p 389 –D uid=$idCliente,ou=people,dc=multiva,dc=mx -w $password -b  -s base contratoAceptado."
+      operationId: "contrato"
+      parameters:
+      - in: "body"
+        name: "contrato"
+        description: "Se requiere la validacion de la contraseña actual  "
+        required: true
+        schema:
+          $ref: "#/definitions/contrato-in"
+      responses:
+        200:
+          description: "Operación correcta: 0"
+          schema:
+            $ref: "#/definitions/operacion-correcta-res"
+        249:
+          description: "No se encuentra el usuario: 32"
+          schema:
+            $ref: "#/definitions/no-se-encuentra-el-usuario-res"
+        232:
+          description: "valor del atributo nulo: 41"
+          schema:
+            $ref: "#/definitions/valor-del-atributo-nulo-res"
+        404:
+          description: "Error"
+          schema:
+            $ref: "#/definitions/ErrorContrato"
+    x-swagger-router-controller: "contrato"
+
+ 
+
 definitions:
+
   contrato-mod-in:
     properties:
       usuario:
@@ -159,4 +261,167 @@ definitions:
         type: "string"
         example: "No se encuentra el usuario: 32"
         description: "No se encuentra el usuario: 32"
+  contrato-in:
+    properties:
+      usuario:
+        type: "string"
+        example: "wined"
+      
+  operacion-correcta-res:
+    properties:
+      Valor obtenido del atributo contrato Aceptado.:
+        type: "string"
+        example: "0"
+      Código de retorno:
+        type: "string"
+        example: "Operación correcta"
+  no-se-encuentra-el-usuario-res:
+    properties:
+      Valor obtenido del atributo contrato Aceptado.:
+        type: "string"
+        example: "32"
+      Código de retorno:
+        type: "string"
+        example: "No se encuentra el usuario"
   
+  valor-del-atributo-nulo-res:
+    properties:
+      Valor obtenido del atributo contrato Aceptado.:
+        type: "string"
+        example: "41"
+      Código de retorno:
+        type: "string"
+        example: "Valor del atributo nulo" 
+
+  
+  
+  usuarioCorrecto-Token-Correcto-res:
+    properties:
+      codigo de respuesta:
+        type: "string"
+        example: "0"
+      Descripción de la respuesta:
+        type: "string"
+        example: "Usuario correcto y token correcto"
+      antiphishing:
+        type: "string"
+        example: "test1"
+  usuario-correcto-y-OTP-incorrecto-res:
+    properties:
+      codigo de respuesta:
+        type: "string"
+        example: "0"
+      Descripción de la respuesta:
+        type: "string"
+        example: "Usuario correcto y OTP incorrecto"
+      antiphishing:
+        type: "string"
+        example: "test1"
+  token-no-asignado-res:
+    properties:
+      codigo de respuesta:
+        type: "string"
+        example: "32"
+      Descripción de la respuesta:
+        type: "string"
+        example: "Token no asignado"
+      antiphishing:
+        type: "string"
+        example: "test1"
+  token-asignado-pero-no-activo-res:
+    properties:
+      codigo de respuesta:
+        type: "string"
+        example: "45"
+      Descripción de la respuesta:
+        type: "string"
+        example: "Token asignado pero no activo"
+      antiphishing:
+        type: "string"
+        example: "test1"
+  
+  
+  
+  cambio-de-contraseña-exitoso-res:
+    properties:
+      codigo de respuesta.:
+        type: "string"
+        example: "0"
+      Descripción de la respuesta:
+        type: "string"
+        example: "Cambio de contraseña exitoso"
+      antiphishing:
+        type: "string"
+        example: "test1"
+  contraseña-actual-errónea-res:
+    properties:
+      codigo de respuesta.:
+        type: "string"
+        example: "49"
+      Descripción de la respuesta:
+        type: "string"
+        example: "Contraseña actual errónea"
+      antiphishing:
+        type: "string"
+        example: "test1"
+  no-coinciden-las-nuevas-contraseñas-res:
+    properties:
+      codigo de respuesta.:
+        type: "string"
+        example: "48"
+      Descripción de la respuesta:
+        type: "string"
+        example: "No coinciden las nuevas contraseñas"
+      antiphishing:
+        type: "string"
+        example: "test1"
+  
+     
+  
+  OTP-in:
+    properties:
+      usuario::
+        type: "string"
+        example: "123456789"
+      password OTP:
+        type: "string"
+        example: "12345tftg5657765412wqsdwdwe23e3r43rd"
+      tipo token:
+        type: "integer"
+        example: "1"
+  contraseña-in:
+    properties:
+      usuario::
+        type: "string"
+        example: "123456789"
+      password:
+        type: "string"
+        example: "12345tftg5657765412wqsdwdwe23e3r43rd"
+      nuevo password:
+        type: "string"
+        example: "12345tftg5657765412wqsdwdwe23e3r43rd"
+      confirma nuevo password:
+        type: "string"
+        example: "12345tftg5657765412wqsdwdwe23e3r43rd"
+      
+  
+  ErrorContrato:
+    properties:
+      Error:
+        type: "string"
+        example: "Error OTP"
+        description: "Respuesta de Contrato"
+ 
+  ErrorCambioPwd:
+    properties:
+      Error:
+        type: "string"
+        example: "Error OTP"
+        description: "Respuesta de cambio de pwd"
+  ErrorOTP:
+    properties:
+      Error:
+        type: "string"
+        example: "Error OTP"
+        description: "Respuesta de OTP"
+ 
