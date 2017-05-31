@@ -11,7 +11,7 @@ tags:
   description: "Primer Login (Dinámico  y Estático)"
   externalDocs:
     description: "Primer Login"
-    url: "http://200.39.24.141:9092/docs"
+    url: "http://200.39.24.141:9090/docs"
 paths:
   /Cliente:
     post:
