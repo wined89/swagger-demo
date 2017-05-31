@@ -1,0 +1,400 @@
+---
+swagger: "2.0"
+info:
+  description: "Documentación de los servicios de la Banca Genérica  "
+  version: "0.1.0"
+  title: "Middleware"
+host: "localhost:9092"
+basePath: "/"
+tags:
+- name: "Core Bancario"
+  description: "Primer Login (Dinámico  y Estático)"
+  externalDocs:
+    description: "Primer Login"
+    url: "http://localhost:9092/docs"
+paths:
+  /validaOTP:
+    post:
+      tags:
+      - "OTP"
+      description: "Se requiere la validacion en VACMAN del usuario y su OTP, si la\
+        \ operación de OTP fue exitosa, el valor del blob que es generado que es generado\
+        \ por vacman se actualizara en el LDAP"
+      operationId: "validaOTP"
+      parameters:
+      - in: "body"
+        name: "validaOTP"
+        description: "Se requiere la validacion de VACMAN del usuario y su OTP"
+        required: true
+        schema:
+          $ref: "#/definitions/OTP-in"
+      responses:
+        200:
+          description: "Usuario correcto y token correcto: 0"
+          schema:
+            $ref: "#/definitions/usuarioCorrecto-Token-Correcto-res"
+        232:
+          description: "Usuario correcto y OTP incorrecto: 32"
+          schema:
+            $ref: "#/definitions/token-no-asignado-res"
+        241:
+          description: "Usuario correcto y OTP incorrecto: 41"
+          schema:
+            $ref: "#/definitions/usuario-correcto-y-OTP-incorrecto-res"
+        245:
+          description: "Token asignado pero no activo: 45"
+          schema:
+            $ref: "#/definitions/token-asignado-pero-no-activo-res"
+        404:
+          description: "Error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "OTP"
+    x-swagger-router-controller: "validaOTP"
+  /cambioPwd:
+    post:
+      tags:
+      - "Contraseña"
+      description: "Se requiere la validacion de la contraseña actual despues que\
+        \ se compare la nueva contraseña si los dos pasos son exitoso se requiere\
+        \ realizar una modificacion al atributo userPassword en LDAP para el numero\
+        \ del cleinte (uid=$numCliente,ou=people,dc=multiva,dc=mx) previamente obtenido\
+        \ en la entradas y se coloca el nuevo password proporcionado."
+      operationId: "cambioPwd"
+      parameters:
+      - in: "body"
+        name: "cambioPwd"
+        description: "Se requiere la validacion de la contraseña actual  "
+        required: true
+        schema:
+          $ref: "#/definitions/contraseña-in"
+      responses:
+        200:
+          description: "Cambio de contraseña exitoso: 0"
+          schema:
+            $ref: "#/definitions/cambio-de-contraseña-exitoso-res"
+        232:
+          description: "No coinciden las nuevas contraseñas: 48"
+          schema:
+            $ref: "#/definitions/no-coinciden-las-nuevas-contraseñas-res"
+        249:
+          description: "Contraseña actual errónea: 49"
+          schema:
+            $ref: "#/definitions/contraseña-actual-errónea-res"
+        404:
+          description: "No se modificó la contraseña valor de la operación en LDAP"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Contrasea"
+    x-swagger-router-controller: "cambioPwd"
+  /contrato:
+    post:
+      tags:
+      - "Contrato"
+      description: "Se requiere obtener el dato del atributo contratoAceptado: en\
+        \ LDAP por medio de un ldapsearch -h ip-server -p 389 –D uid=$idCliente,ou=people,dc=multiva,dc=mx\
+        \ -w $password -b  -s base contratoAceptado."
+      operationId: "contrato"
+      parameters:
+      - in: "body"
+        name: "contrato"
+        description: "Se requiere la validacion de la contraseña actual  "
+        required: true
+        schema:
+          $ref: "#/definitions/contrato-in"
+      responses:
+        200:
+          description: "Operación correcta: 0"
+          schema:
+            $ref: "#/definitions/operacion-correcta-res"
+        232:
+          description: "valor del atributo nulo: 41"
+          schema:
+            $ref: "#/definitions/valor-del-atributo-nulo-res"
+        249:
+          description: "No se encuentra el usuario: 32"
+          schema:
+            $ref: "#/definitions/no-se-encuentra-el-usuario-res"
+        404:
+          description: "Error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Contrato"
+    x-swagger-router-controller: "contrato"
+  /Cliente:
+    post:
+      tags:
+      - "Cliente"
+      summary: "/Cliente"
+      description: "Realiza la consulta de el cliente"
+      operationId: "clientePOST"
+      parameters:
+      - in: "body"
+        name: "Cliente"
+        description: "Respuesta de datos del cliente"
+        required: true
+        schema:
+          $ref: "#/definitions/entradaCliente-in"
+      responses:
+        200:
+          description: "cliente"
+          schema:
+            $ref: "#/definitions/cliente-res"
+        403:
+          description: "Cliente no encontrado"
+          schema:
+            $ref: "#/definitions/Error"
+        404:
+          description: "Cliente no encontrado"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Cliente"
+  /Contrato:
+    post:
+      tags:
+      - "Contrato"
+      summary: "/Contrato"
+      description: "Realiza la modificacion del contrato"
+      operationId: "contratoPOST"
+      parameters:
+      - in: "body"
+        name: "Contrato"
+        description: "Respuesta"
+        required: true
+        schema:
+          $ref: "#/definitions/contrato-mod-in"
+      responses:
+        200:
+          description: "Contrato Modificacion exitosa"
+          schema:
+            $ref: "#/definitions/contrato-mod-res"
+        403:
+          description: "Cliente no encontrado"
+          schema:
+            $ref: "#/definitions/ErrorContratoModificacion"
+        404:
+          description: "Cliente no encontrado"
+          schema:
+            $ref: "#/definitions/ErrorContratoModificacion"
+      x-swagger-router-controller: "Contrato"
+definitions:
+  contrato-mod-in:
+    properties:
+      usuario:
+        type: "string"
+        example: "11212112"
+      contratoAceptado:
+        type: "string"
+        example: "7656715672"
+  contrato-mod-res:
+    properties:
+      respuesta:
+        type: "string"
+        example: "OK"
+      CodigoRespuesta:
+        type: "string"
+        example: "Operación correcta: 0"
+  entradaCliente-in:
+    properties:
+      Numerocliente:
+        type: "integer"
+        example: 1
+  cliente-res:
+    properties:
+      CodigoRespuesta:
+        type: "integer"
+        example: 1
+      DescripcionResp:
+        type: "string"
+        example: "Datos del clinete"
+      NumCliente:
+        type: "string"
+        example: "1234"
+      Nombre:
+        type: "string"
+        example: "Agustin"
+      Direccion:
+        type: "string"
+        example: "5 de mayo"
+      Poblacion:
+        type: "string"
+        example: "polanco"
+      Ciudad:
+        type: "string"
+        example: "mexico"
+      Estado:
+        type: "string"
+        example: "mexico"
+      CP:
+        type: "string"
+        example: "50010"
+      RFC:
+        type: "string"
+        example: "RYTUYT7867687"
+      Telefono1:
+        type: "string"
+        example: "55556262672"
+      Telefono2:
+        type: "string"
+        example: "5556262626"
+      Celular:
+        type: "string"
+        example: "555762272"
+      Mail:
+        type: "string"
+        example: "agusting@hormail.com"
+      TipoPersona:
+        type: "string"
+        example: "Fisica"
+      Estatus:
+        type: "string"
+        example: ""
+      Sucursal:
+        type: "string"
+        example: "1"
+      ESVIP:
+        type: "string"
+        example: "1"
+  Error:
+    properties:
+      CodigoRespuesta:
+        type: "string"
+        example: "Cliente no encontrado"
+        description: "Cliente no encontrado"
+  ErrorContratoModificacion:
+    properties:
+      CodigoRespuesta:
+        type: "string"
+        example: "No se encuentra el usuario: 32"
+        description: "No se encuentra el usuario: 32"
+  contrato-in:
+    properties:
+      usuario:
+        type: "string"
+        example: "wined"
+  operacion-correcta-res:
+    properties:
+      Valor obtenido del atributo contrato Aceptado.:
+        type: "string"
+        example: "0"
+      Código de retorno:
+        type: "string"
+        example: "Operación correcta"
+  no-se-encuentra-el-usuario-res:
+    properties:
+      Valor obtenido del atributo contrato Aceptado.:
+        type: "string"
+        example: "32"
+      Código de retorno:
+        type: "string"
+        example: "No se encuentra el usuario"
+  valor-del-atributo-nulo-res:
+    properties:
+      Valor obtenido del atributo contrato Aceptado.:
+        type: "string"
+        example: "41"
+      Código de retorno:
+        type: "string"
+        example: "Valor del atributo nulo"
+  usuarioCorrecto-Token-Correcto-res:
+    properties:
+      codigo de respuesta:
+        type: "string"
+        example: "0"
+      Descripción de la respuesta:
+        type: "string"
+        example: "Usuario correcto y token correcto"
+      antiphishing:
+        type: "string"
+        example: "test1"
+  usuario-correcto-y-OTP-incorrecto-res:
+    properties:
+      codigo de respuesta:
+        type: "string"
+        example: "0"
+      Descripción de la respuesta:
+        type: "string"
+        example: "Usuario correcto y OTP incorrecto"
+      antiphishing:
+        type: "string"
+        example: "test1"
+  token-no-asignado-res:
+    properties:
+      codigo de respuesta:
+        type: "string"
+        example: "32"
+      Descripción de la respuesta:
+        type: "string"
+        example: "Token no asignado"
+      antiphishing:
+        type: "string"
+        example: "test1"
+  token-asignado-pero-no-activo-res:
+    properties:
+      codigo de respuesta:
+        type: "string"
+        example: "45"
+      Descripción de la respuesta:
+        type: "string"
+        example: "Token asignado pero no activo"
+      antiphishing:
+        type: "string"
+        example: "test1"
+  cambio-de-contraseña-exitoso-res:
+    properties:
+      codigo de respuesta.:
+        type: "string"
+        example: "0"
+      Descripción de la respuesta:
+        type: "string"
+        example: "Cambio de contraseña exitoso"
+      antiphishing:
+        type: "string"
+        example: "test1"
+  contraseña-actual-errónea-res:
+    properties:
+      codigo de respuesta.:
+        type: "string"
+        example: "49"
+      Descripción de la respuesta:
+        type: "string"
+        example: "Contraseña actual errónea"
+      antiphishing:
+        type: "string"
+        example: "test1"
+  no-coinciden-las-nuevas-contraseñas-res:
+    properties:
+      codigo de respuesta.:
+        type: "string"
+        example: "48"
+      Descripción de la respuesta:
+        type: "string"
+        example: "No coinciden las nuevas contraseñas"
+      antiphishing:
+        type: "string"
+        example: "test1"
+  OTP-in:
+    properties:
+      'usuario:':
+        type: "string"
+        example: "123456789"
+      password OTP:
+        type: "string"
+        example: "12345tftg5657765412wqsdwdwe23e3r43rd"
+      tipo token:
+        type: "integer"
+        example: 1
+  contraseña-in:
+    properties:
+      usuario:
+        type: "string"
+        example: "123456789"
+      password:
+        type: "string"
+        example: "12345tftg5657765412wqsdwdwe23e3r43rd"
+      nuevo password:
+        type: "string"
+        example: "12345tftg5657765412wqsdwdwe23e3r43rd"
+      confirma nuevo password:
+        type: "string"
+        example: "12345tftg5657765412wqsdwdwe23e3r43rd"
