@@ -1,7 +1,7 @@
 {
-  "name": "anzen",
+  "name": "grupo-financiero-multiva",
   "version": "0.1.0",
-  "description": "Documentación de las API de la Banca Genérica",
+  "description": "Documentación de la definición de los servicios NoLogin,Multiva,Legosoft",
   "main": "index.js",
   "scripts": {
 	"prestart": "npm install",
