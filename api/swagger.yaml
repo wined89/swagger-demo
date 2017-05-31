@@ -4,14 +4,14 @@ info:
   description: "Documentación de los servicios de la Banca Genérica  "
   version: "0.1.0"
   title: "Middleware"
-host: "localhost:9092"
+host: "200.39.24.141:9092"
 basePath: "/"
 tags:
 - name: "Core Bancario"
   description: "Primer Login (Dinámico  y Estático)"
   externalDocs:
     description: "Primer Login"
-    url: "http://localhost:9092/docs"
+    url: "http://200.39.24.141:9092/docs"
 paths:
   /validaOTP:
     post:
