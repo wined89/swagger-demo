@@ -5,8 +5,8 @@ exports.clientePOST = function(args, res, next) {
    * /Cliente
    * Realiza la consulta de el cliente
    *
-   * cliente Cliente Respuesta de datos del cliente
-   * returns inline_response_200
+   * cliente EntradaCliente-in Respuesta de datos del cliente
+   * returns cliente-res
    **/
   var examples = {};
   examples['application/json'] = {

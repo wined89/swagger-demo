@@ -4,8 +4,8 @@ exports.validaOTP = function(args, res, next) {
   /**
    * Se requiere la validacion en VACMAN del usuario y su OTP, si la operación de OTP fue exitosa, el valor del blob que es generado que es generado por vacman se actualizara en el LDAP
    *
-   * validaOTP ValidaOTP Se requiere la validacion de VACMAN del usuario y su OTP
-   * returns inline_response_200_2
+   * validaOTP OTP-in Se requiere la validacion de VACMAN del usuario y su OTP
+   * returns usuarioCorrecto-Token-Correcto-res
    **/
   var examples = {};
   examples['application/json'] = {

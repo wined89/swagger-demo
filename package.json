@@ -1,8 +1,8 @@
 {
-  "name": "grupo-financiero-multiva",
+  "name": "middleware",
   "version": "0.1.0",
-  "description": "Documentación de la definición de los servicios NoLogin,Multiva,Legosoft",
-  "main": "index.js",
+  "description": "Documentación de los servicios de la Banca Genérica  ",
+  "main": "indexx.js",
   "scripts": {
 	"prestart": "npm install",
 	"start": "node index.js"
