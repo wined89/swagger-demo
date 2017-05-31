@@ -13,69 +13,11 @@ tags:
     description: "Primer Login"
     url: "http://200.39.24.141:9090/docs"
 paths:
-  /Cliente:
-    post:
-      tags:
-      - "Cliente"
-      summary: "/Cliente"
-      description: "Realiza la consulta de el cliente"
-      operationId: "clientePOST"
-      parameters:
-      - in: "body"
-        name: "Cliente"
-        description: "Respuesta de datos del cliente"
-        required: true
-        schema:
-          $ref: "#/definitions/Cliente"
-      responses:
-        200:
-          description: "cliente"
-          schema:
-            $ref: "#/definitions/inline_response_200"
-        403:
-          description: "Cliente no encontrado"
-          schema:
-            $ref: "#/definitions/inline_response_403"
-        404:
-          description: "Cliente no encontrado"
-          schema:
-            $ref: "#/definitions/inline_response_403"
-      x-swagger-router-controller: "Cliente"
-  /Contrato:
-    post:
-      tags:
-      - "Contrato"
-      summary: "/Contrato"
-      description: "Realiza la modificacion del contrato"
-      operationId: "contratoPOST"
-      parameters:
-      - in: "body"
-        name: "Contrato"
-        description: "Respuesta"
-        required: true
-        schema:
-          $ref: "#/definitions/Contrato"
-      responses:
-        200:
-          description: "Contrato Modificacion exitosa"
-          schema:
-            $ref: "#/definitions/inline_response_200_1"
-        403:
-          description: "Cliente no encontrado"
-          schema:
-            $ref: "#/definitions/inline_response_403_1"
-        404:
-          description: "Cliente no encontrado"
-          schema:
-            $ref: "#/definitions/inline_response_403_1"
-      x-swagger-router-controller: "Contrato"
   /validaOTP:
     post:
       tags:
       - "OTP"
-      description: "Se requiere la validacion en VACMAN del usuario y su OTP, si la\
-          operación de OTP fue exitosa, el valor del blob que es generado que es generado\
-          por vacman se actualizara en el LDAP"
+      description: "Se requiere la validacion en VACMAN del usuario y su OTP, si la operación de OTP fue exitosa, el valor del blob que es generado que es generado por vacman se actualizara en el LDAP"
       operationId: "validaOTP"
       parameters:
       - in: "body"
@@ -83,39 +25,34 @@ paths:
         description: "Se requiere la validacion de VACMAN del usuario y su OTP"
         required: true
         schema:
-          $ref: "#/definitions/validaOTP"
+          $ref: "#/definitions/OTP-in"
       responses:
         200:
           description: "Usuario correcto y token correcto: 0"
           schema:
-            $ref: "#/definitions/inline_response_200_2"
-        232:
-          description: "Usuario correcto y OTP incorrecto: 32"
-          schema:
-            $ref: "#/definitions/inline_response_232"
+            $ref: "#/definitions/usuarioCorrecto-Token-Correcto-res"
         241:
           description: "Usuario correcto y OTP incorrecto: 41"
           schema:
-            $ref: "#/definitions/inline_response_241"
+            $ref: "#/definitions/usuario-correcto-y-OTP-incorrecto-res"
+        232:
+          description: "Usuario correcto y OTP incorrecto: 32"
+          schema:
+            $ref: "#/definitions/token-no-asignado-res"
         245:
           description: "Token asignado pero no activo: 45"
           schema:
-            $ref: "#/definitions/inline_response_245"
+            $ref: "#/definitions/token-asignado-pero-no-activo-res"
         404:
           description: "Error"
           schema:
-            $ref: "#/definitions/inline_response_404"
-      x-swagger-router-controller: "OTP"
+            $ref: "#/definitions/Error"
     x-swagger-router-controller: "validaOTP"
   /cambioPwd:
     post:
       tags:
       - "Contraseña"
-      description: "Se requiere la validacion de la contraseña actual despues que\
-          se compare la nueva contraseña si los dos pasos son exitoso se requiere\
-          realizar una modificacion al atributo userPassword en LDAP para el numero\
-          del cleinte (uid=$numCliente,ou=people,dc=multiva,dc=mx) previamente obtenido\
-          en la entradas y se coloca el nuevo password proporcionado."
+      description: "Se requiere la validacion de la contraseña actual despues que se compare la nueva contraseña si los dos pasos son exitoso se requiere realizar una modificacion al atributo userPassword en LDAP para el numero del cleinte (uid=$numCliente,ou=people,dc=multiva,dc=mx) previamente obtenido en la entradas y se coloca el nuevo password proporcionado."
       operationId: "cambioPwd"
       parameters:
       - in: "body"
@@ -123,33 +60,30 @@ paths:
         description: "Se requiere la validacion de la contraseña actual  "
         required: true
         schema:
-          $ref: "#/definitions/cambioPwd"
+          $ref: "#/definitions/contraseña-in"
       responses:
         200:
           description: "Cambio de contraseña exitoso: 0"
           schema:
-            $ref: "#/definitions/inline_response_200_3"
-        248:
-          description: "No coinciden las nuevas contraseñas: 48"
-          schema:
-            $ref: "#/definitions/inline_response_248"
+            $ref: "#/definitions/cambio-de-contraseña-exitoso-res"
         249:
           description: "Contraseña actual errónea: 49"
           schema:
-            $ref: "#/definitions/inline_response_249"
+            $ref: "#/definitions/contraseña-actual-errónea-res"
+        232:
+          description: "No coinciden las nuevas contraseñas: 48"
+          schema:
+            $ref: "#/definitions/no-coinciden-las-nuevas-contraseñas-res"
         404:
           description: "No se modificó la contraseña valor de la operación en LDAP"
           schema:
-            $ref: "#/definitions/inline_response_404_1"
-      x-swagger-router-controller: "Contrasea"
+            $ref: "#/definitions/Error"
     x-swagger-router-controller: "cambioPwd"
   /contrato:
     post:
       tags:
-      - "Contrato"
-      description: "Se requiere obtener el dato del atributo contratoAceptado: en\
-          LDAP por medio de un ldapsearch -h ip-server -p 389 –D uid=$idCliente,ou=people,dc=multiva,dc=mx\
-          -w $password -b  -s base contratoAceptado."
+      - "contrato"
+      description: "Se requiere obtener el dato del atributo contratoAceptado: en LDAP por medio de un ldapsearch -h ip-server -p 389 –D uid=$idCliente,ou=people,dc=multiva,dc=mx -w $password -b  -s base contratoAceptado."
       operationId: "contrato"
       parameters:
       - in: "body"
@@ -157,121 +91,35 @@ paths:
         description: "Se requiere la validacion de la contraseña actual  "
         required: true
         schema:
-          $ref: "#/definitions/contrato"
+          $ref: "#/definitions/contrato-in"
       responses:
         200:
           description: "Operación correcta: 0"
           schema:
-            $ref: "#/definitions/inline_response_200_4"
-        232:
-          description: "valor del atributo nulo: 41"
-          schema:
-            $ref: "#/definitions/inline_response_232_1"
+            $ref: "#/definitions/operacion-correcta-res"
         249:
           description: "No se encuentra el usuario: 32"
           schema:
-            $ref: "#/definitions/inline_response_249_1"
+            $ref: "#/definitions/no-se-encuentra-el-usuario-res"
+        232:
+          description: "valor del atributo nulo: 41"
+          schema:
+            $ref: "#/definitions/valor-del-atributo-nulo-res"
         404:
           description: "Error"
           schema:
-            $ref: "#/definitions/inline_response_404_2"
-      x-swagger-router-controller: "Contrato"
+            $ref: "#/definitions/Error"
     x-swagger-router-controller: "contrato"
+
+ 
+
 definitions:
-  contrato-mod-in:
-    properties:
-      usuario:
-        type: "string"
-        example: "11212112"
-      contratoAceptado:
-        type: "string"
-        example: "7656715672"
-  contrato-mod-res:
-    properties:
-      respuesta:
-        type: "string"
-        example: "OK"
-      CodigoRespuesta:
-        type: "string"
-        example: "Operación correcta: 0"
-  entradaCliente-in:
-    properties:
-      Numerocliente:
-        type: "integer"
-        example: 1
-  cliente-res:
-    properties:
-      CodigoRespuesta:
-        type: "integer"
-        example: 1
-      DescripcionResp:
-        type: "string"
-        example: "Datos del clinete"
-      NumCliente:
-        type: "string"
-        example: "1234"
-      Nombre:
-        type: "string"
-        example: "Agustin"
-      Direccion:
-        type: "string"
-        example: "5 de mayo"
-      Poblacion:
-        type: "string"
-        example: "polanco"
-      Ciudad:
-        type: "string"
-        example: "mexico"
-      Estado:
-        type: "string"
-        example: "mexico"
-      CP:
-        type: "string"
-        example: "50010"
-      RFC:
-        type: "string"
-        example: "RYTUYT7867687"
-      Telefono1:
-        type: "string"
-        example: "55556262672"
-      Telefono2:
-        type: "string"
-        example: "5556262626"
-      Celular:
-        type: "string"
-        example: "555762272"
-      Mail:
-        type: "string"
-        example: "agusting@hormail.com"
-      TipoPersona:
-        type: "string"
-        example: "Fisica"
-      Estatus:
-        type: "string"
-        example: ""
-      Sucursal:
-        type: "string"
-        example: "1"
-      ESVIP:
-        type: "string"
-        example: "1"
-  Error:
-    properties:
-      CodigoRespuesta:
-        type: "string"
-        example: "Cliente no encontrado"
-        description: "Cliente no encontrado"
-  ErrorContratoModificacion:
-    properties:
-      CodigoRespuesta:
-        type: "string"
-        example: "No se encuentra el usuario: 32"
-        description: "No se encuentra el usuario: 32"
   contrato-in:
     properties:
       usuario:
         type: "string"
         example: "wined"
+      
   operacion-correcta-res:
     properties:
       Valor obtenido del atributo contrato Aceptado.:
@@ -288,6 +136,7 @@ definitions:
       Código de retorno:
         type: "string"
         example: "No se encuentra el usuario"
+  
   valor-del-atributo-nulo-res:
     properties:
       Valor obtenido del atributo contrato Aceptado.:
@@ -295,7 +144,10 @@ definitions:
         example: "41"
       Código de retorno:
         type: "string"
-        example: "Valor del atributo nulo"
+        example: "Valor del atributo nulo" 
+
+  
+  
   usuarioCorrecto-Token-Correcto-res:
     properties:
       codigo de respuesta:
@@ -340,6 +192,9 @@ definitions:
       antiphishing:
         type: "string"
         example: "test1"
+  
+  
+  
   cambio-de-contraseña-exitoso-res:
     properties:
       codigo de respuesta.:
@@ -373,9 +228,12 @@ definitions:
       antiphishing:
         type: "string"
         example: "test1"
+  
+     
+  
   OTP-in:
     properties:
-      'usuario:':
+      usuario::
         type: "string"
         example: "123456789"
       password OTP:
@@ -383,10 +241,10 @@ definitions:
         example: "12345tftg5657765412wqsdwdwe23e3r43rd"
       tipo token:
         type: "integer"
-        example: 1
+        example: "1"
   contraseña-in:
     properties:
-      'usuario:':
+      usuario::
         type: "string"
         example: "123456789"
       password:
@@ -398,259 +256,11 @@ definitions:
       confirma nuevo password:
         type: "string"
         example: "12345tftg5657765412wqsdwdwe23e3r43rd"
-  ErrorContrato:
-    properties:
-      Error:
-        type: "string"
-        example: "Error OTP"
-        description: "Respuesta de Contrato"
-  ErrorCambioPwd:
-    properties:
-      Error:
-        type: "string"
-        example: "Error OTP"
-        description: "Respuesta de cambio de pwd"
-  ErrorOTP:
+  
+  Error:
     properties:
       Error:
         type: "string"
         example: "Error OTP"
         description: "Respuesta de OTP"
-  Cliente:
-    properties:
-      Numerocliente:
-        type: "integer"
-        example: 1
-  inline_response_200:
-    properties:
-      CodigoRespuesta:
-        type: "integer"
-        example: 1
-      DescripcionResp:
-        type: "string"
-        example: "Datos del clinete"
-      NumCliente:
-        type: "string"
-        example: "1234"
-      Nombre:
-        type: "string"
-        example: "Agustin"
-      Direccion:
-        type: "string"
-        example: "5 de mayo"
-      Poblacion:
-        type: "string"
-        example: "polanco"
-      Ciudad:
-        type: "string"
-        example: "mexico"
-      Estado:
-        type: "string"
-        example: "mexico"
-      CP:
-        type: "string"
-        example: "50010"
-      RFC:
-        type: "string"
-        example: "RYTUYT7867687"
-      Telefono1:
-        type: "string"
-        example: "55556262672"
-      Telefono2:
-        type: "string"
-        example: "5556262626"
-      Celular:
-        type: "string"
-        example: "555762272"
-      Mail:
-        type: "string"
-        example: "agusting@hormail.com"
-      TipoPersona:
-        type: "string"
-        example: "Fisica"
-      Estatus:
-        type: "string"
-        example: ""
-      Sucursal:
-        type: "string"
-        example: "1"
-      ESVIP:
-        type: "string"
-        example: "1"
-  inline_response_403:
-    properties:
-      CodigoRespuesta:
-        type: "string"
-        example: "Cliente no encontrado"
-        description: "Cliente no encontrado"
-  Contrato:
-    properties:
-      usuario:
-        type: "string"
-        example: "11212112"
-      contratoAceptado:
-        type: "string"
-        example: "7656715672"
-  inline_response_200_1:
-    properties:
-      respuesta:
-        type: "string"
-        example: "OK"
-      CodigoRespuesta:
-        type: "string"
-        example: "Operación correcta: 0"
-  inline_response_403_1:
-    properties:
-      CodigoRespuesta:
-        type: "string"
-        example: "No se encuentra el usuario: 32"
-        description: "No se encuentra el usuario: 32"
-  validaOTP:
-    properties:
-      'usuario:':
-        type: "string"
-        example: "123456789"
-      password OTP:
-        type: "string"
-        example: "12345tftg5657765412wqsdwdwe23e3r43rd"
-      tipo token:
-        type: "integer"
-        example: 1
-  inline_response_200_2:
-    properties:
-      codigo de respuesta:
-        type: "string"
-        example: "0"
-      Descripción de la respuesta:
-        type: "string"
-        example: "Usuario correcto y token correcto"
-      antiphishing:
-        type: "string"
-        example: "test1"
-  inline_response_232:
-    properties:
-      codigo de respuesta:
-        type: "string"
-        example: "32"
-      Descripción de la respuesta:
-        type: "string"
-        example: "Token no asignado"
-      antiphishing:
-        type: "string"
-        example: "test1"
-  inline_response_241:
-    properties:
-      codigo de respuesta:
-        type: "string"
-        example: "0"
-      Descripción de la respuesta:
-        type: "string"
-        example: "Usuario correcto y OTP incorrecto"
-      antiphishing:
-        type: "string"
-        example: "test1"
-  inline_response_245:
-    properties:
-      codigo de respuesta:
-        type: "string"
-        example: "45"
-      Descripción de la respuesta:
-        type: "string"
-        example: "Token asignado pero no activo"
-      antiphishing:
-        type: "string"
-        example: "test1"
-  inline_response_404:
-    properties:
-      Error:
-        type: "string"
-        example: "Error OTP"
-        description: "Respuesta de OTP"
-  cambioPwd:
-    properties:
-      'usuario:':
-        type: "string"
-        example: "123456789"
-      password:
-        type: "string"
-        example: "12345tftg5657765412wqsdwdwe23e3r43rd"
-      nuevo password:
-        type: "string"
-        example: "12345tftg5657765412wqsdwdwe23e3r43rd"
-      confirma nuevo password:
-        type: "string"
-        example: "12345tftg5657765412wqsdwdwe23e3r43rd"
-  inline_response_200_3:
-    properties:
-      codigo de respuesta.:
-        type: "string"
-        example: "0"
-      Descripción de la respuesta:
-        type: "string"
-        example: "Cambio de contraseña exitoso"
-      antiphishing:
-        type: "string"
-        example: "test1"
-  inline_response_248:
-    properties:
-      codigo de respuesta.:
-        type: "string"
-        example: "48"
-      Descripción de la respuesta:
-        type: "string"
-        example: "No coinciden las nuevas contraseñas"
-      antiphishing:
-        type: "string"
-        example: "test1"
-  inline_response_249:
-    properties:
-      codigo de respuesta.:
-        type: "string"
-        example: "49"
-      Descripción de la respuesta:
-        type: "string"
-        example: "Contraseña actual errónea"
-      antiphishing:
-        type: "string"
-        example: "test1"
-  inline_response_404_1:
-    properties:
-      Error:
-        type: "string"
-        example: "Error OTP"
-        description: "Respuesta de cambio de pwd"
-  contrato:
-    properties:
-      usuario:
-        type: "string"
-        example: "wined"
-  inline_response_200_4:
-    properties:
-      Valor obtenido del atributo contrato Aceptado.:
-        type: "string"
-        example: "0"
-      Código de retorno:
-        type: "string"
-        example: "Operación correcta"
-  inline_response_232_1:
-    properties:
-      Valor obtenido del atributo contrato Aceptado.:
-        type: "string"
-        example: "41"
-      Código de retorno:
-        type: "string"
-        example: "Valor del atributo nulo"
-  inline_response_249_1:
-    properties:
-      Valor obtenido del atributo contrato Aceptado.:
-        type: "string"
-        example: "32"
-      Código de retorno:
-        type: "string"
-        example: "No se encuentra el usuario"
-  inline_response_404_2:
-    properties:
-      Error:
-        type: "string"
-        example: "Error OTP"
-        description: "Respuesta de Contrato"
+ 
