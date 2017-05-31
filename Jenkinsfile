@@ -7,8 +7,8 @@ node {
    checkout scm
  
   stage 'Desplegando'
-  sh 'sudo killall node'
+  sh 'kill -9 $(ps -fea|grep node|grep indexx.js|cut -d " " -f 5)'
   sh 'sudo npm install'
-  sh 'nohup  sudo node index.js &'
+  sh 'nohup  sudo node indexx.js &'
 
 }
