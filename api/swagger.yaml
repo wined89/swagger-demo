@@ -74,8 +74,8 @@ paths:
       tags:
       - "OTP"
       description: "Se requiere la validacion en VACMAN del usuario y su OTP, si la\
-        \ operación de OTP fue exitosa, el valor del blob que es generado que es generado\
-        \ por vacman se actualizara en el LDAP"
+          operación de OTP fue exitosa, el valor del blob que es generado que es generado\
+          por vacman se actualizara en el LDAP"
       operationId: "validaOTP"
       parameters:
       - in: "body"
@@ -112,10 +112,10 @@ paths:
       tags:
       - "Contraseña"
       description: "Se requiere la validacion de la contraseña actual despues que\
-        \ se compare la nueva contraseña si los dos pasos son exitoso se requiere\
-        \ realizar una modificacion al atributo userPassword en LDAP para el numero\
-        \ del cleinte (uid=$numCliente,ou=people,dc=multiva,dc=mx) previamente obtenido\
-        \ en la entradas y se coloca el nuevo password proporcionado."
+          se compare la nueva contraseña si los dos pasos son exitoso se requiere\
+          realizar una modificacion al atributo userPassword en LDAP para el numero\
+          del cleinte (uid=$numCliente,ou=people,dc=multiva,dc=mx) previamente obtenido\
+          en la entradas y se coloca el nuevo password proporcionado."
       operationId: "cambioPwd"
       parameters:
       - in: "body"
@@ -148,8 +148,8 @@ paths:
       tags:
       - "Contrato"
       description: "Se requiere obtener el dato del atributo contratoAceptado: en\
-        \ LDAP por medio de un ldapsearch -h ip-server -p 389 –D uid=$idCliente,ou=people,dc=multiva,dc=mx\
-        \ -w $password -b  -s base contratoAceptado."
+          LDAP por medio de un ldapsearch -h ip-server -p 389 –D uid=$idCliente,ou=people,dc=multiva,dc=mx\
+          -w $password -b  -s base contratoAceptado."
       operationId: "contrato"
       parameters:
       - in: "body"
