@@ -244,19 +244,19 @@ definitions:
         example: "1"
   contraseña-in:
     properties:
-      usuario::
-        type: "string"
-        example: "123456789"
-      password:
-        type: "string"
-        example: "12345tftg5657765412wqsdwdwe23e3r43rd"
-      nuevo password:
-        type: "string"
-        example: "12345tftg5657765412wqsdwdwe23e3r43rd"
-      confirma nuevo password:
-        type: "string"
-        example: "12345tftg5657765412wqsdwdwe23e3r43rd"
-  
+        usuario:
+          type: "string"
+          example: "123456789"
+        password:
+          type: "string"
+          example: "12345tftg5657765412wqsdwdwe23e3r43rd"
+        nuevo password:
+          type: "string"
+          example: "12345tftg5657765412wqsdwdwe23e3r43rd"
+        confirma nuevo password:
+          type: "string"
+          example: "12345tftg5657765412wqsdwdwe23e3r43rd"
+
   Error:
     properties:
       Error:
