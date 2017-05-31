@@ -11,1099 +11,152 @@ tags:
   externalDocs:
     description: "Primer Login"
     url: "http://200.39.24.141:9092/docs"
-paths:
-  /LoginEstatico:
+paths: 
+  /Cliente:
     post:
       tags:
       - "Cliente"
-      summary: "/Login"
-      description: "Login por primera vez"
-      operationId: "loginEstaticoPOST"
+      summary: "/Cliente"
+      description: "Realiza la consulta de el cliente"
+      operationId: "clientePOST"
       parameters:
       - in: "body"
-        name: "primer login"
-        description: "Respuesta de login existente del core bancario"
-        required: false
-        schema:
-          $ref: "#/definitions/loginEstatico-in"
-      responses:
-        200:
-          description: "Cliente existente y hace el cambio de la clave estatica"
-          schema:
-            $ref: "#/definitions/loginEstatico-res"
-        403:
-          description: "Cliente no encontrado"
-          schema:
-            $ref: "#/definitions/Error"
-      x-swagger-router-controller: "Login"
-
-  /LoginDinamico:
-    post:
-      tags:
-      - "Mail"
-      summary: "/Login"
-      description: "Login por primera vez"
-      operationId: "loginDinamicoPOST"
-      parameters:
-      - in: "body"
-        name: "primer login"
-        description: "Respuesta de login existente del core bancario"
-        required: false
-        schema:
-          $ref: "#/definitions/login-dinamico-in"
-      responses:
-        200:
-          description: "Cliente existente y hace el cambio de la clave estatica"
-          schema:
-            $ref: "#/definitions/login-dinamico-res"
-        403:
-          description: "Cliente no encontrado"
-          schema:
-            $ref: "#/definitions/Error"
-      x-swagger-router-controller: "Login"
-  /ValidacionDeLoginDinamico:
-    post:
-      tags:
-      - "OTP"
-      summary: "/LoginValidacionDinamico"
-      description: "Valida Login dinamico"
-      operationId: "validacionDeLoginDinamicoPOST"
-      parameters:
-      - in: "body"
-        name: "valor dinamico"
-        description: "Validacion de login dinamico"
-        required: false
-        schema:
-          $ref: "#/definitions/Valida-login-dinamico-in"
-      responses:
-        200:
-          description: "validacion de login dinamico"
-          schema:
-            $ref: "#/definitions/Valida-login-dinamico-res"
-        403:
-          description: "Cliente no encontrado"
-          schema:
-            $ref: "#/definitions/Error"
-      x-swagger-router-controller: "Login"
-  /CuentasPropias:
-    post:
-      tags:
-      - "Contraseña"
-      summary: "/Login"
-      description: "Login por primera vez"
-      operationId: "cuentasPropiasPOST"
-      parameters:
-      - in: "body"
-        name: "primer login"
-        description: "Respuesta de login existente del core bancario"
-        required: false
-        schema:
-          $ref: "#/definitions/consulta-de-cuentas-propias-in"
-      responses:
-        202:
-          description: "Cliente existente y hace el cambio de la clave estatica"
-          schema:
-            $ref: "#/definitions/consulta-de-cuentas-propias-res"
-        403:
-          description: "Cliente no encontrado"
-          schema:
-            $ref: "#/definitions/Error"
-      x-swagger-router-controller: "Login"
-  /CuentasATerceros:
-    post:
-      tags:
-      - "Contrato"
-      summary: "/Login"
-      description: "Login por primera vez"
-      operationId: "cuentasATercerosPOST"
-      parameters:
-      - in: "body"
-        name: "primer login"
-        description: "Respuesta de login existente del core bancario"
-        required: false
-        schema:
-          $ref: "#/definitions/consulta-de-cuentas-terceros-in"
-      responses:
-        202:
-          description: "Cliente existente y hace el cambio de la clave estatica"
-          schema:
-            $ref: "#/definitions/consulta-de-cuentas-terceros-res"
-        403:
-          description: "Cliente no encontrado"
-          schema:
-            $ref: "#/definitions/Error"
-      x-swagger-router-controller: "Login"
-  /ConsultaOrdenesPago:
-    post:
-      tags:
-      - "Contrato"
-      summary: "/Login"
-      description: "Login por primera vez"
-      operationId: "consultaOrdenesPagoPOST"
-      parameters:
-      - in: "body"
-        name: "primer login"
-        description: "Respuesta de login existente del core bancario"
-        required: false
-        schema:
-          $ref: "#/definitions/cuentasDeOrdenesDePago-in"
-      responses:
-        202:
-          description: "Cliente existente y hace el cambio de la clave estatica"
-          schema:
-            $ref: "#/definitions/cuentasDeOrdenesDePago-res"
-        403:
-          description: "Cliente no encontrado"
-          schema:
-            $ref: "#/definitions/Error"
-      x-swagger-router-controller: "Login"
-  /CuentasInterbancarias:
-    post:
-      tags:
-      - "Contrato"
-      summary: "/Login"
-      description: "Login por primera vez"
-      operationId: "cuentasInterbancariasPOST"
-      parameters:
-      - in: "body"
-        name: "primer login"
-        description: "Respuesta de login existente del core bancario"
-        required: false
-        schema:
-          $ref: "#/definitions/consulta-de-cuentas-interbancarias-in"
-      responses:
-        202:
-          description: "Cliente existente y hace el cambio de la clave estatica"
-          schema:
-            $ref: "#/definitions/consulta-de-cuentas-interbancarias-res"
-        403:
-          description: "Cliente no encontrado"
-          schema:
-            $ref: "#/definitions/Error"
-      x-swagger-router-controller: "Login"
-  /ConsultaOrdenesInternacionales:
-    post:
-      tags:
-      - "Contrato"
-      summary: "/Login"
-      description: "Login por primera vez"
-      operationId: "consultaOrdenesInternacionalesPOST"
-      parameters:
-      - in: "body"
-        name: "primer login"
-        description: "Respuesta de login existente del core bancario"
-        required: false
-        schema:
-          $ref: "#/definitions/consulta-de-ordenes-internacionales-in"
-      responses:
-        202:
-          description: "Cliente existente y hace el cambio de la clave estatica"
-          schema:
-            $ref: "#/definitions/consulta-de-ordenes-internacionales-res"
-        403:
-          description: "Cliente no encontrado"
-          schema:
-            $ref: "#/definitions/Error"
-      x-swagger-router-controller: "Login"
-  /ConsultaEstablecimiento:
-    post:
-      tags:
-      - "Contrato"
-      summary: "/Login"
-      description: "Login por primera vez"
-      operationId: "consultaEstablecimientoPOST"
-      parameters:
-      - in: "body"
-        name: "primer login"
-        description: "Respuesta de login existente del core bancario"
-        required: false
-        schema:
-          $ref: "#/definitions/consulta-de-establecimiento-in"
-      responses:
-        202:
-          description: "Cliente existente y hace el cambio de la clave estatica"
-          schema:
-            $ref: "#/definitions/consulta-de-establecimiento-res"
-        403:
-          description: "Cliente no encontrado"
-          schema:
-            $ref: "#/definitions/Error"
-      x-swagger-router-controller: "Login"
-  /Logout:
-    post:
-      tags:
-      - "Contrato"
-      summary: "/Login"
-      description: "Login por primera vez"
-      operationId: "logoutPOST"
-      parameters:
-      - in: "body"
-        name: "primer login"
-        description: "Respuesta de login existente del core bancario"
-        required: false
-        schema:
-          $ref: "#/definitions/loginExitoso-in"
-      responses:
-        202:
-          description: "Cliente existente y hace el cambio de la clave estatica"
-          schema:
-            $ref: "#/definitions/loginExitoso-res"
-        403:
-          description: "Cliente no encontrado"
-          schema:
-            $ref: "#/definitions/Error"
-      x-swagger-router-controller: "Login"
-  /GeneraArchivo:
-    post:
-      tags:
-      - "Contrato"
-      summary: "/GeneraArchivo"
-      description: "Servicio que realiza una consulta a la bd"
-      operationId: "generaArchivoPOST"
-      parameters:
-      - in: "body"
-        name: "primer login"
-        description: "GeneraArchivo"
-        required: false
-        schema:
-          $ref: "#/definitions/consultaArchivo-in"
-      responses:
-        200:
-          description: "An array of products"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Datos-Archivo-res"
-        default:
-          description: "Unexpected error"
-          schema:
-            $ref: "#/definitions/Error"
-      x-swagger-router-controller: "GeneraArchivo"
-  /Minio:
-    get:
-      tags:
-      - "Contrato"
-      summary: "/Minio"
-      description: "Servicio rest que nos trae las credenciales para el acceso a minio."
-      operationId: "minioGET"
-      parameters: []
-      responses:
-        200:
-          description: "An array of products"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/ProductRes"
-        default:
-          description: "Unexpected error"
-          schema:
-            $ref: "#/definitions/Error"
-      x-swagger-router-controller: "Minio"
-
-
-
-  /nomina/layout:
-    post:
-      tags:
-      - "Contrato"
-      summary: "/nomina"
-      description: "Servicio que realiza una consulta de los diferentes layout de nomina."
-      operationId: "layout"
-      parameters:
-      - in: "body"
-        name: "Existe layout"
-        description: "layout"
+        name: "Cliente"
+        description: "Respuesta de datos del cliente"
         required: true
         schema:
-          $ref: "#/definitions/FileDefinition-in"
+          $ref: "#/definitions/entradaCliente-in"
       responses:
         200:
-          description: "Validacion de layout"
+          description: "cliente"
           schema:
-              $ref: "#/definitions/FileDefinition-res"
-        default:
-          description: "layout no existe"
-          schema:
-            $ref: "#/definitions/Errorlayout"
-      x-swagger-router-controller: "Nomina"
-
-  /facultamiento/menu:
-    post:
-      tags:
-      - "Contrato"
-      summary: "/menu"
-      description: "menu bancanet"
-      operationId: "menu"
-      parameters:
-      - in: "body"
-        name: "menu"
-        description: "Consulta menu por usuario"
-        required: true
-        schema:
-          $ref: "#/definitions/menu-in"
-      responses:
-        200:
-          description: "responde menu"
-          schema:
-            $ref: "#/definitions/inline_response_200"
+            $ref: "#/definitions/cliente-res"
         403:
           description: "Cliente no encontrado"
           schema:
             $ref: "#/definitions/Error"
-      x-swagger-router-controller: "Facultamiento" 
-
-  /nomina/sendLayout:
+        404:
+          description: "Cliente no encontrado"
+          schema:
+            $ref: "#/definitions/Error"            
+      x-swagger-router-controller: "Cliente"
+  /Contrato:
     post:
       tags:
-        - "Contrato"
-      operationId: "sendLayout"
-      summary: "/nomina"
-      description: ''
-      consumes:
-        - multipart/form-data
-      produces:
-        - application/json
+      - "Contrato"
+      summary: "/Contrato"
+      description: "Realiza la modificacion del contrato"
+      operationId: "contratoPOST"
       parameters:
-        - name: id
-          in: header
-          description: 'El id es el identificador  del layout que el servicio va validar'
-          required: false
-          type: integer
-
-        - name: file
-          in: formData
-          description: 'file es el form-data que consume un archivo con .zip el cual contiene el archivo txt con las transacciones'
-          required: true
-          type: file
+      - in: "body"
+        name: "Contrato"
+        description: "Respuesta"
+        required: true
+        schema:
+          $ref: "#/definitions/contrato-mod-in"
       responses:
-          '200':
-            description: 'Valida la estructura del archivo que se adjunta'
-            schema:
-              $ref: '#/definitions/customModels'
-      x-swagger-router-controller: "Nomina"
-
+        200:
+          description: "Contrato Modificacion exitosa"
+          schema:
+            $ref: "#/definitions/contrato-mod-res"
+        403:
+          description: "Cliente no encontrado"
+          schema:
+            $ref: "#/definitions/ErrorContratoModificacion"
+        404:
+          description: "Cliente no encontrado"
+          schema:
+            $ref: "#/definitions/ErrorContratoModificacion"            
+      x-swagger-router-controller: "Contrato"
+      
 definitions:
-  FileDefinition-in:
+  contrato-mod-in:
     properties:
-      idFileType:
-        type: "integer"
-        example: 1
-  FileDefinition-res:
-    properties:
-      idFileType:
-        type: "integer"
-        example: 1
-      fileType:
-        type: "string"
-        example: "layout 'C' formatos para importación (TEF / TEF Intelar)"
-      validationSide:
-        type: "integer"
-        example: 3
-      keyLen:
-        type: "integer"
-        example: 2
-      lines:
-        $ref: "#/definitions/lines"
-
-  customModels:
-    properties:
-      descripción:
-         type: string
-         example: "Se procesaron el siguiente numero de transacciones correctamente."
-
-
-
-  lines:
-    properties:
-      99:
-        $ref: "#/definitions/99"
-      OO:
-        $ref: "#/definitions/OO"
-      O1:
-        $ref: "#/definitions/OO"
-  99:
-    required:
-    - "len"
-    - "appears"
-    properties:
-      appears:
-        type: "string"
-        example: 1
-      len:
-        type: "integer"
-        example: 52
-      fields:
-        type: "array"
-        items:
-          $ref: "#/definitions/fields"
-  OO:
-    required:
-    - "len"
-    - "appears"
-    properties:
-      appears:
-        type: "boolean"
-        example: true
-      len:
-        type: "integer"
-        example: 1
-      fieldFields:
-        type: "array"
-        items:
-          $ref: "#/definitions/fields"
-
-  fields:
-    properties:
-      name:
-        type: "string"
-        example: "tipoRegistro"
-      len:
-        type: "integer"
-        example: 1
-      start:
-        type: "integer"
-        example: 0
-      type:
-        type: "integer"
-        example: "int"
-      validations:
-        type: "array"
-        items:
-          $ref: "#/definitions/validations"
-  validations:
-    properties:
-      validationSide:
-        type: "integer"
-        example: 3
-      rule:
-        type: "string"
-        example: "footerEqualTo"
-      params:
-        type: "array"
-        items:
-          $ref: "#/definitions/params"
-  params:
-    properties:
-      value:
-        type: string
-        example: 4
-  loginEstatico-res:
-    properties:
-      identificador-de-sesion:
-        type: "string"
-        example: "werwer12321"
-      hora-de-login:
-        type: "string"
-        example: "780"
-      fecha-login:
-        type: "string"
-        format: "date"
-        example: "12/12/12"
-      Fecha-de-Vigencia-de-Clave:
-        type: "string"
-        format: "date"
-        example: "12/12/12"
-      Razon-Social:
-        type: "string"
-        example: "Multiva"
-      Hora-login-previo:
-        type: "string"
-        example: "720"
-      Fecha-Login-previo:
-        type: "string"
-        format: "date"
-        example: "12/12/12"
-      Servicios-contratados:
-        type: "string"
-        example: "3"
-    description: "Valores de regreso de clave dinamica"
-  Valida-login-dinamico-in:
-    properties:
-      cliente:
-        type: "string"
-        example: "werwer12321"
       usuario:
         type: "string"
-        example: "12wined"
-      identificador de sesion:
+        example: "11212112"
+      contratoAceptado:
         type: "string"
-        format: "date"
-        example: "12we2345rwfw"
-      valor-dinamico:
-        type: "string"
-        format: "date"
-        example: "12-23-sd-x"
-    description: "Valores de regreso de clave dinamica"
-  Valida-login-dinamico-res:
+        example: "7656715672"
+  contrato-mod-res:
     properties:
-      respuest:
-        type: "boolean"
-        example: true
-    description: "Valores de regreso de clave dinamica"
-  loginEstatico-in:
+      respuesta:
+        type: "string"
+        example: "OK"
+      CodigoRespuesta:
+        type: "string"
+        example: "Operación correcta: 0"
+  entradaCliente-in:
     properties:
-      cliente:
-        type: "string"
-        example: "Mutiva"
-      usuario:
-        type: "string"
-        example: "Edwin"
-      ip:
-        type: "string"
-        example: "192.168.1.2"
-      pasword:
-        type: "string"
-        example: "aqui-esta-el-password"
-    description: "Valores de regreso de clave dinamica"
-  login-dinamico-res:
+      Numerocliente:
+        type: "integer"
+        example: 1
+  cliente-res:
     properties:
-      valor-de-comparacion:
-        type: "boolean"
-        example: true
-    description: "Generacion de clave dinamica"
-  login-dinamico-in:
-    properties:
-      cliente:
+      CodigoRespuesta:
+        type: "integer"
+        example: 1
+      DescripcionResp:
         type: "string"
-        example: "qwertywined12345"
-      usuario:
+        example: "Datos del clinete"
+      NumCliente:
         type: "string"
-        example: "wined"
-      identificador-de-sesion:
+        example: "1234"
+      Nombre:
         type: "string"
-        example: "qwerty12345"
-    description: "Generacion de clave dinamica"
-  consulta-de-cuentas-propias-res:
-    properties:
-      Numero-de-cuenta:
+        example: "Agustin"
+      Direccion:
+        type: "string"
+        example: "5 de mayo"
+      Poblacion:
+        type: "string"
+        example: "polanco"
+      Ciudad:
+        type: "string"
+        example: "mexico"
+      Estado:
+        type: "string"
+        example: "mexico"
+      CP:
+        type: "string"
+        example: "50010"
+      RFC:
+        type: "string"
+        example: "RYTUYT7867687"
+      Telefono1:
+        type: "string"
+        example: "55556262672"
+      Telefono2:
+        type: "string"
+        example: "5556262626"
+      Celular:
+        type: "string"
+        example: "555762272"
+      Mail:
+        type: "string"
+        example: "agusting@hormail.com"
+      TipoPersona:
+        type: "string"
+        example: "Fisica"
+      Estatus:
+        type: "string"
+        example: ""
+      Sucursal:
         type: "string"
         example: "1"
-      tipo-cuenta:
-        type: "string"
-        example: "Cuenta a terceros"
-      sucrusal:
-        type: "string"
-        example: "insurgentes sur"
-      cuenta:
-        type: "integer"
-        example: 1
-      nombre-de-cuenta:
-        type: "integer"
-        example: "multiva"
-      alias-cuenta:
-        type: "string"
-        example: "multiva12345"
-      estatus:
-        type: "boolean"
-        example: false
-      moneda:
-        type: "number"
-        format: "double"
-        example: "Pesos"
-      fecha-ultimo-pago:
-        type: "string"
-        format: "date"
-        example: "12/12/12"
-      monto-ultimo-pago:
-        type: "number"
-        format: "double"
-        example: 10000
-      identificador-mas-cuentas:
-        type: "string"
-        example: "false"
-    description: "Informacion de cuentas propias por cliente"
-  consulta-de-cuentas-propias-in:
-    properties:
-      cliente:
-        type: "string"
-        example: "wined"
-      usuario:
-        type: "string"
-        example: "wineduser"
-      identificador-de-sesion:
-        type: "string"
-        example: "qwertywined12345"
-      tipo ultima cuenta:
+      ESVIP:
         type: "string"
         example: "1"
-      sucursal ultima cuenta:
-        type: "string"
-        example: "123"
-      ultima cuenta:
-        type: "string"
-        example: "1234456"
-    description: "Informacion de cuentas propias por cliente"
-  consulta-de-cuentas-terceros-res:
-    properties:
-      Numero-de-cuenta:
-        type: "integer"
-        example: 123234234
-      tipo-cuenta:
-        type: "string"
-        example: "terceros"
-      sucursal:
-        type: "integer"
-        example: 12
-      cuenta:
-        type: "integer"
-        example: "null"
-      nombre-de-cuenta:
-        type: "string"
-        example: "nomina"
-      alias-cuenta:
-        type: "string"
-        example: "nomwined"
-      estatus:
-        type: "boolean"
-        example: true
-      moneda:
-        type: "number"
-        format: "double"
-        example: "pesos"
-      fecha-ultimo-pago:
-        type: "string"
-        example: "null"
-      monto-ultimo-pago:
-        type: "string"
-        format: "date"
-        example: "12/12/12"
-      Tipo de persona:
-        type: "string"
-        example: "fisica"
-      telefono:
-        type: "string"
-        example: "34-34-34-34"
-      correo-electronico:
-        type: "string"
-        example: "anzen@anzen.com.mx"
-      Periodicidad:
-        type: "integer"
-        example: 1
-      Monto Máximo:
-        type: "number"
-        format: "double"
-        example: "120,000"
-      Identificador más cuentas:
-        type: "string"
-        example: "123qweqweqew"
-    description: "Informacion de cuentas propias por cliente"
-  consulta-de-cuentas-terceros-in:
-    properties:
-      cliente:
-        type: "string"
-        example: ""
-      usuario:
-        type: "string"
-        example: ""
-      identificador-de-sesion:
-        type: "string"
-        example: ""
-      tipo ultima cuenta:
-        type: "string"
-        example: ""
-      sucursal ultima cuenta:
-        type: "string"
-        example: ""
-      ultima cuenta:
-        type: "string"
-        example: ""
-    description: "Informacion de cuentas propias por cliente"
-  cuentasDeOrdenesDePago-res:
-    properties:
-      Numero-de-cuenta:
-        type: "string"
-        example: "12312312sdf"
-      tipo-cuenta:
-        type: "string"
-        example: "qwe123"
-      sucursal:
-        type: "string"
-        example: "12"
-      cuenta:
-        type: "string"
-        example: "213wqeqwe"
-      nombre-de-cuenta:
-        type: "string"
-        example: "null"
-      alias-cuenta:
-        type: "string"
-        example: "multiva"
-      estatus:
-        type: "boolean"
-        example: false
-      moneda:
-        type: "number"
-        example: "pesos"
-      fecha-ultimo-pago:
-        type: "string"
-        format: "date"
-        example: "null"
-      monto-ultimo-pago:
-        type: "number"
-        example: 12000
-      tipo persona:
-        type: "string"
-        example: "fisica"
-      telefono:
-        type: "number"
-        example: 23232323
-      correo-electronico:
-        type: "string"
-        example: "23@multiva.com"
-      Periodicidad:
-        type: "integer"
-        example: 1
-      Monto Máximo:
-        type: "number"
-        format: "double"
-        example: 10000
-      RFC:
-        type: "string"
-        example: "eahei89ejfd"
-      identificador mas cuentas:
-        type: "string"
-        example: "true"
-    description: "Generacion de clave dinamica"
-  cuentasDeOrdenesDePago-in:
-    properties:
-      cliente:
-        type: "string"
-        example: "wined"
-      usuario:
-        type: "string"
-        example: "wined"
-      identificador de sesion:
-        type: "string"
-        example: "qwerty1234wined"
-      tipo ultima cuenta:
-        type: "string"
-        example: "1"
-      ultimo beneficiario:
-        type: "string"
-        example: "12"
-      ultima cuenta:
-        type: "string"
-        example: "true"
-    description: "Cuentas Propias"
-  consulta-de-cuentas-interbancarias-res:
-    properties:
-      Numero-de-cuenta:
-        type: "number"
-        example: 123123123213
-      tipo-cuenta:
-        type: "string"
-        example: "3ros"
-      sucursal:
-        type: "integer"
-        example: 1
-      cuenta:
-        type: "string"
-        example: "multiva1234"
-      nombre-de-cuenta:
-        type: "string"
-        example: "propia"
-      alias-cuenta:
-        type: "string"
-        example: "prowined"
-      estatus:
-        type: "boolean"
-        example: true
-      moneda:
-        type: "number"
-        format: "double"
-        example: "null"
-      fecha-ultimo-pago:
-        type: "string"
-        format: "date"
-        example: "12/12/12"
-      monto-ultimo-pago:
-        type: "string"
-        format: "double"
-        example: "120,000"
-      identificador-mas-cuentas:
-        type: "string"
-        example: "12233445erer"
-      telefono:
-        type: "string"
-        example: "55-23-23-23-"
-      correo-electronico:
-        type: "string"
-        example: "multiva@example.com.mx"
-      Periodicidad:
-        type: "integer"
-        example: 123
-      Monto Máximo:
-        type: "number"
-        format: "double"
-        example: "120,000"
-      Identificador más cuentas:
-        type: "string"
-        example: "12qwerty"
-      RFC:
-        type: "string"
-        example: "eagw123456jfmd178"
-    description: "Generacion de clave dinamica"
-  consulta-de-cuentas-interbancarias-in:
-    properties:
-      cliente:
-        type: "string"
-        example: ""
-      usuario:
-        type: "string"
-        example: ""
-      identificador de sesion:
-        type: "string"
-        example: ""
-      tipo ultima cuenta:
-        type: "string"
-        example: ""
-      ultima cuenta:
-        type: "string"
-        example: ""
-    description: "Generacion de clave dinamica"
-  consulta-de-ordenes-internacionales-res:
-    properties:
-      tipo-cuenta:
-        type: "string"
-        example: "cuentas a terceros"
-      Swift:
-        type: "string"
-        example: "qwe123123"
-      beneficiarios:
-        type: "string"
-        example: "tres"
-      alias-cuenta:
-        type: "string"
-        example: "winedterceros"
-      estatus:
-        type: "boolean"
-        example: true
-      moneda:
-        type: "number"
-        format: "double"
-        example: "null"
-      fecha-ultimo-pago:
-        type: "string"
-        format: "date"
-        example: "12/12/12"
-      monto-ultimo-pago:
-        type: "number"
-        example: "120,000"
-      tipo de persona:
-        type: "integer"
-        format: "int32"
-        example: 1
-      telefono:
-        type: "string"
-        example: "45-45-45-45"
-      correo-electronico:
-        type: "string"
-        example: "wined@anzen.com.mx"
-      Periodicidad:
-        type: "string"
-        example: "12we1234"
-      Monto Máximo:
-        type: "number"
-        format: "double"
-        example: "200,000"
-      RFC:
-        type: "string"
-        example: "eage123456hrmc140"
-      Identificador más cuentas:
-        type: "string"
-        example: "12we324er"
-    description: "Generacion de clave dinamica"
-  consulta-de-ordenes-internacionales-in:
-    properties:
-      cliente:
-        type: "string"
-        example: ""
-      usuario:
-        type: "string"
-        example: ""
-      identificador de sesion:
-        type: "string"
-        example: ""
-      tipo ultima cuenta:
-        type: "string"
-        example: ""
-      ultimo swift:
-        type: "string"
-        example: ""
-      ultimo beneficiario:
-        type: "string"
-        example: ""
-    description: "Generacion de clave dinamica"
-  consulta-de-establecimiento-res:
-    properties:
-      numero-de-cuentas:
-        type: "string"
-        example: "123123123213"
-      tipo-cuenta:
-        type: "string"
-        example: "terceros"
-      Banco:
-        type: "string"
-        example: "banamex"
-      Cuenta:
-        type: "string"
-        example: "1236543"
-      nombre-cuenta:
-        type: "string"
-        example: "nomina"
-      alias-cuenta:
-        type: "string"
-        example: "nom23"
-      estatus:
-        type: "boolean"
-        example: false
-      moneda:
-        type: "number"
-        format: "double"
-        example: "null"
-      fecha-ultimo-pago:
-        type: "string"
-        format: "date"
-        example: "12/12/12"
-      monto-ultimo-pago:
-        type: "number"
-        format: "double"
-        example: "12,999"
-      identificador-mas-cuentas:
-        type: "string"
-        example: "qwerty123"
-      telefono:
-        type: "string"
-        example: "44-44-44-44"
-      correo-electronico:
-        type: "string"
-        example: "anzen@anzen.com"
-      Periodicidad:
-        type: "integer"
-        format: "int32"
-        example: 1
-      Monto Máximo:
-        type: "number"
-        format: "double"
-        example: "120,000"
-      Identificador más cuentas:
-        type: "string"
-        example: "12321eqwe"
-      RFC:
-        type: "string"
-        example: "123123wsfdsdrew34r"
-    description: "Generacion de clave dinamica"
-  consulta-de-establecimiento-in:
-    properties:
-      cliente:
-        type: "string"
-        example: ""
-      usuario:
-        type: "string"
-        example: ""
-      identificador de sesion:
-        type: "string"
-        example: ""
-      tipo ultima cuenta:
-        type: "string"
-        example: ""
-      establecimiento:
-        type: "string"
-        example: ""
-    description: "Generacion de clave dinamica"
-  loginExitoso-res:
-    properties:
-      respuest:
-        type: "boolean"
-        example: false
-    description: "Generacion de clave dinamica"
-  loginExitoso-in:
-    properties:
-      cliente:
-        type: "string"
-        example: "Banamexico"
-      usuario:
-        type: "string"
-        example: "wined"
-      identificador de sesion:
-        type: "string"
-        example: "asd123qwe123"
-    description: "Generacion de clave dinamica"
-  ProductRes:
-    type: "string"
-    properties:
-      accesskey:
-        type: "string"
-        example: "Q3AM3UQ867SPQQA43P2F"
-        description: "V9LKMYLJN5HTJZRXAVPZ"
-      secretket:
-        type: "string"
-        example: "zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG"
-        description: "FFoH7i4W+Ipn2fO4Q2OMiD9bkLH7B5fNFlaJngLQ"
-      url:
-        type: "string"
-        example: "https://play.minio.io:9000"
-        description: "https://play.minio.io:9000"
-  consultaArchivo-in:
-    properties:
-      nombreArchivo:
-        type: "string"
-        example: "Nomina Agosto"
-      cuentaOrigen:
-        type: "string"
-        example: "cuenta Nomina-0654 $1,889.098"
-      descripcion:
-        type: "string"
-        example: "pago nomina"
-      aplicacion:
-        type: "string"
-        example: "10/04/2017"
-      secuencial:
-        type: "integer"
-        example: 3
-    description: "Realiza una consulta"
-  Datos-Archivo-res:
-    properties:
-      nombreArchivo:
-        type: "string"
-        example: "Segunda Quincena de Julio 2015"
-      cuentaOrigen:
-        type: "string"
-        example: "cuenta ahorro-6025.000"
-      descripcion:
-        type: "string"
-        example: "pago nomina segunda quincena"
-      Fechaaplicacion:
-        type: "string"
-        example: "10/04/2017"
-      secuencial:
-        type: "integer"
-        example: 40
-    description: "Realiza una consulta"
-  menu-in:
-    properties:
-      id:
-        type: "integer"
-        example: 1
-    description: "Valores de regreso de clave dinamica"
-  inline_response_200:
-    properties:
-      id:
-        type: "string"
-        example: "menu" 
-    description: "Valores de regreso de clave dinamica" 	
-	
   Error:
     properties:
-      Error:
+      CodigoRespuesta:
         type: "string"
-        example: "Error en la autenticacion"
-        description: "Respuesta de Login"
-    description: "Error de Respuesta dinamica"
-  Errorlayout:
+        example: "Cliente no encontrado"
+        description: "Cliente no encontrado"
+  ErrorContratoModificacion:
     properties:
-      Error:
+      CodigoRespuesta:
         type: "string"
-        example: "Error"
-        description: "Error"
-    description: "Error de Respuesta dinamica"
+        example: "No se encuentra el usuario: 32"
+        description: "No se encuentra el usuario: 32"
+  
