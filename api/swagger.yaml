@@ -3,7 +3,7 @@ info:
   description: "Documentación de los servicios Multiva" 
   version: "0.1.0"
   title: "Middleware"
-host: "200.39.24.141:9090"
+host: "200.39.24.141"
 basePath: "/"
 tags:
 - name: "Core Bancario"
