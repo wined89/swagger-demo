@@ -374,9 +374,7 @@ definitions:
         example: "No coinciden las nuevas contraseñas"
       antiphishing:
         type: "string"
-        example: "test1"
-  
-     
+        example: "test1"  
   
   OTP-in:
     properties:
