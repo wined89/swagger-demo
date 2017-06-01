@@ -41,11 +41,10 @@ paths:
           schema:
             $ref: "#/definitions/inline_response_403"
       x-swagger-router-controller: "Cliente"
-  /Contrato:
+  /Validacontrato:
     post:
       tags:
       - "Contrato"
-      summary: "/Contrato"
       description: "Realiza la modificacion del contrato"
       operationId: "contratoPOST"
       parameters:
@@ -143,40 +142,7 @@ paths:
             $ref: "#/definitions/inline_response_404_1"
       x-swagger-router-controller: "Contrasea"
     x-swagger-router-controller: "cambioPwd"
-  /contrato:
-    post:
-      tags:
-      - "Contrato"
-      description: "Se requiere obtener el dato del atributo contratoAceptado: en\
-        \ LDAP por medio de un ldapsearch -h ip-server -p 389 –D uid=$idCliente,ou=people,dc=multiva,dc=mx\
-        \ -w $password -b  -s base contratoAceptado."
-      operationId: "contrato"
-      parameters:
-      - in: "body"
-        name: "contrato"
-        description: "Se requiere la validacion de la contraseña actual  "
-        required: true
-        schema:
-          $ref: "#/definitions/contrato"
-      responses:
-        200:
-          description: "Operación correcta: 0"
-          schema:
-            $ref: "#/definitions/inline_response_200_4"
-        232:
-          description: "valor del atributo nulo: 41"
-          schema:
-            $ref: "#/definitions/inline_response_232_2"
-        249:
-          description: "No se encuentra el usuario: 32"
-          schema:
-            $ref: "#/definitions/inline_response_249_1"
-        404:
-          description: "Error"
-          schema:
-            $ref: "#/definitions/inline_response_404_2"
-      x-swagger-router-controller: "Contrato"
-    x-swagger-router-controller: "contrato"
+
 definitions:
   ErrorContratoModificacion:
     properties:
@@ -186,7 +152,7 @@ definitions:
         description: "No se encuentra el usuario: 32"
   contrato-mod-in:
     properties:
-      usuario:
+      Usuario:
         type: "string"
         example: "11212112"
       contratoAceptado:
@@ -485,7 +451,7 @@ definitions:
         description: "Respuesta"
   Contrato:
     properties:
-      usuario:
+      Usuario:
         type: "string"
         example: "11212112"
       contratoAceptado:
