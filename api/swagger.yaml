@@ -89,7 +89,7 @@ paths:
           description: "Usuario correcto y token correcto: 0"
           schema:
             $ref: "#/definitions/inline_response_200_2"
-        232:
+        231:
           description: "Usuario correcto y OTP incorrecto: 32"
           schema:
             $ref: "#/definitions/inline_response_232"
@@ -107,7 +107,7 @@ paths:
             $ref: "#/definitions/inline_response_404"
       x-swagger-router-controller: "OTP"
     x-swagger-router-controller: "validaOTP"
-  /cambioPwd:
+  /Cambiapassword:
     post:
       tags:
       - "Contraseña"
@@ -292,7 +292,7 @@ definitions:
         example: "Valor del atributo nulo"
   usuarioCorrecto-Token-Correcto-res:
     properties:
-      codigo de respuesta:
+      CodigoRespuesta:
         type: "string"
         example: "0"
       Descripción de la respuesta:
@@ -303,7 +303,7 @@ definitions:
         example: "test1"
   usuario-correcto-y-OTP-incorrecto-res:
     properties:
-      codigo de respuesta:
+      CodigoRespuesta:
         type: "string"
         example: "0"
       Descripción de la respuesta:
@@ -314,7 +314,7 @@ definitions:
         example: "test1"
   token-no-asignado-res:
     properties:
-      codigo de respuesta:
+      CodigoRespuesta:
         type: "string"
         example: "32"
       Descripción de la respuesta:
@@ -325,7 +325,7 @@ definitions:
         example: "test1"
   token-asignado-pero-no-activo-res:
     properties:
-      codigo de respuesta:
+      CodigoRespuesta:
         type: "string"
         example: "45"
       Descripción de la respuesta:
@@ -336,7 +336,7 @@ definitions:
         example: "test1"
   cambio-de-contraseña-exitoso-res:
     properties:
-      codigo de respuesta.:
+      CodigoRespuesta:
         type: "string"
         example: "0"
       Descripción de la respuesta:
@@ -347,7 +347,7 @@ definitions:
         example: "test1"
   contraseña-actual-errónea-res:
     properties:
-      codigo de respuesta.:
+      CodigoRespuesta:
         type: "string"
         example: "49"
       Descripción de la respuesta:
@@ -358,7 +358,7 @@ definitions:
         example: "test1"
   no-coinciden-las-nuevas-contraseñas-res:
     properties:
-      codigo de respuesta.:
+      CodigoRespuesta:
         type: "string"
         example: "48"
       Descripción de la respuesta:
@@ -507,57 +507,57 @@ definitions:
         description: "No se encuentra el usuario: 32"
   validaOTP:
     properties:
-      'usuario:':
+      Usuario:
         type: "string"
         example: "123456789"
-      password OTP:
+      OTP:
         type: "string"
         example: "12345tftg5657765412wqsdwdwe23e3r43rd"
-      tipo token:
+      Tipo:
         type: "integer"
         example: 1
   inline_response_200_2:
     properties:
-      codigo de respuesta:
+      CodigoRespuesta:
         type: "string"
         example: "0"
-      Descripción de la respuesta:
+      DescRespuesta:
         type: "string"
         example: "Usuario correcto y token correcto"
-      antiphishing:
+      Antiphishing:
         type: "string"
         example: "test1"
   inline_response_232:
     properties:
-      codigo de respuesta:
+      CodigoRespuesta:
         type: "string"
         example: "32"
-      Descripción de la respuesta:
+      DescRespuesta:
         type: "string"
         example: "Token no asignado"
-      antiphishing:
+      Antiphishing:
         type: "string"
         example: "test1"
   inline_response_241:
     properties:
-      codigo de respuesta:
+      CodigoRespuesta:
         type: "string"
         example: "0"
-      Descripción de la respuesta:
+      DescRespuesta:
         type: "string"
         example: "Usuario correcto y OTP incorrecto"
-      antiphishing:
+      Antiphishing:
         type: "string"
         example: "test1"
   inline_response_245:
     properties:
-      codigo de respuesta:
+      CodigoRespuesta:
         type: "string"
         example: "45"
-      Descripción de la respuesta:
+      DescRespuesta:
         type: "string"
         example: "Token asignado pero no activo"
-      antiphishing:
+      Antiphishing:
         type: "string"
         example: "test1"
   inline_response_404:
@@ -568,21 +568,21 @@ definitions:
         description: "Respuesta de OTP"
   cambioPwd:
     properties:
-      usuario:
+      Usuario:
         type: "string"
         example: "123456789"
-      password:
+      Contraseña_original:
         type: "string"
         example: "12345tftg5657765412wqsdwdwe23e3r43rd"
-      nuevo password:
+      Nueva_contraseña:
         type: "string"
         example: "12345tftg5657765412wqsdwdwe23e3r43rd"
-      confirma nuevo password:
+      Comprueba_contraseña:
         type: "string"
         example: "12345tftg5657765412wqsdwdwe23e3r43rd"
   inline_response_200_3:
     properties:
-      codigo de respuesta.:
+      CodigoRespuesta:
         type: "string"
         example: "0"
       Descripción de la respuesta:
