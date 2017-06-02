@@ -70,7 +70,7 @@ paths:
             $ref: "#/definitions/inline_response_200_2"
       x-swagger-router-controller: "OTP"
     x-swagger-router-controller: "validaOTP"
-  /cambioPwd:
+  /Cambiapassword:
     post:
       tags:
       - "Contraseña"
@@ -93,11 +93,11 @@ paths:
           schema:
             $ref: "#/definitions/inline_response_200_3"
         500:
-          description: "No coinciden las nuevas contraseñas: 48"
+          description: "error en el servicio"
           schema:
             $ref: "#/definitions/inline_response_200_2"
         400:
-          description: "Contraseña actual errónea: 49"
+          description: "no se encuentra el recurso"
           schema:
             $ref: "#/definitions/inline_response_200_2"
         
@@ -233,29 +233,24 @@ definitions:
 
   cambioPwd:
     properties:
-      usuario:
+      Usuario:
         type: "string"
         example: "123456789"
-      password:
+      Contraseña_original:
         type: "string"
-        example: "12345tftg5657765412wqsdwdwe23e3r43rd"
-      nuevo password:
+        example: "12345tftg5657765412wq"
+      Nueva_contraseña:
         type: "string"
-        example: "12345tftg5657765412wqsdwdwe23e3r43rd"
-      confirma nuevo password:
+        example: "12345tftg5657765412wq"
+      Comprueba_contraseña:
         type: "string"
-        example: "12345tftg5657765412wqsdwdwe23e3r43rd"
+        example: "12345tftg5657765412wq"
   inline_response_200_3:
     properties:
       CodigoRespuesta:
-        type: "string"
-        example: "0"
-      DescRespuesta:
-        type: "string"
-        example: "Cambio de contraseña exitoso"
-      Antiphishing:
-        type: "string"
-        example: "test1"
+        type: "integer"
+        example: "integer"
+     
  
   contrato:
     properties:
