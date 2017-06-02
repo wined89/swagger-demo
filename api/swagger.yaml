@@ -89,7 +89,7 @@ paths:
           $ref: "#/definitions/cambioPwd"
       responses:
         200:
-          description: "Cambio de contraseña exitoso: 0"
+          description: "Estructura de la respuesta del servicio"
           schema:
             $ref: "#/definitions/inline_response_200_3"
         500:
