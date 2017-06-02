@@ -1,17 +1,23 @@
 ---
 swagger: "2.0"
 info:
-  description: "Documentación de los servicios Multivaam"
+  description: "Documentación de los servicios Multiva Sprint 1  <a href='http://drive.google.com/open?id=0B5MVImiMKmoPbk1RS09LWjR1aTQ'>Documento Compartido</a>" 
   version: "0.1.0"
-  title: "Middlewareea"
+  title: "Grupo FInzanciero Multiva"
 host: "200.39.24.141:9090"
 basePath: "/"
-
+tags:
+- name: "Core Bancario"
+  description: "Primer Login (Dinámico  y Estático)"
+  externalDocs:
+    description: "Primer Login"
+    url: "http://200.39.24.141:9090/docs"
 paths:
-  /Cliente:
+  /getCliente:
     post:
       tags:
       - "Cliente"
+      
       description: "Realiza la consulta de el cliente"
       operationId: "cliente"
       parameters:
@@ -20,19 +26,26 @@ paths:
         description: "Respuesta de datos del cliente"
         required: true
         schema:
-          $ref: "#/definitions/entradaCliente-out"
+          $ref: "#/definitions/Cliente"
       responses:
         200:
           description: "cliente"
           schema:
-            $ref: "#/definitions/Cliente"
-       
+            $ref: "#/definitions/inline_response_200"
+        403:
+          description: "Cliente no encontrado"
+          schema:
+            $ref: "#/definitions/inline_response_403"
+        404:
+          description: "Cliente no encontrado"
+          schema:
+            $ref: "#/definitions/inline_response_403"
       x-swagger-router-controller: "Cliente"
   /Contrato:
     post:
       tags:
       - "Contrato"
-      summary: "/Contrato"
+    
       description: "Realiza la modificacion del contrato"
       operationId: "contratoPOST"
       parameters:
@@ -56,13 +69,12 @@ paths:
           schema:
             $ref: "#/definitions/inline_response_403_1"
       x-swagger-router-controller: "Contrato"
-  /validaOTP:
+  /Validaotp:
     post:
       tags:
       - "OTP"
-      description: "Se requiere la validacion en VACMAN del usuario y su OTP, si la\
-        \ operación de OTP fue exitosa, el valor del blob que es generado que es generado\
-        \ por vacman se actualizara en el LDAP"
+      description: "Se requiere la validacion en VACMAN del usuario y su OTP, si la
+        operación de OTP fue exitosa, el valor del blob que es generado que es generado por vacman se actualizara en el LDAP"
       operationId: "validaOTP"
       parameters:
       - in: "body"
@@ -130,6 +142,40 @@ paths:
             $ref: "#/definitions/inline_response_404_1"
       x-swagger-router-controller: "Contrasea"
     x-swagger-router-controller: "cambioPwd"
+  /contrato:
+    post:
+      tags:
+      - "Contrato"
+      description: "Se requiere obtener el dato del atributo contratoAceptado: en\
+        \ LDAP por medio de un ldapsearch -h ip-server -p 389 –D uid=$idCliente,ou=people,dc=multiva,dc=mx\
+        \ -w $password -b  -s base contratoAceptado."
+      operationId: "contrato"
+      parameters:
+      - in: "body"
+        name: "contrato"
+        description: "Se requiere la validacion de la contraseña actual  "
+        required: true
+        schema:
+          $ref: "#/definitions/contrato"
+      responses:
+        200:
+          description: "Operación correcta: 0"
+          schema:
+            $ref: "#/definitions/inline_response_200_4"
+        232:
+          description: "valor del atributo nulo: 41"
+          schema:
+            $ref: "#/definitions/inline_response_232_2"
+        249:
+          description: "No se encuentra el usuario: 32"
+          schema:
+            $ref: "#/definitions/inline_response_249_1"
+        404:
+          description: "Error"
+          schema:
+            $ref: "#/definitions/inline_response_404_2"
+      x-swagger-router-controller: "Contrato"
+    x-swagger-router-controller: "contrato"
 definitions:
   ErrorContratoModificacion:
     properties:
@@ -150,67 +196,70 @@ definitions:
       respuesta:
         type: "string"
         example: "OK"
-      
-  entradaCliente-out:
-     properties:  
+      CodigoRespuesta:
+        type: "string"
+        example: "Operación correcta: 0"
+  entradaCliente-in:
+    properties:
+      Numerocliente:
+        type: "integer"
+        example: 1
+  cliente-res:
+    properties:
       CodigoRespuesta:
         type: "integer"
-        example: "integer"
-      Numerocliente:
-        type: "string"
-        example: "string"
-  
+        example: 1
       DescripcionResp:
         type: "string"
-        example: "string"
+        example: "Datos del clinete"
       NumCliente:
         type: "string"
-        example: "string"
+        example: "1234"
       Nombre:
         type: "string"
-        example: "string"
+        example: "Agustin"
       Direccion:
         type: "string"
-        example: "string"
+        example: "5 de mayo"
       Poblacion:
         type: "string"
-        example: "string"
+        example: "polanco"
       Ciudad:
         type: "string"
-        example: "string"
+        example: "mexico"
       Estado:
         type: "string"
-        example: "string"
+        example: "mexico"
       CP:
         type: "string"
-        example: "string"
+        example: "50010"
       RFC:
         type: "string"
-        example: "string"
+        example: "RYTUYT7867687"
       Telefono1:
         type: "string"
-        example: "string"
+        example: "55556262672"
       Telefono2:
         type: "string"
-        example: "string"
+        example: "5556262626"
       Celular:
         type: "string"
-        example: "string"
+        example: "555762272"
       Mail:
         type: "string"
-        example: "string"
+        example: "agusting@hormail.com"
       TipoPersona:
         type: "string"
-        example: "string"
+        example: "Fisica"
       Estatus:
         type: "string"
         example: ""
       Sucursal:
         type: "string"
-        example: "string"
+        example: "1"
       ESVIP:
         type: "string"
-        example: "string"
+        example: "1"
   contrato-in:
     properties:
       usuario:
@@ -371,6 +420,8 @@ definitions:
       Numerocliente:
         type: "integer"
         example: 1
+  inline_response_200:
+    properties:
       CodigoRespuesta:
         type: "integer"
         example: 1
@@ -455,24 +506,24 @@ definitions:
         description: "No se encuentra el usuario: 32"
   validaOTP:
     properties:
-      'usuario:':
-        type: "string"
-        example: "123456789"
-      password OTP:
+      Usuario:
+        type: "integer"
+        example: 123456789
+      OTP:
         type: "string"
         example: "12345tftg5657765412wqsdwdwe23e3r43rd"
-      tipo token:
+      Tipo:
         type: "integer"
         example: 1
   inline_response_200_2:
     properties:
-      codigo de respuesta:
+      CodigoRespuesta:
         type: "string"
         example: "0"
-      Descripción de la respuesta:
+      DescRespuesta:
         type: "string"
         example: "Usuario correcto y token correcto"
-      antiphishing:
+      Antiphishing:
         type: "string"
         example: "test1"
   inline_response_232:
