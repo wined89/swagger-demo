@@ -9,8 +9,7 @@ exports.contrato = function(args, res, next) {
    **/
   var examples = {};
   examples['application/json'] = {
-  "Código de retorno" : "Operación correcta",
-  "Valor obtenido del atributo contrato Aceptado." : "0"
+     "CodigoRespuesta" : 0
 };
   if (Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
@@ -30,8 +29,7 @@ exports.contratoPOST = function(args, res, next) {
    **/
   var examples = {};
   examples['application/json'] = {
-  "respuesta" : "OK",
-  "CodigoRespuesta" : "Operación correcta: 0"
+    "CodigoRespuesta" : 0
 };
   if (Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
