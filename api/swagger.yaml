@@ -89,22 +89,14 @@ paths:
           description: "Usuario correcto y token correcto: 0"
           schema:
             $ref: "#/definitions/inline_response_200_2"
-        232:
+        500:
           description: "Usuario correcto y OTP incorrecto: 32"
           schema:
             $ref: "#/definitions/inline_response_232"
-        241:
+        400:
           description: "Usuario correcto y OTP incorrecto: 41"
           schema:
             $ref: "#/definitions/inline_response_241"
-        245:
-          description: "Token asignado pero no activo: 45"
-          schema:
-            $ref: "#/definitions/inline_response_245"
-        404:
-          description: "Error"
-          schema:
-            $ref: "#/definitions/inline_response_404"
       x-swagger-router-controller: "OTP"
     x-swagger-router-controller: "validaOTP"
   /cambioPwd:
@@ -507,24 +499,24 @@ definitions:
         description: "No se encuentra el usuario: 32"
   validaOTP:
     properties:
-      'usuario:':
+      Usuario:
         type: "string"
         example: "123456789"
-      password OTP:
+      OTP:
         type: "string"
         example: "12345tftg5657765412wqsdwdwe23e3r43rd"
-      tipo token:
+      Tipo:
         type: "integer"
         example: 1
   inline_response_200_2:
     properties:
-      codigo de respuesta:
+      CodigoRespuesta:
         type: "string"
         example: "0"
-      Descripción de la respuesta:
+      DescRespuesta:
         type: "string"
         example: "Usuario correcto y token correcto"
-      antiphishing:
+      Antiphishing:
         type: "string"
         example: "test1"
   inline_response_232:
