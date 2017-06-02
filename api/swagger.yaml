@@ -3,7 +3,7 @@ swagger: "2.0"
 info:
   description: "Documentación de los servicios Multiva Sprint 1  <a href='http://drive.google.com/open?id=0B5MVImiMKmoPbk1RS09LWjR1aTQ'>Documento Compartido</a>" 
   version: "0.1.0"
-  title: "Grupo FInzanciero Multivaa"
+  title: "Grupo FInzanciero Multiva"
 host: "200.39.24.141:9090"
 basePath: "/"
 tags:
@@ -46,12 +46,12 @@ paths:
     post:
       tags:
       - "OTP"
-      description: "Se requiere la validacion en VACMAN del usuario y su OTP, si la operación de OTP fue exitosa, el valor del blob que es generado  por vacman se actualizara en el LDAP"
+      description: "Servicio que realiza la validación del OTP"
       operationId: "validaOTP"
       parameters:
       - in: "body"
         name: "validaOTP"
-        description: "Se requiere la validacion de VACMAN del usuario y su OTP"
+        description: "Se requiere la validación de VACMAN del usuario y su OTP"
         required: true
         schema:
           $ref: "#/definitions/validaOTP"
@@ -61,11 +61,11 @@ paths:
           schema:
             $ref: "#/definitions/inline_response_403_1"
         500:
-          description: "Usuario correcto y OTP incorrecto: 32"
+          description: "error en el servicio"
           schema:
             $ref: "#/definitions/inline_response_200_2"
         400:
-          description: "Usuario correcto y OTP incorrecto: 41"
+          description: "no se encuentra el recurso"
           schema:
             $ref: "#/definitions/inline_response_200_2"
       x-swagger-router-controller: "OTP"
@@ -216,8 +216,8 @@ definitions:
   validaOTP:
     properties:
       Usuario:
-        type: "string"
-        example: "123456789"
+        type: "integer"
+        example: 123456789
       OTP:
         type: "string"
         example: "12345tftg56577654"
