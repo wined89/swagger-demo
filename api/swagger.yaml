@@ -260,11 +260,11 @@ definitions:
   contrato:
     properties:
       usuario:
-        type: "integer"
+        type: "string"
         example: "4333534"
-      contratoAceptado:
+      ContratoAceptado:
         type: "integer"
-        example: "1"
+        example: 1
   inline_response_200_4:
     properties:
       CodigoRespuesta:
