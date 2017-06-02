@@ -118,6 +118,10 @@ paths:
         schema:
           $ref: "#/definitions/cambioPwd"
       responses:
+        200:
+          description: "Respuesta del cambio de contraseña"
+          schema:
+            $ref: "#/definitions/cambiorPwd"
         400:
           description: "No se encuentra el recurso en el servidor"
           schema:
@@ -527,6 +531,20 @@ definitions:
       Comprueba_contraseña:
         type: "integer"
         example: "sfsdf3443"
+  cambiorPwd:
+    properties:
+      Usuario:
+        type: "string"
+        example: "string"
+      Contraseña_original:
+        type: "string"
+        example: "string"
+      Nueva_contraseña:
+        type: "string"
+        example: "string"
+      Comprueba_contraseña:
+        type: "integer"
+        example: "string"
   inline_response_200_3:
     properties:
       CodigoRespuesta:
