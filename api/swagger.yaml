@@ -116,12 +116,12 @@ paths:
         description: "Se requiere la validacion de la contraseña actual  "
         required: true
         schema:
-          $ref: "#/definitions/cambiorPwd"
+          $ref: "#/definitions/cambioPwd"
       responses:
         200:
           description: "Respuesta del cambio de contraseña"
           schema:
-            $ref: "#/definitions/cambiorPwd"
+            $ref: "#/definitions/cambioPwd"
         400:
           description: "No se encuentra el recurso en el servidor"
           schema:
