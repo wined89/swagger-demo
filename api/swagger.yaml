@@ -118,22 +118,15 @@ paths:
         schema:
           $ref: "#/definitions/cambioPwd"
       responses:
-        200:
-          description: "Cambio de contraseña exitoso: 0"
+        400:
+          description: "No se encuentra el recurso en el servidor"
           schema:
             $ref: "#/definitions/inline_response_200_3"
-        232:
-          description: "No coinciden las nuevas contraseñas: 48"
+        500:
+          description: "Existe un error en el recurso que se solicito"
           schema:
             $ref: "#/definitions/inline_response_232_1"
-        249:
-          description: "Contraseña actual errónea: 49"
-          schema:
-            $ref: "#/definitions/inline_response_249"
-        404:
-          description: "No se modificó la contraseña valor de la operación en LDAP"
-          schema:
-            $ref: "#/definitions/inline_response_404_1"
+      
       x-swagger-router-controller: "Contrasea"
     x-swagger-router-controller: "cambioPwd"
 
@@ -524,38 +517,29 @@ definitions:
     properties:
       Usuario:
         type: "string"
-        example: "string"
+        example: "AaronMultiva"
       Contraseña_original:
         type: "string"
-        example: "string"
+        example: "3433dfd4"
       Nueva_contraseña:
         type: "string"
-        example: "string"
+        example: "sfsdf3443"
       Comprueba_contraseña:
         type: "integer"
-        example: "integer"
+        example: "sfsdf3443"
   inline_response_200_3:
     properties:
       CodigoRespuesta:
         type: "string"
-        example: "0"
-      Descripción de la respuesta:
-        type: "string"
-        example: "Cambio de contraseña exitoso"
-      antiphishing:
-        type: "string"
-        example: "test1"
+        example: "string"
+      
   inline_response_232_1:
     properties:
-      codigo de respuesta.:
-        type: "string"
-        example: "48"
-      Descripción de la respuesta:
-        type: "string"
-        example: "No coinciden las nuevas contraseñas"
-      antiphishing:
-        type: "string"
-        example: "test1"
+      CodigoRespuesta:
+        type: "error"
+        example: "string "
+     
+     
   inline_response_249:
     properties:
       codigo de respuesta.:
