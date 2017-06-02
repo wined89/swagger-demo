@@ -69,7 +69,7 @@ paths:
           schema:
             $ref: "#/definitions/inline_response_403_1"
       x-swagger-router-controller: "Contrato"
-  /validaOTP:
+  /Validaotp:
     post:
       tags:
       - "OTP"
