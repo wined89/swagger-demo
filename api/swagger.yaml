@@ -3,7 +3,7 @@ swagger: "2.0"
 info:
   description: "Documentación de los servicios Multiva"
   version: "0.1.0"
-  title: "Middlewaree"
+  title: "Middlewareea"
 host: "200.39.24.141:9090"
 basePath: "/"
 tags:
@@ -31,15 +31,8 @@ paths:
         200:
           description: "cliente"
           schema:
-            $ref: "#/definitions/inline_response_200"
-        403:
-          description: "Cliente no encontrado"
-          schema:
-            $ref: "#/definitions/inline_response_403"
-        404:
-          description: "Cliente no encontrado"
-          schema:
-            $ref: "#/definitions/inline_response_403"
+            $ref: "#/definitions/Cliente"
+       
       x-swagger-router-controller: "Cliente"
   /Contrato:
     post:
@@ -143,40 +136,6 @@ paths:
             $ref: "#/definitions/inline_response_404_1"
       x-swagger-router-controller: "Contrasea"
     x-swagger-router-controller: "cambioPwd"
-  /contrato:
-    post:
-      tags:
-      - "Contrato"
-      description: "Se requiere obtener el dato del atributo contratoAceptado: en\
-        \ LDAP por medio de un ldapsearch -h ip-server -p 389 –D uid=$idCliente,ou=people,dc=multiva,dc=mx\
-        \ -w $password -b  -s base contratoAceptado."
-      operationId: "contrato"
-      parameters:
-      - in: "body"
-        name: "contrato"
-        description: "Se requiere la validacion de la contraseña actual  "
-        required: true
-        schema:
-          $ref: "#/definitions/contrato"
-      responses:
-        200:
-          description: "Operación correcta: 0"
-          schema:
-            $ref: "#/definitions/inline_response_200_4"
-        232:
-          description: "valor del atributo nulo: 41"
-          schema:
-            $ref: "#/definitions/inline_response_232_2"
-        249:
-          description: "No se encuentra el usuario: 32"
-          schema:
-            $ref: "#/definitions/inline_response_249_1"
-        404:
-          description: "Error"
-          schema:
-            $ref: "#/definitions/inline_response_404_2"
-      x-swagger-router-controller: "Contrato"
-    x-swagger-router-controller: "contrato"
 definitions:
   ErrorContratoModificacion:
     properties:
@@ -421,8 +380,6 @@ definitions:
       Numerocliente:
         type: "integer"
         example: 1
-  inline_response_200:
-    properties:
       CodigoRespuesta:
         type: "integer"
         example: 1
