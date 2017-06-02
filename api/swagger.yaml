@@ -3,7 +3,7 @@ swagger: "2.0"
 info:
   description: "Documentación de los servicios Multiva Sprint 1  <a href='http://drive.google.com/open?id=0B5MVImiMKmoPbk1RS09LWjR1aTQ'>Documento Compartido</a>" 
   version: "0.1.0"
-  title: "Grupo FInzanciero Multiva"
+  title: "Grupo FInzanciero Multivaa"
 host: "200.39.24.141:9090"
 basePath: "/"
 tags:
