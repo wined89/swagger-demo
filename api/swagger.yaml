@@ -107,7 +107,7 @@ paths:
     post:
       tags:
       - "Contrato"
-      description: "Este servicio es para  cambiar la bandera del  usuario cuando entra por primera vez."
+      description: "Este servicio es para  cambiar la bandera de que el usuario acepto el contrato"
       operationId: "contrato"
       parameters:
       - in: "body"
@@ -260,8 +260,11 @@ definitions:
   contrato:
     properties:
       usuario:
-        type: "string"
-        example: "wined"
+        type: "integer"
+        example: "4333534"
+      contratoAceptado:
+        type: "integer"
+        example: "1"
   inline_response_200_4:
     properties:
       CodigoRespuesta:
