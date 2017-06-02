@@ -9,8 +9,8 @@ exports.validaOTP = function(args, res, next) {
    **/
   var examples = {};
   examples['application/json'] = {
-  "Antiphishing" : "test1",
-  "CodigoRespuesta" : "0",
+  "Antiphishing" : 989999,
+  "CodigoRespuesta" : 0,
   "DescRespuesta" : "Usuario correcto y token correcto"
 };
   if (Object.keys(examples).length > 0) {
