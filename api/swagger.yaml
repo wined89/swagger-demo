@@ -26,7 +26,7 @@ paths:
         description: "Respuesta de datos del cliente"
         required: true
         schema:
-          $ref: "#/definitions/Cliente"
+          $ref: "#/definitions/cliente-res"
       responses:
         200:
           description: "cliente"
@@ -428,10 +428,10 @@ definitions:
         example: "string"
       Sucursal:
         type: "string"
-        example: "1"
+        example: "string"
       ESVIP:
         type: "string"
-        example: "1"
+        example: "string"
   inline_response_403:
     properties:
       Error:
