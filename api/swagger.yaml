@@ -20,7 +20,7 @@ paths:
         description: "Respuesta de datos del cliente"
         required: true
         schema:
-          $ref: "#/definitions/Cliente"
+          $ref: "#/definitions/entradaCliente-out"
       responses:
         200:
           description: "cliente"
@@ -150,70 +150,67 @@ definitions:
       respuesta:
         type: "string"
         example: "OK"
+      
+  entradaCliente-out:
+     properties:  
       CodigoRespuesta:
-        type: "string"
-        example: "Operación correcta: 0"
-  entradaCliente-in:
-    properties:
+        type: "integer"
+        example: "integer"
       Numerocliente:
-        type: "integer"
-        example: 1
-  cliente-res:
-    properties:
-      CodigoRespuesta:
-        type: "integer"
-        example: 1
+        type: "string"
+        example: "string"
+  
       DescripcionResp:
         type: "string"
-        example: "Datos del clinete"
+        example: "string"
       NumCliente:
         type: "string"
-        example: "1234"
+        example: "string"
       Nombre:
         type: "string"
-        example: "Agustin"
+        example: "string"
       Direccion:
         type: "string"
-        example: "5 de mayo"
+        example: "string"
       Poblacion:
         type: "string"
-        example: "polanco"
+        example: "string"
       Ciudad:
         type: "string"
-        example: "mexico"
+        example: "string"
       Estado:
         type: "string"
-        example: "mexico"
+        example: "string"
       CP:
         type: "string"
-        example: "50010"
+        example: "string"
       RFC:
         type: "string"
-        example: "RYTUYT7867687"
+        example: "string"
       Telefono1:
         type: "string"
-        example: "55556262672"
+        example: "string"
       Telefono2:
         type: "string"
-        example: "5556262626"
+        example: "string"
       Celular:
         type: "string"
-        example: "555762272"
+        example: "string"
       Mail:
         type: "string"
-        example: "agusting@hormail.com"
+        example: "string"
       TipoPersona:
         type: "string"
-        example: "Fisica"
+        example: "string"
       Estatus:
         type: "string"
         example: ""
       Sucursal:
         type: "string"
-        example: "1"
+        example: "string"
       ESVIP:
         type: "string"
-        example: "1"
+        example: "string"
   contrato-in:
     properties:
       usuario:
