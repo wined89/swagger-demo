@@ -41,34 +41,7 @@ paths:
           schema:
             $ref: "#/definitions/inline_response_403"
       x-swagger-router-controller: "Cliente"
-  /Contrato:
-    post:
-      tags:
-      - "Contrato"
-      summary: "/Contrato"
-      description: "Realiza la modificacion del contrato"
-      operationId: "contratoPOST"
-      parameters:
-      - in: "body"
-        name: "Contrato"
-        description: "Respuesta"
-        required: true
-        schema:
-          $ref: "#/definitions/Contrato"
-      responses:
-        200:
-          description: "Contrato Modificacion exitosa"
-          schema:
-            $ref: "#/definitions/inline_response_200_1"
-        500:
-          description: "Cliente no encontrado"
-          schema:
-            $ref: "#/definitions/inline_response_200_2"
-        400:
-          description: "Cliente no encontrado"
-          schema:
-            $ref: "#/definitions/inline_response_200_2"
-      x-swagger-router-controller: "Contrato"
+ 
   /Validaotp:
     post:
       tags:
@@ -229,22 +202,6 @@ definitions:
         type: "string"
         example: "Error"
         description: "Respuesta"
-  Contrato:
-    properties:
-      usuario:
-        type: "string"
-        example: "11212112"
-      contratoAceptado:
-        type: "string"
-        example: "7656715672"
-  inline_response_200_1:
-    properties:
-      respuesta:
-        type: "string"
-        example: "OK"
-      CodigoRespuesta:
-        type: "string"
-        example: "Operación correcta: 0"
   inline_response_403_1:
      properties:
       CodigoRespuesta:
