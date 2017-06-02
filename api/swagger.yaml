@@ -137,7 +137,7 @@ definitions:
     properties:
       Numerocliente:
         type: "string"
-        example: "string"
+        example: "1"
   inline_response_200:
     properties:
       CodigoRespuesta:
