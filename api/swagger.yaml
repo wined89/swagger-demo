@@ -379,49 +379,53 @@ definitions:
     properties:
       CodigoRespuesta:
         type: "integer"
-        example: 1
+        example: "integer"
+      DescripcionResp:
+        type: "string"
+        example: "string"
+      
       NumCliente:
         type: "string"
-        example: "1234"
+        example: "string"
       Nombre:
         type: "string"
-        example: "Agustin"
+        example: "string"
       Direccion:
         type: "string"
-        example: "5 de mayo"
+        example: "string"
       Poblacion:
         type: "string"
-        example: "polanco"
+        example: "string"
       Ciudad:
         type: "string"
-        example: "mexico"
+        example: "string"
       Estado:
         type: "string"
-        example: "mexico"
+        example: "string"
       CP:
         type: "string"
-        example: "50010"
+        example: "string"
       RFC:
         type: "string"
-        example: "RYTUYT7867687"
+        example: "string"
       Telefono1:
         type: "string"
-        example: "55556262672"
+        example: "string"
       Telefono2:
         type: "string"
-        example: "5556262626"
+        example: "string"
       Celular:
         type: "string"
-        example: "555762272"
+        example: "string"
       Mail:
         type: "string"
-        example: "agusting@hormail.com"
+        example: "string"
       TipoPersona:
         type: "string"
-        example: "Fisica"
+        example: "string"
       Estatus:
         type: "string"
-        example: ""
+        example: "string"
       Sucursal:
         type: "string"
         example: "1"
@@ -547,15 +551,21 @@ definitions:
         example: "string"
   inline_response_200_3:
     properties:
-      CodigoRespuesta:
+      codigoError:
+        type: "string"
+        example: "string"
+      errorMensaje:
         type: "string"
         example: "string"
       
   inline_response_232_1:
     properties:
-      CodigoRespuesta:
+      codigoError:
         type: "string"
-        example: "string "
+        example: "string"
+      errorMensaje:
+        type: "string"
+        example: "string"
      
      
   inline_response_249:
