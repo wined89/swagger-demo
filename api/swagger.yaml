@@ -269,10 +269,10 @@ definitions:
         example: 1
   inline_response_200_2:
     properties:
-      CodigoRespuesta:
+      codigoError:
         type: "integer"
         example: "integer"
-      DescRespuesta:
+      mensajeError:
         type: "string"
         example: "string"
       Antiphishing:
