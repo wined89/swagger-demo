@@ -73,9 +73,7 @@ paths:
     post:
       tags:
       - "OTP"
-      description: "Se requiere la validacion en VACMAN del usuario y su OTP, si la\
-        \ operación de OTP fue exitosa, el valor del blob que es generado que es generado\
-        \ por vacman se actualizara en el LDAP"
+      description: "Se requiere la validacion en VACMAN del usuario y su OTP, si la operación de OTP fue exitosa, el valor del blob que es generado  por vacman se actualizara en el LDAP"
       operationId: "validaOTP"
       parameters:
       - in: "body"
@@ -521,26 +519,20 @@ definitions:
         example: "integer"
   inline_response_232:
     properties:
-      codigo de respuesta:
+      codigoError:
+        type: "integer"
+        example: "integer"
+      mensajeError:
         type: "string"
-        example: "32"
-      Descripción de la respuesta:
-        type: "string"
-        example: "Token no asignado"
-      antiphishing:
-        type: "string"
-        example: "test1"
+        example: "string"
   inline_response_241:
     properties:
-      codigo de respuesta:
+      codigoError:
+        type: "integer"
+        example: "integer"
+      mensajeError:
         type: "string"
-        example: "0"
-      Descripción de la respuesta:
-        type: "string"
-        example: "Usuario correcto y OTP incorrecto"
-      antiphishing:
-        type: "string"
-        example: "test1"
+        example: "string"
   inline_response_245:
     properties:
       codigo de respuesta:
