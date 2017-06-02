@@ -9,9 +9,8 @@ exports.cambioPwd = function(args, res, next) {
    **/
   var examples = {};
   examples['application/json'] = {
-  "codigo de respuesta." : "0",
-  "antiphishing" : "test1",
-  "Descripción de la respuesta" : "Cambio de contraseña exitoso"
+  "CodigoRespuesta" : "0"
+  
 };
   if (Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
