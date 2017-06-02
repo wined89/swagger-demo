@@ -9,9 +9,9 @@ exports.validaOTP = function(args, res, next) {
    **/
   var examples = {};
   examples['application/json'] = {
-  "antiphishing" : "test1",
-  "codigo de respuesta" : "0",
-  "Descripción de la respuesta" : "Usuario correcto y token correcto"
+  "Antiphishing" : "test1",
+  "CodigoRespuesta" : "0",
+  "DescRespuesta" : "Usuario correcto y token correcto"
 };
   if (Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
