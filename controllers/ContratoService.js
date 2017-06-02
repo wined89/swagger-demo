@@ -9,7 +9,7 @@ exports.contrato = function(args, res, next) {
    **/
   var examples = {};
   examples['application/json'] = {
-     "CodigoRespuesta" : 0
+     "CodigoRespuesta" : 1
 };
   if (Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
