@@ -216,8 +216,8 @@ definitions:
   validaOTP:
     properties:
       Usuario:
-        type: "integer"
-        example: 123456789
+        type: "string"
+        example: "123456789"
       OTP:
         type: "string"
         example: "12345tftg56577654"
