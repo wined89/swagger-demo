@@ -56,17 +56,11 @@ paths:
           $ref: "#/definitions/Contrato"
       responses:
         200:
-          description: "Contrato Modificacion exitosa"
+          description: "ResContrato Modificacion exitosa"
           schema:
             $ref: "#/definitions/inline_response_200_1"
-        403:
-          description: "Cliente no encontrado"
-          schema:
-            $ref: "#/definitions/inline_response_403_1"
-        404:
-          description: "Cliente no encontrado"
-          schema:
-            $ref: "#/definitions/inline_response_403_1"
+       
+        
       x-swagger-router-controller: "Contrato"
   /validaOTP:
     post:
@@ -160,9 +154,6 @@ definitions:
         example: "7656715672"
   contrato-mod-res:
     properties:
-      respuesta:
-        type: "string"
-        example: "OK"
       CodigoRespuesta:
         type: "string"
         example: "Operación correcta: 0"
@@ -392,9 +383,6 @@ definitions:
       CodigoRespuesta:
         type: "integer"
         example: 1
-      DescripcionResp:
-        type: "string"
-        example: "Datos del clinete"
       NumCliente:
         type: "string"
         example: "1234"
@@ -536,16 +524,16 @@ definitions:
     properties:
       Usuario:
         type: "string"
-        example: "123456789"
+        example: "string"
       Contraseña_original:
         type: "string"
-        example: "12345tftg5657765412wqsdwdwe23e3r43rd"
+        example: "string"
       Nueva_contraseña:
         type: "string"
-        example: "12345tftg5657765412wqsdwdwe23e3r43rd"
+        example: "string"
       Comprueba_contraseña:
-        type: "string"
-        example: "12345tftg5657765412wqsdwdwe23e3r43rd"
+        type: "integer"
+        example: "integer"
   inline_response_200_3:
     properties:
       CodigoRespuesta:
