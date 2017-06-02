@@ -26,7 +26,7 @@ paths:
         description: "Respuesta de datos del cliente"
         required: true
         schema:
-          $ref: "#/definitions/cliente-res"
+          $ref: "#/definitions/Cliente"
       responses:
         200:
           description: "cliente"
