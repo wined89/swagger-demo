@@ -11,9 +11,9 @@ exports.clientePOST = function(args, res, next) {
   var examples = {};
   examples['application/json'] = {
   
-  "CodigoRespuesta" : 0
-  "DescripcionResp" : "cliente encontrado"
-  "NumCliente" : "7687668687" 
+  "CodigoRespuesta" : 0,
+  "DescripcionResp" : "cliente encontrado",
+  "NumCliente" : "7687668687" ,
   "Nombre" : "Agustin",
   "Poblacion" : "polanco",
   "Telefono2" : "5556262626",
