@@ -116,7 +116,7 @@ paths:
         description: "Se requiere la validacion de la contraseña actual  "
         required: true
         schema:
-          $ref: "#/definitions/cambioPwd"
+          $ref: "#/definitions/cambiorPwd"
       responses:
         200:
           description: "Respuesta del cambio de contraseña"
