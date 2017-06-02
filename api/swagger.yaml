@@ -29,7 +29,7 @@ paths:
           $ref: "#/definitions/Cliente"
       responses:
         200:
-          description: "cliente"
+          description: "estructura de la respuesta del cliente"
           schema:
             $ref: "#/definitions/inline_response_200"
         500:
@@ -142,7 +142,7 @@ definitions:
     properties:
       CodigoRespuesta:
         type: "integer"
-        example: 1
+        example: "integer"
       DescripcionResp:
         type: "string"
         example: "string"
