@@ -13,13 +13,13 @@ tags:
     description: "Primer Login"
     url: "http://200.39.24.141:9090/docs"
 paths:
-  /Cliente:
+  /getCliente:
     post:
       tags:
       - "Cliente"
-      summary: "/Cliente"
+      
       description: "Realiza la consulta de el cliente"
-      operationId: "clientePOST"
+      operationId: "cliente"
       parameters:
       - in: "body"
         name: "Cliente"
@@ -41,10 +41,11 @@ paths:
           schema:
             $ref: "#/definitions/inline_response_403"
       x-swagger-router-controller: "Cliente"
-  /Validacontrato:
+  /Contrato:
     post:
       tags:
       - "Contrato"
+    
       description: "Realiza la modificacion del contrato"
       operationId: "contratoPOST"
       parameters:
@@ -56,19 +57,24 @@ paths:
           $ref: "#/definitions/Contrato"
       responses:
         200:
-          description: "ResContrato Modificacion exitosa"
+          description: "Contrato Modificacion exitosa"
           schema:
             $ref: "#/definitions/inline_response_200_1"
-       
-        
+        403:
+          description: "Cliente no encontrado"
+          schema:
+            $ref: "#/definitions/inline_response_403_1"
+        404:
+          description: "Cliente no encontrado"
+          schema:
+            $ref: "#/definitions/inline_response_403_1"
       x-swagger-router-controller: "Contrato"
-  /validaOTP:
+  /Validaotp:
     post:
       tags:
       - "OTP"
-      description: "Se requiere la validacion en VACMAN del usuario y su OTP, si la\
-        \ operación de OTP fue exitosa, el valor del blob que es generado que es generado\
-        \ por vacman se actualizara en el LDAP"
+      description: "Se requiere la validacion en VACMAN del usuario y su OTP, si la
+        operación de OTP fue exitosa, el valor del blob que es generado que es generado por vacman se actualizara en el LDAP"
       operationId: "validaOTP"
       parameters:
       - in: "body"
@@ -82,7 +88,7 @@ paths:
           description: "Usuario correcto y token correcto: 0"
           schema:
             $ref: "#/definitions/inline_response_200_2"
-        231:
+        232:
           description: "Usuario correcto y OTP incorrecto: 32"
           schema:
             $ref: "#/definitions/inline_response_232"
@@ -100,7 +106,7 @@ paths:
             $ref: "#/definitions/inline_response_404"
       x-swagger-router-controller: "OTP"
     x-swagger-router-controller: "validaOTP"
-  /Cambiapassword:
+  /cambioPwd:
     post:
       tags:
       - "Contraseña"
@@ -119,21 +125,57 @@ paths:
           $ref: "#/definitions/cambioPwd"
       responses:
         200:
-          description: "Respuesta del cambio de contraseña"
-          schema:
-            $ref: "#/definitions/cambioPwd"
-        400:
-          description: "No se encuentra el recurso en el servidor"
+          description: "Cambio de contraseña exitoso: 0"
           schema:
             $ref: "#/definitions/inline_response_200_3"
-        500:
-          description: "Existe un error en el recurso que se solicito"
+        232:
+          description: "No coinciden las nuevas contraseñas: 48"
           schema:
             $ref: "#/definitions/inline_response_232_1"
-      
+        249:
+          description: "Contraseña actual errónea: 49"
+          schema:
+            $ref: "#/definitions/inline_response_249"
+        404:
+          description: "No se modificó la contraseña valor de la operación en LDAP"
+          schema:
+            $ref: "#/definitions/inline_response_404_1"
       x-swagger-router-controller: "Contrasea"
     x-swagger-router-controller: "cambioPwd"
-
+  /contrato:
+    post:
+      tags:
+      - "Contrato"
+      description: "Se requiere obtener el dato del atributo contratoAceptado: en\
+        \ LDAP por medio de un ldapsearch -h ip-server -p 389 –D uid=$idCliente,ou=people,dc=multiva,dc=mx\
+        \ -w $password -b  -s base contratoAceptado."
+      operationId: "contrato"
+      parameters:
+      - in: "body"
+        name: "contrato"
+        description: "Se requiere la validacion de la contraseña actual  "
+        required: true
+        schema:
+          $ref: "#/definitions/contrato"
+      responses:
+        200:
+          description: "Operación correcta: 0"
+          schema:
+            $ref: "#/definitions/inline_response_200_4"
+        232:
+          description: "valor del atributo nulo: 41"
+          schema:
+            $ref: "#/definitions/inline_response_232_2"
+        249:
+          description: "No se encuentra el usuario: 32"
+          schema:
+            $ref: "#/definitions/inline_response_249_1"
+        404:
+          description: "Error"
+          schema:
+            $ref: "#/definitions/inline_response_404_2"
+      x-swagger-router-controller: "Contrato"
+    x-swagger-router-controller: "contrato"
 definitions:
   ErrorContratoModificacion:
     properties:
@@ -143,7 +185,7 @@ definitions:
         description: "No se encuentra el usuario: 32"
   contrato-mod-in:
     properties:
-      Usuario:
+      usuario:
         type: "string"
         example: "11212112"
       contratoAceptado:
@@ -151,6 +193,9 @@ definitions:
         example: "7656715672"
   contrato-mod-res:
     properties:
+      respuesta:
+        type: "string"
+        example: "OK"
       CodigoRespuesta:
         type: "string"
         example: "Operación correcta: 0"
@@ -246,7 +291,7 @@ definitions:
         example: "Valor del atributo nulo"
   usuarioCorrecto-Token-Correcto-res:
     properties:
-      CodigoRespuesta:
+      codigo de respuesta:
         type: "string"
         example: "0"
       Descripción de la respuesta:
@@ -257,7 +302,7 @@ definitions:
         example: "test1"
   usuario-correcto-y-OTP-incorrecto-res:
     properties:
-      CodigoRespuesta:
+      codigo de respuesta:
         type: "string"
         example: "0"
       Descripción de la respuesta:
@@ -268,7 +313,7 @@ definitions:
         example: "test1"
   token-no-asignado-res:
     properties:
-      CodigoRespuesta:
+      codigo de respuesta:
         type: "string"
         example: "32"
       Descripción de la respuesta:
@@ -279,7 +324,7 @@ definitions:
         example: "test1"
   token-asignado-pero-no-activo-res:
     properties:
-      CodigoRespuesta:
+      codigo de respuesta:
         type: "string"
         example: "45"
       Descripción de la respuesta:
@@ -290,7 +335,7 @@ definitions:
         example: "test1"
   cambio-de-contraseña-exitoso-res:
     properties:
-      CodigoRespuesta:
+      codigo de respuesta.:
         type: "string"
         example: "0"
       Descripción de la respuesta:
@@ -301,7 +346,7 @@ definitions:
         example: "test1"
   contraseña-actual-errónea-res:
     properties:
-      CodigoRespuesta:
+      codigo de respuesta.:
         type: "string"
         example: "49"
       Descripción de la respuesta:
@@ -312,7 +357,7 @@ definitions:
         example: "test1"
   no-coinciden-las-nuevas-contraseñas-res:
     properties:
-      CodigoRespuesta:
+      codigo de respuesta.:
         type: "string"
         example: "48"
       Descripción de la respuesta:
@@ -379,59 +424,58 @@ definitions:
     properties:
       CodigoRespuesta:
         type: "integer"
-        example: "integer"
+        example: 1
       DescripcionResp:
         type: "string"
-        example: "string"
-      
+        example: "Datos del clinete"
       NumCliente:
         type: "string"
-        example: "string"
+        example: "1234"
       Nombre:
         type: "string"
-        example: "string"
+        example: "Agustin"
       Direccion:
         type: "string"
-        example: "string"
+        example: "5 de mayo"
       Poblacion:
         type: "string"
-        example: "string"
+        example: "polanco"
       Ciudad:
         type: "string"
-        example: "string"
+        example: "mexico"
       Estado:
         type: "string"
-        example: "string"
+        example: "mexico"
       CP:
         type: "string"
-        example: "string"
+        example: "50010"
       RFC:
         type: "string"
-        example: "string"
+        example: "RYTUYT7867687"
       Telefono1:
         type: "string"
-        example: "string"
+        example: "55556262672"
       Telefono2:
         type: "string"
-        example: "string"
+        example: "5556262626"
       Celular:
         type: "string"
-        example: "string"
+        example: "555762272"
       Mail:
         type: "string"
-        example: "string"
+        example: "agusting@hormail.com"
       TipoPersona:
         type: "string"
-        example: "string"
+        example: "Fisica"
       Estatus:
         type: "string"
-        example: "string"
+        example: ""
       Sucursal:
         type: "string"
-        example: "string"
+        example: "1"
       ESVIP:
         type: "string"
-        example: "string"
+        example: "1"
   inline_response_403:
     properties:
       Error:
@@ -440,7 +484,7 @@ definitions:
         description: "Respuesta"
   Contrato:
     properties:
-      Usuario:
+      usuario:
         type: "string"
         example: "11212112"
       contratoAceptado:
@@ -463,8 +507,8 @@ definitions:
   validaOTP:
     properties:
       Usuario:
-        type: "string"
-        example: "123456789"
+        type: "integer"
+        example: 123456789
       OTP:
         type: "string"
         example: "12345tftg5657765412wqsdwdwe23e3r43rd"
@@ -484,35 +528,35 @@ definitions:
         example: "test1"
   inline_response_232:
     properties:
-      CodigoRespuesta:
+      codigo de respuesta:
         type: "string"
         example: "32"
-      DescRespuesta:
+      Descripción de la respuesta:
         type: "string"
         example: "Token no asignado"
-      Antiphishing:
+      antiphishing:
         type: "string"
         example: "test1"
   inline_response_241:
     properties:
-      CodigoRespuesta:
+      codigo de respuesta:
         type: "string"
         example: "0"
-      DescRespuesta:
+      Descripción de la respuesta:
         type: "string"
         example: "Usuario correcto y OTP incorrecto"
-      Antiphishing:
+      antiphishing:
         type: "string"
         example: "test1"
   inline_response_245:
     properties:
-      CodigoRespuesta:
+      codigo de respuesta:
         type: "string"
         example: "45"
-      DescRespuesta:
+      Descripción de la respuesta:
         type: "string"
         example: "Token asignado pero no activo"
-      Antiphishing:
+      antiphishing:
         type: "string"
         example: "test1"
   inline_response_404:
@@ -523,51 +567,40 @@ definitions:
         description: "Respuesta de OTP"
   cambioPwd:
     properties:
-      Usuario:
+      usuario:
         type: "string"
-        example: "AaronMultiva"
-      Contraseña_original:
+        example: "123456789"
+      password:
         type: "string"
-        example: "3433dfd4"
-      Nueva_contraseña:
+        example: "12345tftg5657765412wqsdwdwe23e3r43rd"
+      nuevo password:
         type: "string"
-        example: "sfsdf3443"
-      Comprueba_contraseña:
-        type: "integer"
-        example: "sfsdf3443"
-  cambiorPwd:
-    properties:
-      Usuario:
+        example: "12345tftg5657765412wqsdwdwe23e3r43rd"
+      confirma nuevo password:
         type: "string"
-        example: "string"
-      Contraseña_original:
-        type: "string"
-        example: "string"
-      Nueva_contraseña:
-        type: "string"
-        example: "string"
-      Comprueba_contraseña:
-        type: "integer"
-        example: "string"
+        example: "12345tftg5657765412wqsdwdwe23e3r43rd"
   inline_response_200_3:
     properties:
-      codigoError:
+      codigo de respuesta.:
         type: "string"
-        example: "string"
-      errorMensaje:
+        example: "0"
+      Descripción de la respuesta:
         type: "string"
-        example: "string"
-      
+        example: "Cambio de contraseña exitoso"
+      antiphishing:
+        type: "string"
+        example: "test1"
   inline_response_232_1:
     properties:
-      codigoError:
+      codigo de respuesta.:
         type: "string"
-        example: "string"
-      errorMensaje:
+        example: "48"
+      Descripción de la respuesta:
         type: "string"
-        example: "string"
-     
-     
+        example: "No coinciden las nuevas contraseñas"
+      antiphishing:
+        type: "string"
+        example: "test1"
   inline_response_249:
     properties:
       codigo de respuesta.:
