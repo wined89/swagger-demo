@@ -536,7 +536,7 @@ definitions:
   inline_response_232_1:
     properties:
       CodigoRespuesta:
-        type: "error"
+        type: "string"
         example: "string "
      
      
