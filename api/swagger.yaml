@@ -1,9 +1,9 @@
 ---
 swagger: "2.0"
 info:
-  description: "Documentación de los servicios Multiva Sprint 1  <a href='http://drive.google.com/open?id=0B5MVImiMKmoPbk1RS09LWjR1aTQ'>Documento Compartido</a>" 
+  description: "Documentación de los servicios Multiva"
   version: "0.1.0"
-  title: "Grupo FInzanciero Multiva"
+  title: "Middleware"
 host: "200.39.24.141:9090"
 basePath: "/"
 tags:
@@ -13,13 +13,13 @@ tags:
     description: "Primer Login"
     url: "http://200.39.24.141:9090/docs"
 paths:
-  /getCliente:
+  /Cliente:
     post:
       tags:
       - "Cliente"
-      
+      summary: "/Cliente"
       description: "Realiza la consulta de el cliente"
-      operationId: "cliente"
+      operationId: "clientePOST"
       parameters:
       - in: "body"
         name: "Cliente"
@@ -45,7 +45,7 @@ paths:
     post:
       tags:
       - "Contrato"
-    
+      summary: "/Contrato"
       description: "Realiza la modificacion del contrato"
       operationId: "contratoPOST"
       parameters:
@@ -69,12 +69,13 @@ paths:
           schema:
             $ref: "#/definitions/inline_response_403_1"
       x-swagger-router-controller: "Contrato"
-  /Validaotp:
+  /validaOTP:
     post:
       tags:
       - "OTP"
-      description: "Se requiere la validacion en VACMAN del usuario y su OTP, si la
-        operación de OTP fue exitosa, el valor del blob que es generado que es generado por vacman se actualizara en el LDAP"
+      description: "Se requiere la validacion en VACMAN del usuario y su OTP, si la\
+        \ operación de OTP fue exitosa, el valor del blob que es generado que es generado\
+        \ por vacman se actualizara en el LDAP"
       operationId: "validaOTP"
       parameters:
       - in: "body"
@@ -506,24 +507,24 @@ definitions:
         description: "No se encuentra el usuario: 32"
   validaOTP:
     properties:
-      Usuario:
-        type: "integer"
-        example: 123456789
-      OTP:
+      'usuario:':
+        type: "string"
+        example: "123456789"
+      password OTP:
         type: "string"
         example: "12345tftg5657765412wqsdwdwe23e3r43rd"
-      Tipo:
+      tipo token:
         type: "integer"
         example: 1
   inline_response_200_2:
     properties:
-      CodigoRespuesta:
+      codigo de respuesta:
         type: "string"
         example: "0"
-      DescRespuesta:
+      Descripción de la respuesta:
         type: "string"
         example: "Usuario correcto y token correcto"
-      Antiphishing:
+      antiphishing:
         type: "string"
         example: "test1"
   inline_response_232:
