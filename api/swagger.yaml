@@ -249,13 +249,13 @@ definitions:
         example: "12345tftg5657765412wqsdwdwe23e3r43rd"
   inline_response_200_3:
     properties:
-      codigo de respuesta.:
+      CodigoRespuesta:
         type: "string"
         example: "0"
-      Descripción de la respuesta:
+      DescRespuesta:
         type: "string"
         example: "Cambio de contraseña exitoso"
-      antiphishing:
+      Antiphishing:
         type: "string"
         example: "test1"
  
