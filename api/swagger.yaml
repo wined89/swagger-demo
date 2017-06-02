@@ -511,14 +511,14 @@ definitions:
   inline_response_200_2:
     properties:
       CodigoRespuesta:
-        type: "string"
-        example: "0"
+        type: "integer"
+        example: "integer"
       DescRespuesta:
         type: "string"
-        example: "Usuario correcto y token correcto"
+        example: "string"
       Antiphishing:
-        type: "string"
-        example: "test1"
+        type: "integer"
+        example: "integer"
   inline_response_232:
     properties:
       codigo de respuesta:
