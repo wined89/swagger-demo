@@ -275,25 +275,7 @@ definitions:
       mensajeError:
         type: "string"
         example: "string"
-      Antiphishing:
-        type: "integer"
-        example: "integer"
-  inline_response_232:
-    properties:
-      codigoError:
-        type: "integer"
-        example: "integer"
-      mensajeError:
-        type: "string"
-        example: "string"
-  inline_response_241:
-    properties:
-      codigoError:
-        type: "integer"
-        example: "integer"
-      mensajeError:
-        type: "string"
-        example: "string"
+
   cambioPwd:
     properties:
       usuario:
@@ -319,34 +301,7 @@ definitions:
       antiphishing:
         type: "string"
         example: "test1"
-  inline_response_232_1:
-    properties:
-      codigo de respuesta.:
-        type: "string"
-        example: "48"
-      Descripción de la respuesta:
-        type: "string"
-        example: "No coinciden las nuevas contraseñas"
-      antiphishing:
-        type: "string"
-        example: "test1"
-  inline_response_249:
-    properties:
-      codigo de respuesta.:
-        type: "string"
-        example: "49"
-      Descripción de la respuesta:
-        type: "string"
-        example: "Contraseña actual errónea"
-      antiphishing:
-        type: "string"
-        example: "test1"
-  inline_response_404_1:
-    properties:
-      Error:
-        type: "string"
-        example: "Error cambio pwd"
-        description: "Respuesta de cambio pwd"
+ 
   contrato:
     properties:
       usuario:
@@ -360,25 +315,4 @@ definitions:
       Código de retorno:
         type: "string"
         example: "Operación correcta"
-  inline_response_232_2:
-    properties:
-      Valor obtenido del atributo contrato Aceptado.:
-        type: "string"
-        example: "41"
-      Código de retorno:
-        type: "string"
-        example: "Valor del atributo nulo"
-  inline_response_249_1:
-    properties:
-      Valor obtenido del atributo contrato Aceptado.:
-        type: "string"
-        example: "32"
-      Código de retorno:
-        type: "string"
-        example: "No se encuentra el usuario"
-  inline_response_404_2:
-    properties:
-      Error:
-        type: "string"
-        example: "Error Contrato"
-        description: "Respuesta de Contrato"
+ 
