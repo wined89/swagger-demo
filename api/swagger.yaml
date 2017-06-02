@@ -60,14 +60,14 @@ paths:
           description: "Contrato Modificacion exitosa"
           schema:
             $ref: "#/definitions/inline_response_200_1"
-        403:
+        500:
           description: "Cliente no encontrado"
           schema:
-            $ref: "#/definitions/inline_response_403_1"
-        404:
+            $ref: "#/definitions/inline_response_200_2"
+        400:
           description: "Cliente no encontrado"
           schema:
-            $ref: "#/definitions/inline_response_403_1"
+            $ref: "#/definitions/inline_response_200_2"
       x-swagger-router-controller: "Contrato"
   /Validaotp:
     post:
@@ -86,15 +86,15 @@ paths:
         200:
           description: "Usuario correcto y token correcto: 0"
           schema:
-            $ref: "#/definitions/inline_response_200_2"
+            $ref: "#/definitions/inline_response_403_1"
         500:
           description: "Usuario correcto y OTP incorrecto: 32"
           schema:
-            $ref: "#/definitions/inline_response_232"
+            $ref: "#/definitions/inline_response_200_2"
         400:
           description: "Usuario correcto y OTP incorrecto: 41"
           schema:
-            $ref: "#/definitions/inline_response_241"
+            $ref: "#/definitions/inline_response_200_2"
       x-swagger-router-controller: "OTP"
     x-swagger-router-controller: "validaOTP"
   /cambioPwd:
@@ -119,18 +119,15 @@ paths:
           description: "Cambio de contraseña exitoso: 0"
           schema:
             $ref: "#/definitions/inline_response_200_3"
-        232:
+        500:
           description: "No coinciden las nuevas contraseñas: 48"
           schema:
-            $ref: "#/definitions/inline_response_232_1"
-        249:
+            $ref: "#/definitions/inline_response_200_2"
+        400:
           description: "Contraseña actual errónea: 49"
           schema:
-            $ref: "#/definitions/inline_response_249"
-        404:
-          description: "No se modificó la contraseña valor de la operación en LDAP"
-          schema:
-            $ref: "#/definitions/inline_response_404_1"
+            $ref: "#/definitions/inline_response_200_2"
+        
       x-swagger-router-controller: "Contrasea"
     x-swagger-router-controller: "cambioPwd"
   /contrato:
@@ -153,18 +150,14 @@ paths:
           description: "Operación correcta: 0"
           schema:
             $ref: "#/definitions/inline_response_200_4"
-        232:
+        500:
           description: "valor del atributo nulo: 41"
           schema:
-            $ref: "#/definitions/inline_response_232_2"
-        249:
+            $ref: "#/definitions/inline_response_200_2"
+        400:
           description: "No se encuentra el usuario: 32"
           schema:
-            $ref: "#/definitions/inline_response_249_1"
-        404:
-          description: "Error"
-          schema:
-            $ref: "#/definitions/inline_response_404_2"
+            $ref: "#/definitions/inline_response_200_2"
       x-swagger-router-controller: "Contrato"
     x-swagger-router-controller: "contrato"
 definitions:
@@ -253,11 +246,16 @@ definitions:
         type: "string"
         example: "Operación correcta: 0"
   inline_response_403_1:
-    properties:
+     properties:
       CodigoRespuesta:
+        type: "integer"
+        example: "integer"
+      DescRespuesta:
         type: "string"
-        example: "No se encuentra el usuario: 32"
-        description: "No se encuentra el usuario: 32"
+        example: "string"
+      Antiphishing:
+        type: "integer"
+        example: "integer"
   validaOTP:
     properties:
       Usuario:
