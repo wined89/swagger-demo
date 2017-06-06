@@ -1,7 +1,7 @@
 ---
 swagger: "2.0"
 info:
-  description: "Documentación de los servicios Multiva Sprint 1  <a href='http://drive.google.com/open?id=0B5MVImiMKmoPbk1RS09LWjR1aTQ'>Documento Compartido</a>" 
+  description: "Documentación de los servicios Multiva Sprint 1  <a href='https://drive.google.com/open?id=0B_OaZlYG0i2ndHJUT3VFem5LWlk'>Documento Compartido</a>" 
   version: "0.1.0"
   title: "Grupo Financiero Multiva"
 host: "localhost:9090"
