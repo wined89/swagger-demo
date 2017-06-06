@@ -17,21 +17,20 @@ paths:
     post:
       tags:
       - "ESB Fuse"
-      summary: "/consultaDatosCliente"
       description: "Realiza la consulta de los datos del cliente"
-      operationId: "clientePOST"
+      operationId: "Consulta Datos Cliente ESB Fuse"
       parameters:
       - in: "body"
-        name: "Cliente"
+        name: "/consultaDatosCliente"
         description: "Estructura de la respuesta del cliente"
         required: true
         schema:
-          $ref: "#/definitions/Cliente"
+          $ref: "#/definitions/consultaDatosCliente-in"
       responses:
         200:
           description: "estructura de la respuesta del cliente"
           schema:
-            $ref: "#/definitions/inline_response_200"
+            $ref: "#/definitions/cconsultaDatosCliente-res"
         500:
           description: "el servicio tiene un error"
           schema:
@@ -40,7 +39,7 @@ paths:
           description: "no se encuentra el recurso"
           schema:
             $ref: "#/definitions/inline_response_200_2"
-      x-swagger-router-controller: "Cliente"
+      x-swagger-router-controller: "/consultaDatosClientes"
   /ConsultaDatosCliente:
     post:
       tags:
@@ -419,12 +418,100 @@ paths:
       x-swagger-router-controller: "Contrato"
     x-swagger-router-controller: "contrato"
 definitions:
-  
-  Cliente:
+  consultaDatosCliente-in:
     properties:
-      Numerocliente:
+      idPersona:
+        type: number
+        example: "1025478963"
+  
+  cconsultaDatosCliente-res:
+    properties:
+      numCliente:
+        type: "integer"
+        format: "int64"
+        example: "1"
+      Nombre:
         type: "string"
         example: "1"
+      listaDirecciones:
+        type: "object"
+        example: "ListaDirecciones"
+      rfc:
+        type: "string"
+        example: "String"
+      listaTelefonos:
+        type: "array"
+        items:
+          $ref: "#/definitions/listaDeTelefonos"
+      listaEmails:
+        type: "array"
+        items:
+          $ref: "#/definitions/listaDeEmail"
+      tipoPersona:
+        type: "string"
+        example: "String"
+      estatus:
+        type: "string"
+        example: "String"
+      vip:
+        type: "string"
+        example: "String"
+      responseStatus:
+        type: "string"
+        example: "String"
+      responseError:
+        type: "string"
+        example: "String"
+      sucursal:
+        type: "array"
+        items:
+          $ref: "#/definitions/listaDeDirecciones"
+          
+  listaDeEmail:
+    properties:
+      mail:
+        type: "string"
+        example: "String"
+      activo:
+        type: boolean
+        example: "Boolean"
+      tipoEmail:
+        type: "string"
+        example: "String"
+     
+        
+  listaDeTelefonos:
+    properties:
+      telefono:
+        type: integer
+        example: "Integer"
+      tipoTelefono:
+        type: "string"
+        example: "String"
+    
+        
+        
+  listaDeDirecciones:
+    properties:
+      direccion:
+        type: "string"
+        example: "String"
+      poblacion:
+        type: "string"
+        example: "String"
+      ciudad:
+        type: "string"
+        example: "String"
+      estado:
+        type: "string"
+        example: "String"
+      cp:
+        type: "string"
+        example: "String"
+      tipoDireccion:
+        type: "string"
+        example: "String"
+     
   inline_response_200:
     properties:
       CodigoRespuesta:
