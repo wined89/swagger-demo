@@ -202,28 +202,34 @@ paths:
           schema:
             $ref: "#/definitions/inline_response_200_2"
       x-swagger-router-controller: "Cliente"
-#-------------------------------------------------------------------      
   /MessagingCentralService:
     post:
       tags:
       - "Middleware"
       summary: "/MessagingCentralService"
-      description: "Realiza el envio de email"
-      operationId: "MessagingCentralServicePOST"
+      description: "Realiza la consulta de los datos del cliente"
+      operationId: "MessagingCentralService"
       parameters:
       - in: "body"
         name: "MessagingCentralService"
-        description: "Realiza el envio de email"
+        description: "Estructura de la respuesta del cliente"
         required: true
         schema:
-          $ref: "#/definitions/sendEmail-in"
+          $ref: "#/definitions/consultaDatosCliente-in"
       responses:
         200:
-          description: "Realiza el envio de email"
+          description: "estructura de la respuesta del cliente"
           schema:
-            $ref: "#/definitions/sendEmail-res" 
+            $ref: "#/definitions/inline_response_200"
+        500:
+          description: "el servicio tiene un error"
+          schema:
+            $ref: "#/definitions/inline_response_200_2"
+        404:
+          description: "no se encuentra el recurso"
+          schema:
+            $ref: "#/definitions/inline_response_200_2"
       x-swagger-router-controller: "MessagingCentralService"
-#------------------------------------------------------------------- 
   /ServiciosContratados:
     post:
       tags:
@@ -402,7 +408,10 @@ paths:
     x-swagger-router-controller: "contrato"
 definitions:
   consultaDatosCliente-in:
+    required:
+      - idPersona
     properties:
+      
       idPersona:
         type: number
         example: "1025478963"
@@ -628,33 +637,4 @@ definitions:
         type: "integer"
         example: "integer"
 
-        
-#------------------------------------------------------------------------------------------
-  sendEmail-in:
-    properties:
-      constante:
-        type: "string"
-        example: "2"
-      idMensaje:
-        type: "string"
-        example: "316"
-      correo:
-        type: "string"
-        example: "rafael.sanchez@multiva.com.mx"
-      nombreUsu:
-        type: "string"
-        example: "rafael sanchez"       
-      fechaHora:
-        type: "string"
-        example: "2" 
-
-
-
-  sendEmail-res:
-    properties:
-      CodigoRespuesta:
-        type: "string"
-        example: "0"
-
-#------------------------------------------------------------------------------------
   
