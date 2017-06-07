@@ -410,8 +410,9 @@ definitions:
   consultaDatosCliente-in:
     required:
       - idPersona
+      - ticket
+      - canal
     properties:
-      
       idPersona:
         type: number
         example: "1025478963"
