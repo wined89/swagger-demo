@@ -5,7 +5,7 @@ info:
   version: "0.1.0"
   title: "Grupo Financiero Multiva"
 host: "200.39.24.141:9090"
-basePath: "/"
+basePath: "/BEO"
 tags:
 - name: "Core Bancario"
   description: "Primer Login (Dinámico  y Estático)"
