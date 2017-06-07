@@ -21,7 +21,7 @@ paths:
       operationId: "Consulta Datos Cliente ESB Fuse"
       parameters:
       - in: "body"
-        name: "/consultaDatosCliente"
+        name: "/consultaDatosClientes"
         description: "Estructura de la respuesta del cliente"
         required: true
         schema:
@@ -30,7 +30,7 @@ paths:
         200:
           description: "estructura de la respuesta del cliente"
           schema:
-            $ref: "#/definitions/cconsultaDatosCliente-res"
+            $ref: "#/definitions/consultaDatosCliente-res"
         500:
           description: "el servicio tiene un error"
           schema:
@@ -355,7 +355,7 @@ paths:
           schema:
             $ref: "#/definitions/inline_response_200_2"
       x-swagger-router-controller: "OTP"
-    x-swagger-router-controller: "validaOTP"
+
   /cambiapassword:
     post:
       tags:
@@ -424,7 +424,7 @@ definitions:
         type: number
         example: "1025478963"
   
-  cconsultaDatosCliente-res:
+  consultaDatosCliente-res:
     properties:
       numCliente:
         type: "integer"
