@@ -413,6 +413,9 @@ definitions:
       idPersona:
         type: number
         example: "1025478963"
+      ticket:
+        type: "string"
+        example: "CUBA1234575SDF"
   
   consultaDatosCliente-res:
     properties:
