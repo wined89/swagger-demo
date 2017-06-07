@@ -18,7 +18,7 @@ paths:
       tags:
       - "ESB Fuse"
       description: "Realiza la consulta de los datos del cliente"
-      operationId: "Consulta Datos Cliente ESB Fuse"
+      operationId: "/consultaDatosClientes"
       parameters:
       - in: "body"
         name: "/consultaDatosClientes"
