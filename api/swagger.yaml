@@ -434,8 +434,9 @@ definitions:
         type: "string"
         example: "1"
       listaDirecciones:
-        type: "object"
-        example: "ListaDirecciones"
+         type: "array"
+         items:
+          $ref: "#/definitions/listaDeDirecciones"
       rfc:
         type: "string"
         example: "String"
@@ -462,10 +463,8 @@ definitions:
       responseError:
         type: "string"
         example: "String"
-      sucursal:
-        type: "array"
-        items:
-          $ref: "#/definitions/listaDeDirecciones"
+      
+       
           
   listaDeEmail:
     properties:
