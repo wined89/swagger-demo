@@ -422,10 +422,10 @@ definitions:
       numCliente:
         type: "integer"
         format: "int64"
-        example: "1"
+        example: "Long"
       Nombre:
         type: "string"
-        example: "1"
+        example: "String"
       listaDirecciones:
          type: "array"
          items:
