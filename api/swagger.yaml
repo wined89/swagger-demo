@@ -39,7 +39,7 @@ paths:
           description: "no se encuentra el recurso"
           schema:
             $ref: "#/definitions/inline_response_200_2"
-      x-swagger-router-controller: "/consultaDatosClientes"
+    x-swagger-router-controller: "/consultaDatosClientes"
   /ConsultaDatosCliente:
     post:
       tags:
