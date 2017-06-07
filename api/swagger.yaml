@@ -30,6 +30,124 @@ paths:
           description: "estructura de la respuesta del cliente"
           schema:
             $ref: "#/definitions/consultaDatosCliente-res"
+  
+  /consultaServiciosContratados:
+    post:
+      tags:
+      - "ESB Fuse"
+      summary: "/MessagingCentralService"
+      description: "Realiza la consulta de los datos del cliente"
+      operationId: "/MessagingCentralService"
+      parameters:
+      - in: "body"
+        name: "/MessagingCentralService"
+        description: "Estructura de la respuesta del cliente"
+        required: true
+        schema:
+          $ref: "#/definitions/consultaDatosCliente-in"
+      responses:
+        200:
+          description: "estructura de la respuesta del cliente"
+          schema:
+            $ref: "#/definitions/inline_response_200"
+        500:
+          description: "el servicio tiene un error"
+          schema:
+            $ref: "#/definitions/inline_response_200_2"
+        404:
+          description: "no se encuentra el recurso"
+          schema:
+            $ref: "#/definitions/inline_response_200_2"
+      x-swagger-router-controller: "/MessagingCentralService"
+  /consultaProductosContratados:
+    post:
+      tags:
+      - "ESB Fuse"
+      summary: "/MessagingCentral"
+      description: "Realiza la consulta de los datos del cliente"
+      operationId: "/MessagingCentral"
+      parameters:
+      - in: "body"
+        name: "/MessagingCentral"
+        description: "Estructura de la respuesta del cliente"
+        required: true
+        schema:
+          $ref: "#/definitions/consultaDatosCliente-in"
+      responses:
+        200:
+          description: "estructura de la respuesta del cliente"
+          schema:
+            $ref: "#/definitions/inline_response_200"
+        500:
+          description: "el servicio tiene un error"
+          schema:
+            $ref: "#/definitions/inline_response_200_2"
+        404:
+          description: "no se encuentra el recurso"
+          schema:
+            $ref: "#/definitions/inline_response_200_2"
+      x-swagger-router-controller: "/MessagingCentral"
+  /validaotp:
+    post:
+      tags:
+      - "ESB Fuse"
+      description: "Servicio que realiza la validación del OTP"
+      operationId: "validaOtp"
+      parameters:
+      - in: "body"
+        name: "validaOTP"
+        description: "Se requiere la validación de VACMAN del usuario y su OTP"
+        required: true
+        schema:
+          $ref: "#/definitions/validaOTP"
+      responses:
+        200:
+          description: "Tipos de datos de la respuesta del servicio"
+          schema:
+            $ref: "#/definitions/inline_response_403_1"
+        500:
+          description: "error en el servicio"
+          schema:
+            $ref: "#/definitions/inline_response_200_2"
+        404:
+          description: "no se encuentra el recurso"
+          schema:
+            $ref: "#/definitions/inline_response_200_2"
+      x-swagger-router-controller: "OTP"
+
+  /cambiapassword:
+    post:
+      tags:
+      - "ESB Fuse"
+      description: "Se requiere la validacion de la contraseña actual despues que\
+        \ se compare la nueva contraseña si los dos pasos son exitoso se requiere\
+        \ realizar una modificacion al atributo userPassword en LDAP para el numero\
+        \ del cleinte (uid=$numCliente,ou=people,dc=multiva,dc=mx) previamente obtenido\
+        \ en la entradas y se coloca el nuevo password proporcionado."
+      operationId: "cambioPwdd"
+      parameters:
+      - in: "body"
+        name: "cambioPwd"
+        description: "Se requiere la validacion de la contraseña actual  "
+        required: true
+        schema:
+          $ref: "#/definitions/cambioPwd"
+      responses:
+        200:
+          description: "Estructura de la respuesta del servicio"
+          schema:
+            $ref: "#/definitions/inline_response_200_3"
+        500:
+          description: "error en el servicio"
+          schema:
+            $ref: "#/definitions/inline_response_200_2"
+        404:
+          description: "no se encuentra el recurso"
+          schema:
+            $ref: "#/definitions/inline_response_200_2"
+        
+      x-swagger-router-controller: "Contrasea"
+    x-swagger-router-controller: "cambioPwd"
   /ConsultaDatosCliente:
     post:
       tags:
@@ -114,63 +232,6 @@ paths:
           schema:
             $ref: "#/definitions/inline_response_200_2"
       x-swagger-router-controller: "MessagingCentralService"
-  /consultaServiciosContratados:
-    post:
-      tags:
-      - "ESB Fuse"
-      summary: "/MessagingCentralService"
-      description: "Realiza la consulta de los datos del cliente"
-      operationId: "/MessagingCentralService"
-      parameters:
-      - in: "body"
-        name: "/MessagingCentralService"
-        description: "Estructura de la respuesta del cliente"
-        required: true
-        schema:
-          $ref: "#/definitions/consultaDatosCliente-in"
-      responses:
-        200:
-          description: "estructura de la respuesta del cliente"
-          schema:
-            $ref: "#/definitions/inline_response_200"
-        500:
-          description: "el servicio tiene un error"
-          schema:
-            $ref: "#/definitions/inline_response_200_2"
-        404:
-          description: "no se encuentra el recurso"
-          schema:
-            $ref: "#/definitions/inline_response_200_2"
-      x-swagger-router-controller: "/MessagingCentralService"
-  /consultaProductosContratados:
-    post:
-      tags:
-      - "ESB Fuse"
-      summary: "/MessagingCentral"
-      description: "Realiza la consulta de los datos del cliente"
-      operationId: "/MessagingCentral"
-      parameters:
-      - in: "body"
-        name: "/MessagingCentral"
-        description: "Estructura de la respuesta del cliente"
-        required: true
-        schema:
-          $ref: "#/definitions/consultaDatosCliente-in"
-      responses:
-        200:
-          description: "estructura de la respuesta del cliente"
-          schema:
-            $ref: "#/definitions/inline_response_200"
-        500:
-          description: "el servicio tiene un error"
-          schema:
-            $ref: "#/definitions/inline_response_200_2"
-        404:
-          description: "no se encuentra el recurso"
-          schema:
-            $ref: "#/definitions/inline_response_200_2"
-      x-swagger-router-controller: "/MessagingCentral"
-
   /ServiciosContratados:
     post:
       tags:
@@ -318,67 +379,7 @@ paths:
       x-swagger-router-controller: "Contrato"
     x-swagger-router-controller: "contrato"
  
-  /validaotp:
-    post:
-      tags:
-      - "ESB Fuse"
-      description: "Servicio que realiza la validación del OTP"
-      operationId: "validaOtp"
-      parameters:
-      - in: "body"
-        name: "validaOTP"
-        description: "Se requiere la validación de VACMAN del usuario y su OTP"
-        required: true
-        schema:
-          $ref: "#/definitions/validaOTP"
-      responses:
-        200:
-          description: "Tipos de datos de la respuesta del servicio"
-          schema:
-            $ref: "#/definitions/inline_response_403_1"
-        500:
-          description: "error en el servicio"
-          schema:
-            $ref: "#/definitions/inline_response_200_2"
-        404:
-          description: "no se encuentra el recurso"
-          schema:
-            $ref: "#/definitions/inline_response_200_2"
-      x-swagger-router-controller: "OTP"
 
-  /cambiapassword:
-    post:
-      tags:
-      - "ESB Fuse"
-      description: "Se requiere la validacion de la contraseña actual despues que\
-        \ se compare la nueva contraseña si los dos pasos son exitoso se requiere\
-        \ realizar una modificacion al atributo userPassword en LDAP para el numero\
-        \ del cleinte (uid=$numCliente,ou=people,dc=multiva,dc=mx) previamente obtenido\
-        \ en la entradas y se coloca el nuevo password proporcionado."
-      operationId: "cambioPwdd"
-      parameters:
-      - in: "body"
-        name: "cambioPwd"
-        description: "Se requiere la validacion de la contraseña actual  "
-        required: true
-        schema:
-          $ref: "#/definitions/cambioPwd"
-      responses:
-        200:
-          description: "Estructura de la respuesta del servicio"
-          schema:
-            $ref: "#/definitions/inline_response_200_3"
-        500:
-          description: "error en el servicio"
-          schema:
-            $ref: "#/definitions/inline_response_200_2"
-        404:
-          description: "no se encuentra el recurso"
-          schema:
-            $ref: "#/definitions/inline_response_200_2"
-        
-      x-swagger-router-controller: "Contrasea"
-    x-swagger-router-controller: "cambioPwd"
   /validacontrato:
     post:
       tags:
@@ -414,6 +415,9 @@ definitions:
         type: number
         example: "1025478963"
       ticket:
+        type: "string"
+        example: "CUBA1234575SDF"
+      canal:
         type: "string"
         example: "CUBA1234575SDF"
   
