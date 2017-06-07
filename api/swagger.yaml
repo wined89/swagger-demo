@@ -416,6 +416,8 @@ definitions:
         example: "1025478963"
       ticket:
         type: "string"
+        minLength: 1
+        maxLength: 1
         example: "CUBA1234575SDF"
       canal:
         type: "string"
