@@ -44,16 +44,16 @@ paths:
     post:
       tags:
       - "Middleware"
-      summary: "/consultaDatosCliente"
+      summary: "/ConsultaDatosCliente"
       description: "Realiza la consulta de los datos del cliente"
-      operationId: "clientePOST"
+      operationId: "ConsultaDatosCliente"
       parameters:
       - in: "body"
-        name: "Cliente"
+        name: "ConsultaDatosCliente"
         description: "Estructura de la respuesta del cliente"
         required: true
         schema:
-          $ref: "#/definitions/Cliente"
+          $ref: "#/definitions/consultaDatosCliente-in"
       responses:
         200:
           description: "estructura de la respuesta del cliente"
@@ -67,14 +67,14 @@ paths:
           description: "no se encuentra el recurso"
           schema:
             $ref: "#/definitions/inline_response_200_2"
-      x-swagger-router-controller: "Cliente"
+      x-swagger-router-controller: "ConsultaDatosCliente"
   /primerAcceso:
     post:
       tags:
       - "Middleware"
       summary: "/primerAcceso"
       description: "Realiza la consulta de los datos del cliente"
-      operationId: "clientePOST"
+      operationId: "primerAcceso"
       parameters:
       - name: id
         in: "header"
@@ -102,14 +102,14 @@ paths:
       - "Middleware"
       summary: "/MessagingCentralService"
       description: "Realiza la consulta de los datos del cliente"
-      operationId: "clientePOST"
+      operationId: "MessagingCentralService"
       parameters:
       - in: "body"
-        name: "Cliente"
+        name: "MessagingCentralService"
         description: "Estructura de la respuesta del cliente"
         required: true
         schema:
-          $ref: "#/definitions/Cliente"
+          $ref: "#/definitions/consultaDatosCliente-in"
       responses:
         200:
           description: "estructura de la respuesta del cliente"
@@ -123,21 +123,21 @@ paths:
           description: "no se encuentra el recurso"
           schema:
             $ref: "#/definitions/inline_response_200_2"
-      x-swagger-router-controller: "Cliente"
+      x-swagger-router-controller: "MessagingCentralService"
   /consultaServiciosContratados:
     post:
       tags:
       - "ESB Fuse"
       summary: "/MessagingCentralService"
       description: "Realiza la consulta de los datos del cliente"
-      operationId: "clientePOST"
+      operationId: "/MessagingCentralService"
       parameters:
       - in: "body"
-        name: "Cliente"
+        name: "/MessagingCentralService"
         description: "Estructura de la respuesta del cliente"
         required: true
         schema:
-          $ref: "#/definitions/Cliente"
+          $ref: "#/definitions/consultaDatosCliente-in"
       responses:
         200:
           description: "estructura de la respuesta del cliente"
@@ -151,21 +151,21 @@ paths:
           description: "no se encuentra el recurso"
           schema:
             $ref: "#/definitions/inline_response_200_2"
-      x-swagger-router-controller: "Cliente"
+      x-swagger-router-controller: "/MessagingCentralService"
   /consultaProductosContratados:
     post:
       tags:
       - "ESB Fuse"
-      summary: "/MessagingCentralService"
+      summary: "/MessagingCentral"
       description: "Realiza la consulta de los datos del cliente"
-      operationId: "clientePOST"
+      operationId: "/MessagingCentral"
       parameters:
       - in: "body"
-        name: "Cliente"
+        name: "/MessagingCentral"
         description: "Estructura de la respuesta del cliente"
         required: true
         schema:
-          $ref: "#/definitions/Cliente"
+          $ref: "#/definitions/consultaDatosCliente-in"
       responses:
         200:
           description: "estructura de la respuesta del cliente"
@@ -179,22 +179,22 @@ paths:
           description: "no se encuentra el recurso"
           schema:
             $ref: "#/definitions/inline_response_200_2"
-      x-swagger-router-controller: "Cliente"
+      x-swagger-router-controller: "/MessagingCentral"
 
   /ServiciosContratados:
     post:
       tags:
       - "Middleware"
-      summary: "/MessagingCentralService"
+      summary: "CentralService"
       description: "Realiza la consulta de los datos del cliente"
-      operationId: "clientePOST"
+      operationId: "CentralService"
       parameters:
       - in: "body"
-        name: "Cliente"
+        name: "CentralService"
         description: "Estructura de la respuesta del cliente"
         required: true
         schema:
-          $ref: "#/definitions/Cliente"
+          $ref: "#/definitions/consultaDatosCliente-in"
       responses:
         200:
           description: "estructura de la respuesta del cliente"
@@ -208,21 +208,21 @@ paths:
           description: "no se encuentra el recurso"
           schema:
             $ref: "#/definitions/inline_response_200_2"
-      x-swagger-router-controller: "Cliente"
+      x-swagger-router-controller: "CentralService"
   /ProductosContratados:
     post:
       tags:
       - "Middleware"
-      summary: "/MessagingCentralService"
+      summary: "/MessagingService"
       description: "Realiza la consulta de los datos del cliente"
-      operationId: "clientePOST"
+      operationId: "/MessagingService"
       parameters:
       - in: "body"
-        name: "Cliente"
+        name: "/MessagingService"
         description: "Estructura de la respuesta del cliente"
         required: true
         schema:
-          $ref: "#/definitions/Cliente"
+          $ref: "#/definitions/consultaDatosCliente-in"
       responses:
         200:
           description: "estructura de la respuesta del cliente"
@@ -236,7 +236,7 @@ paths:
           description: "no se encuentra el recurso"
           schema:
             $ref: "#/definitions/inline_response_200_2"
-      x-swagger-router-controller: "Cliente"
+      x-swagger-router-controller: "/MessagingService"
 
   /Validaotp:
     post:
@@ -333,7 +333,7 @@ paths:
       tags:
       - "ESB Fuse"
       description: "Servicio que realiza la validación del OTP"
-      operationId: "validaOTP"
+      operationId: "validaOtp"
       parameters:
       - in: "body"
         name: "validaOTP"
@@ -365,7 +365,7 @@ paths:
         \ realizar una modificacion al atributo userPassword en LDAP para el numero\
         \ del cleinte (uid=$numCliente,ou=people,dc=multiva,dc=mx) previamente obtenido\
         \ en la entradas y se coloca el nuevo password proporcionado."
-      operationId: "cambioPwd"
+      operationId: "cambioPwdd"
       parameters:
       - in: "body"
         name: "cambioPwd"
@@ -394,7 +394,7 @@ paths:
       tags:
       - "Seguridad Nologin"
       description: "Este servicio es para  cambiar la bandera de que el usuario acepto el contrato"
-      operationId: "contrato"
+      operationId: "contratoo"
       parameters:
       - in: "body"
         name: "contrato"
