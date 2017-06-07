@@ -35,12 +35,10 @@ paths:
     post:
       tags:
       - "ESB Fuse"
-      summary: "/MessagingCentralService"
       description: "Realiza la consulta de los datos del cliente"
-      operationId: "/MessagingCentralService"
       parameters:
       - in: "body"
-        name: "/MessagingCentralService"
+        name: "/consultaServiciosContratados"
         description: "Estructura de la respuesta del cliente"
         required: true
         schema:
@@ -58,7 +56,7 @@ paths:
           description: "no se encuentra el recurso"
           schema:
             $ref: "#/definitions/inline_response_200_2"
-      x-swagger-router-controller: "/MessagingCentralService"
+      x-swagger-router-controller: "/consultaServiciosContratados"
   /consultaProductosContratados:
     post:
       tags:
@@ -417,10 +415,12 @@ definitions:
       ticket:
         type: "string"
         minLength: 1
-        maxLength: 1
+        maxLength: 16
         example: "CUBA1234575SDF"
       canal:
         type: "string"
+        minLength: 1
+        maxLength: 5
         example: "CUBA1234575SDF"
   
   consultaDatosCliente-res:
