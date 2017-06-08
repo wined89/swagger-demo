@@ -558,6 +558,7 @@ definitions:
         
         
         
+        
   Validacontrato-in:
     properties:
       Usuario:
@@ -566,7 +567,7 @@ definitions:
       ContratoAceptado:
         type: "integer"
         example: 1
-      Otp:
+      token:
         type: "integer"
         example: 1
       
