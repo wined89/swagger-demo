@@ -84,53 +84,45 @@ paths:
           schema:
             $ref: "#/definitions/Validaotp-res"
         
-  /cambioContrasena:
+ 
+            
+  /Validacontrato:
     post:
       tags:
       - "ESB Fuse"
-      description: "Se requiere la validacion de la contraseña actual despues que
-        se compare la nueva contraseña si los dos pasos son exitoso se requiere
-        realizar una modificacion al atributo userPassword en LDAP para el numero
-        del cleinte previamente obtenido en la entradas y se coloca el nuevo password proporcionado"
+      description: "Este servicio es para  cambiar la bandera de que el usuario acepto el contrato"
       parameters:
       - in: "body"
-        name: "cambioPwd"
-        description: "Se requiere la validacion de la contraseña actual  "
+        name: "contrato"
+        description: "Se requiere la validacion de la contraseña actual"
         required: true
         schema:
-          $ref: "#/definitions/cambiapassword-in"
+          $ref: "#/definitions/Validacontrato-in"
       responses:
         200:
-          description: "Estructura de la respuesta del servicio"
+          description: "Tipos de datos de respuesta"
           schema:
-            $ref: "#/definitions/cambiapassword-res"
+            $ref: "#/definitions/Validacontrato-res"
         
        
   
   
  
 definitions:
-  cambiapassword-in:
+  Validacontrato-in:
     properties:
       Usuario:
         type: "string"
-        example: "123456789"
-      Contraseña_original:
-        type: "string"
-        example: "12345pwd"
-      Nueva_contraseña:
-        type: "string"
-        example: "pwd1234"
-      Comprueba_contraseña:
-        type: "string"
-        example: "pwd1233"
+        example: "4333534"
+      ContratoAceptado:
+        type: "integer"
+        example: 1
         
-  cambiapassword-res:
+  Validacontrato-res:
     properties:
       CodigoRespuesta:
         type: "integer"
-        format: "int64"
-        example: "Long"
+        example: "integer"
         
   consultaProductosContratados-in:
     required:
