@@ -198,7 +198,7 @@ paths:
           schema:
             $ref: "#/definitions/Validacontrato-res"
             
-  /CambioContrasena:
+  /V1/CambioContrasena:
     post:
       tags:
       - "ESB Fuse"
@@ -218,7 +218,7 @@ paths:
           schema:
             $ref: "#/definitions/cambioContrasena-res"
             
-  /ConsultaCuentasAgregadasCliente:
+  /V1/ConsultaCuentasAgregadasCliente:
     post:
       tags:
       - "ESB Fuse"
@@ -239,7 +239,7 @@ paths:
           schema:
             $ref: "#/definitions/consultaCuentasAgregadasCliente-res"
             
-  /EnvioNotificaciones:
+  /V1/EnvioNotificaciones:
     post:
       tags:
       - "ESB Fuse"
@@ -283,6 +283,9 @@ definitions:
       idPersona:
         type: "string"
         example: "Long"
+      token:
+        type: "string"
+        example: "string"        
       ticket:
         $ref: "#/definitions/cambioContrasenain_ticket"
       tipoMensaje:
@@ -373,6 +376,9 @@ definitions:
       idPersona:
         type: "string"
         example: "Long"
+      token:
+        type: "string"
+        example: "Long"        
       ticket:
         $ref: "#/definitions/cambioContrasenain_ticket"
       canal:
@@ -442,20 +448,12 @@ definitions:
         example: "integer"
         
   consultaProductosContratados-in:
-    required:
-      - idPersona
-      - canal
+    required: 
+      - token
     properties:
-      idPersona:
-        type: number
-        example: "1025478963"
-      ticket:
-          $ref: "#/definitions/consultaProductosContratadosticket"
-      canal:
+      token:
         type: "string"
-        minLength: 1
-        maxLength: 5
-        example: "CUBA1234575SDF"
+        example: "1025478963" 
         
   consultaProductosContratados-res:
     required:
@@ -471,15 +469,7 @@ definitions:
       responseError:
         type: "string"
         example: "String"
-        
-  consultaProductosContratadosticket:
-    properties:
-      id_user:
-        type: "string"
-        example: ""
-      id_creds:
-        type: "string"
-        example: ""
+         
         
   Validaotp-res:
      properties:
