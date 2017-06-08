@@ -30,7 +30,6 @@ paths:
           description: "En esta interfaz se describe un servicio dummy que se publicara para el uso del consumidor en tanto se completa la integracion del ESB a T24. Bajo el entendido de que la firma expuesta en este servicio dummy no cambiara cuando el desarrollo termine"
           schema:
             $ref: "#/definitions/consultaDatosBasicos-res"
-            
   /consultaServiciosContratados:
     post:
       tags:
@@ -48,7 +47,6 @@ paths:
           description: "Devuelve un listado de los servicios existentes para personas morales, indicando cuales de ellos han sido contratados por la persona proporcionada."
           schema:
             $ref: "#/definitions/consultaServiciosContratados-res"
-            
   /consultaProductosContratados:
     post:
       tags:
@@ -83,9 +81,6 @@ paths:
           description: "Tipos de datos de la respuesta del servicio"
           schema:
             $ref: "#/definitions/Validaotp-res"
-        
- 
-            
   /Validacontrato:
     post:
       tags:
@@ -104,9 +99,8 @@ paths:
           schema:
             $ref: "#/definitions/Validacontrato-res"
             
-            
-            
-        
+
+
   /v1/consultaDatosBasicos:
     post:
       tags:
@@ -124,7 +118,6 @@ paths:
           description: "En esta interfaz se describe un servicio dummy que se publicara para el uso del consumidor en tanto se completa la integracion del ESB a T24. Bajo el entendido de que la firma expuesta en este servicio dummy no cambiara cuando el desarrollo termine"
           schema:
             $ref: "#/definitions/consultaDatosBasicos-res"
-            
   /v1/consultaServiciosContratados:
     post:
       tags:
@@ -142,7 +135,6 @@ paths:
           description: "Devuelve un listado de los servicios existentes para personas morales, indicando cuales de ellos han sido contratados por la persona proporcionada."
           schema:
             $ref: "#/definitions/consultaServiciosContratados-res"
-            
   /v1/consultaProductosContratados:
     post:
       tags:
@@ -177,9 +169,6 @@ paths:
           description: "Tipos de datos de la respuesta del servicio"
           schema:
             $ref: "#/definitions/Validaotp-res"
-        
- 
-            
   /v1/Validacontrato:
     post:
       tags:
@@ -197,11 +186,10 @@ paths:
           description: "Tipos de datos de respuesta"
           schema:
             $ref: "#/definitions/Validacontrato-res"
-            
   /V1/CambioContrasena:
     post:
       tags:
-      - "ESB Fuse"
+      - "Middleware"
       description: "Devuelve un listado de los productos bancarios que han sido contratados\
         \ por la persona proporcionada. "
       parameters:
@@ -217,11 +205,10 @@ paths:
             \ contratados por la persona proporcionada."
           schema:
             $ref: "#/definitions/cambioContrasena-res"
-            
   /V1/ConsultaCuentasAgregadasCliente:
     post:
       tags:
-      - "ESB Fuse"
+      - "Middleware"
       description: "Devuelve un listado de los productos bancarios que han sido contratados\
         \ por la persona proporcionada. "
       operationId: "consultaCuentasAgregadasClientePOST"
@@ -238,11 +225,10 @@ paths:
             \ contratados por la persona proporcionada."
           schema:
             $ref: "#/definitions/consultaCuentasAgregadasCliente-res"
-            
   /V1/EnvioNotificaciones:
     post:
       tags:
-      - "ESB Fuse"
+      - "Middleware"
       description: "Devuelve un listado de los productos bancarios que han sido contratados\
         \ por la persona proporcionada. "
       operationId: "envioNotificacionesPOST"
@@ -261,10 +247,6 @@ paths:
             $ref: "#/definitions/envioNotificaciones-res"
         
         
-       
-  
-  
- 
 definitions:
   envioNotificaciones-res:
     properties:
