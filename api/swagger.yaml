@@ -559,11 +559,9 @@ definitions:
         
         
         
+        
   Validacontrato-in:
     properties:
-      Usuario:
-        type: "string"
-        example: "4333534"
       ContratoAceptado:
         type: "integer"
         example: 1
