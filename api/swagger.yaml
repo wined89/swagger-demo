@@ -492,7 +492,7 @@ definitions:
         
   cambioContrasena-in-v1:
     required:
-    - "canal"
+    - "confirmNewPassword"
     - "idPersona"
     - "token"
     - "newPassword"
@@ -505,9 +505,7 @@ definitions:
       token:
         type: "string"
         example: "87897"        
-      ticket:
-        $ref: "#/definitions/cambioContrasenain_ticket"
-      canal:
+      confirmNewPassword:
         type: "string"
         example: "1"
       otp:
@@ -559,6 +557,7 @@ definitions:
     
         
         
+        
   Validacontrato-in:
     properties:
       Usuario:
@@ -567,6 +566,10 @@ definitions:
       ContratoAceptado:
         type: "integer"
         example: 1
+      Otp:
+        type: "integer"
+        example: 1
+      
         
   Validacontrato-res:
     properties:
