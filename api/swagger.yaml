@@ -197,12 +197,227 @@ paths:
           description: "Tipos de datos de respuesta"
           schema:
             $ref: "#/definitions/Validacontrato-res"
+            
+  /CambioContrasena:
+    post:
+      tags:
+      - "ESB Fuse"
+      description: "Devuelve un listado de los productos bancarios que han sido contratados\
+        \ por la persona proporcionada. "
+      parameters:
+      - in: "body"
+        name: "CambioContrasena"
+        description: " cambio de Contrasena"
+        required: true
+        schema:
+          $ref: "#/definitions/cambioContrasena-in"
+      responses:
+        200:
+          description: "Devuelve un listado de los productos bancarios que han sido\
+            \ contratados por la persona proporcionada."
+          schema:
+            $ref: "#/definitions/cambioContrasena-res"
+            
+  /ConsultaCuentasAgregadasCliente:
+    post:
+      tags:
+      - "ESB Fuse"
+      description: "Devuelve un listado de los productos bancarios que han sido contratados\
+        \ por la persona proporcionada. "
+      operationId: "consultaCuentasAgregadasClientePOST"
+      parameters:
+      - in: "body"
+        name: "ConsultaCuentasAgregadasCliente"
+        description: " Consulta Productos Contratadose"
+        required: true
+        schema:
+          $ref: "#/definitions/consultaProductosContratados-in"
+      responses:
+        200:
+          description: "Devuelve un listado de los productos bancarios que han sido\
+            \ contratados por la persona proporcionada."
+          schema:
+            $ref: "#/definitions/consultaCuentasAgregadasCliente-res"
+            
+  /EnvioNotificaciones:
+    post:
+      tags:
+      - "ESB Fuse"
+      description: "Devuelve un listado de los productos bancarios que han sido contratados\
+        \ por la persona proporcionada. "
+      operationId: "envioNotificacionesPOST"
+      parameters:
+      - in: "body"
+        name: "EnvioNotificaciones"
+        description: " Consulta Productos Contratadose"
+        required: true
+        schema:
+          $ref: "#/definitions/envioNotificaciones-in"
+      responses:
+        200:
+          description: "Devuelve un listado de los productos bancarios que han sido\
+            \ contratados por la persona proporcionada."
+          schema:
+            $ref: "#/definitions/envioNotificaciones-res"
+        
         
        
   
   
  
 definitions:
+  envioNotificaciones-res:
+    properties:
+      responseStatus:
+        type: "string"
+        example: "string"
+      responseError:
+        type: "string"
+        example: "string"
+
+  envioNotificaciones-in:
+    required:
+    - "canal"
+    - "idPersona"
+    properties:
+      idPersona:
+        type: "string"
+        example: "Long"
+      ticket:
+        $ref: "#/definitions/cambioContrasenain_ticket"
+      tipoMensaje:
+        type: "string"
+        example: "string"
+      tipoNotificacion:
+        type: "string"
+        example: "string"
+      from:
+        type: "string"
+        example: "string"
+      to:
+        type: "string"
+        example: "string"
+      mapParameters:
+        $ref: "#/definitions/envioNotificacionesin_mapParameters"
+      canal:
+        type: "string"
+        example: "string"
+        minLength: 1
+        maxLength: 5
+        
+        
+  envioNotificacionesin_mapParameters:
+    properties:
+      key:
+        type: "string"
+        example: "string"
+        
+        
+  
+  consultaCuentasAgregadasCliente-res:
+    properties:
+      listCuentasCliente:
+        type: "array"
+        items:
+          $ref: "#/definitions/consultaCuentasAgregadasCliente-res-array"
+      listCreditosCliente:
+        type: "array"
+        items:
+          $ref: "#/definitions/consultaCuentasAgregadasCliente-res-array"
+      listInversionesCliente:
+        type: "array"
+        items:
+          $ref: "#/definitions/consultaCuentasAgregadasCliente-res-array"
+      responseStatus:
+        type: "string"
+        example: "string"
+      responseError:
+        type: "string"
+        example: "string"
+        
+  consultaCuentasAgregadasCliente-res-array:
+    properties:
+      numeroDeCuenta:
+        type: "string"
+        example: "string"
+      idProducto:
+        type: "string"
+        example: "string"
+      descripcionProducto:
+        type: "string"
+        example: "string"
+      divisa:
+        type: "string"
+        example: "string"
+      saldo:
+        type: "string"
+        example: "Big Decimal"
+      idSucursal:
+        type: "string"
+        example: "integer"
+      nombreSucursal:
+        type: "string"
+        example: "string"
+
+        
+  
+
+  cambioContrasena-in:
+    required:
+    - "canal"
+    - "idPersona"
+    - "newPassword"
+    - "oldPassword"
+    - "otp"
+    properties:
+      idPersona:
+        type: "string"
+        example: "Long"
+      ticket:
+        $ref: "#/definitions/cambioContrasenain_ticket"
+      canal:
+        type: "string"
+        example: "string"
+      otp:
+        type: "string"
+        example: "string"
+      oldPassword:
+        type: "string"
+        example: "string"
+      newPassword:
+        type: "string"
+        example: "string"
+        
+  cambioContrasenain_ticket:
+    properties:
+      id_user:
+        type: "string"
+        example: "string"
+      id_creds:
+        type: "string"
+        example: "string"
+        
+        
+  cambioContrasena-res:
+    properties:
+      listCambioContrasena:
+        $ref: "#/definitions/cambioContrasenares_listCambioContrasena"
+        
+  cambioContrasenares_listCambioContrasena:
+    properties:
+      codigo:
+        type: "string"
+        example: "integer"
+      mensaje:
+        type: "string"
+        example: "string"
+
+
+
+
+
+
+
   ValidacontratoMiddleware-in:
     properties:
       token:
@@ -475,3 +690,4 @@ definitions:
         type: "string"
         example: "String"
      
+ 
