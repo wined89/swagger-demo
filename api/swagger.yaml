@@ -106,6 +106,72 @@ paths:
             
             
             
+  /CambioContrasena:
+    post:
+      tags:
+      - "ESB Fuse"
+      description: "Devuelve un listado de los productos bancarios que han sido contratados\
+        \ por la persona proporcionada. "
+      parameters:
+      - in: "body"
+        name: "CambioContrasena"
+        description: " cambio de Contrasena"
+        required: true
+        schema:
+          $ref: "#/definitions/cambioContrasena-in"
+      responses:
+        200:
+          description: "Devuelve un listado de los productos bancarios que han sido\
+            \ contratados por la persona proporcionada."
+          schema:
+            $ref: "#/definitions/cambioContrasena-res"
+            
+  /ConsultaCuentasAgregadasCliente:
+    post:
+      tags:
+      - "ESB Fuse"
+      description: "Devuelve un listado de los productos bancarios que han sido contratados\
+        \ por la persona proporcionada. "
+      operationId: "consultaCuentasAgregadasClientePOST"
+      parameters:
+      - in: "body"
+        name: "ConsultaCuentasAgregadasCliente"
+        description: " Consulta Productos Contratadose"
+        required: true
+        schema:
+          $ref: "#/definitions/consultaProductosContratados-in"
+      responses:
+        200:
+          description: "Devuelve un listado de los productos bancarios que han sido\
+            \ contratados por la persona proporcionada."
+          schema:
+            $ref: "#/definitions/consultaCuentasAgregadasCliente-res"
+            
+  /EnvioNotificaciones:
+    post:
+      tags:
+      - "ESB Fuse"
+      description: "Devuelve un listado de los productos bancarios que han sido contratados\
+        \ por la persona proporcionada. "
+      operationId: "envioNotificacionesPOST"
+      parameters:
+      - in: "body"
+        name: "EnvioNotificaciones"
+        description: " Consulta Productos Contratadose"
+        required: true
+        schema:
+          $ref: "#/definitions/envioNotificaciones-in"
+      responses:
+        200:
+          description: "Devuelve un listado de los productos bancarios que han sido\
+            \ contratados por la persona proporcionada."
+          schema:
+            $ref: "#/definitions/envioNotificaciones-res"
+        
+                    
+            
+            
+            
         
   /v1/consultaDatosBasicos:
     post:
@@ -198,10 +264,10 @@ paths:
           schema:
             $ref: "#/definitions/Validacontrato-res"
             
-  /CambioContrasena:
+  /v1/CambioContrasena:
     post:
       tags:
-      - "ESB Fuse"
+      - "Middleware"
       description: "Devuelve un listado de los productos bancarios que han sido contratados\
         \ por la persona proporcionada. "
       parameters:
@@ -210,7 +276,7 @@ paths:
         description: " cambio de Contrasena"
         required: true
         schema:
-          $ref: "#/definitions/cambioContrasena-in"
+          $ref: "#/definitions/cambioContrasena-in-v1"
       responses:
         200:
           description: "Devuelve un listado de los productos bancarios que han sido\
@@ -218,20 +284,19 @@ paths:
           schema:
             $ref: "#/definitions/cambioContrasena-res"
             
-  /ConsultaCuentasAgregadasCliente:
+  /v1/ConsultaCuentasAgregadasCliente:
     post:
       tags:
-      - "ESB Fuse"
+      - "Middleware"
       description: "Devuelve un listado de los productos bancarios que han sido contratados\
-        \ por la persona proporcionada. "
-      operationId: "consultaCuentasAgregadasClientePOST"
+        \ por la persona proporcionada. " 
       parameters:
       - in: "body"
         name: "ConsultaCuentasAgregadasCliente"
         description: " Consulta Productos Contratadose"
         required: true
         schema:
-          $ref: "#/definitions/consultaProductosContratados-in"
+          $ref: "#/definitions/consultaProductosContratados-in-v1"
       responses:
         200:
           description: "Devuelve un listado de los productos bancarios que han sido\
@@ -239,20 +304,19 @@ paths:
           schema:
             $ref: "#/definitions/consultaCuentasAgregadasCliente-res"
             
-  /EnvioNotificaciones:
+  /v1/EnvioNotificaciones:
     post:
       tags:
-      - "ESB Fuse"
+      - "Middleware"
       description: "Devuelve un listado de los productos bancarios que han sido contratados\
-        \ por la persona proporcionada. "
-      operationId: "envioNotificacionesPOST"
+        \ por la persona proporcionada. " 
       parameters:
       - in: "body"
         name: "EnvioNotificaciones"
         description: " Consulta Productos Contratadose"
         required: true
         schema:
-          $ref: "#/definitions/envioNotificaciones-in"
+          $ref: "#/definitions/envioNotificaciones-in-v1"
       responses:
         200:
           description: "Devuelve un listado de los productos bancarios que han sido\
@@ -282,35 +346,72 @@ definitions:
     properties:
       idPersona:
         type: "string"
-        example: "Long"
+        example: "2222"
       ticket:
         $ref: "#/definitions/cambioContrasenain_ticket"
       tipoMensaje:
         type: "string"
-        example: "string"
+        example: "mensaje"
       tipoNotificacion:
         type: "string"
-        example: "string"
+        example: "notificacion"
       from:
         type: "string"
-        example: "string"
+        example: "123"
       to:
         type: "string"
-        example: "string"
+        example: "321"
       mapParameters:
         $ref: "#/definitions/envioNotificacionesin_mapParameters"
       canal:
         type: "string"
-        example: "string"
+        example: "1"
         minLength: 1
         maxLength: 5
+        
+
+
+  envioNotificaciones-in-v1:
+    required:
+    - "canal"
+    - "idPersona"
+    - "token"
+    properties:
+      idPersona:
+        type: "string"
+        example: "123" 
+      token:
+        type: "string"
+        example: "1025478963"        
+      ticket:
+        $ref: "#/definitions/cambioContrasenain_ticket"
+      tipoMensaje:
+        type: "string"
+        example: "1"
+      tipoNotificacion:
+        type: "string"
+        example: "1"
+      from:
+        type: "string"
+        example: "q@r"
+      to:
+        type: "string"
+        example: "e@w"
+      mapParameters:
+        $ref: "#/definitions/envioNotificacionesin_mapParameters"
+      canal:
+        type: "string"
+        example: "1"
+        minLength: 1
+        maxLength: 5        
+        
         
         
   envioNotificacionesin_mapParameters:
     properties:
       key:
         type: "string"
-        example: "string"
+        example: "1223333"
         
         
   
@@ -372,30 +473,62 @@ definitions:
     properties:
       idPersona:
         type: "string"
-        example: "Long"
+        example: "1222"
       ticket:
         $ref: "#/definitions/cambioContrasenain_ticket"
       canal:
         type: "string"
-        example: "string"
+        example: "1"
       otp:
         type: "string"
-        example: "string"
+        example: "otp"
       oldPassword:
         type: "string"
-        example: "string"
+        example: "123"
       newPassword:
         type: "string"
-        example: "string"
+        example: "123"
+        
+        
+  cambioContrasena-in-v1:
+    required:
+    - "canal"
+    - "idPersona"
+    - "token"
+    - "newPassword"
+    - "oldPassword"
+    - "otp"
+    properties:
+      idPersona:
+        type: "string"
+        example: "123"
+      token:
+        type: "string"
+        example: "87897"        
+      ticket:
+        $ref: "#/definitions/cambioContrasenain_ticket"
+      canal:
+        type: "string"
+        example: "1"
+      otp:
+        type: "string"
+        example: "1"
+      oldPassword:
+        type: "string"
+        example: "123"
+      newPassword:
+        type: "string"
+        example: "123"        
+        
         
   cambioContrasenain_ticket:
     properties:
       id_user:
         type: "string"
-        example: "string"
+        example: "123"
       id_creds:
         type: "string"
-        example: "string"
+        example: "123"
         
         
   cambioContrasena-res:
@@ -457,6 +590,14 @@ definitions:
         maxLength: 5
         example: "CUBA1234575SDF"
         
+  consultaProductosContratados-in-v1:
+    required:
+      - token 
+    properties:
+      token:
+        type: "string"
+        example: "1025478963"        
+        
   consultaProductosContratados-res:
     required:
       - responseStatus
@@ -472,14 +613,15 @@ definitions:
         type: "string"
         example: "String"
         
+        
   consultaProductosContratadosticket:
     properties:
       id_user:
         type: "string"
-        example: ""
+        example: "123"
       id_creds:
         type: "string"
-        example: ""
+        example: "321"
         
   Validaotp-res:
      properties:
