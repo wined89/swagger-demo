@@ -66,10 +66,72 @@ paths:
           description: "Devuelve un listado de los productos bancarios que han sido contratados por la persona proporcionada"
           schema:
             $ref: "#/definitions/consultaProductosContratados-res"
+  /Validaotp:
+    post:
+      tags:
+      - "ESB Fuse"
+      description: "Servicio que realiza la validación del OTP"
+      parameters:
+      - in: "body"
+        name: "validaOTP"
+        description: "Se requiere la validación de VACMAN del usuario y su OTP"
+        required: true
+        schema:
+          $ref: "#/definitions/validaOTP"
+      responses:
+        200:
+          description: "Tipos de datos de la respuesta del servicio"
+          schema:
+            $ref: "#/definitions/Validaotp-res"
+        
+  /cambioContrasena:
+    post:
+      tags:
+      - "ESB Fuse"
+      description: "Se requiere la validacion de la contraseña actual despues que
+        se compare la nueva contraseña si los dos pasos son exitoso se requiere
+        realizar una modificacion al atributo userPassword en LDAP para el numero
+        del cleinte previamente obtenido en la entradas y se coloca el nuevo password proporcionado"
+      parameters:
+      - in: "body"
+        name: "cambioPwd"
+        description: "Se requiere la validacion de la contraseña actual  "
+        required: true
+        schema:
+          $ref: "#/definitions/cambiapassword-in"
+      responses:
+        200:
+          description: "Estructura de la respuesta del servicio"
+          schema:
+            $ref: "#/definitions/cambiapassword-res"
+        
+       
   
   
  
 definitions:
+  cambiapassword-in:
+    properties:
+      Usuario:
+        type: "string"
+        example: "123456789"
+      Contraseña_original:
+        type: "string"
+        example: "12345pwd"
+      Nueva_contraseña:
+        type: "string"
+        example: "pwd1234"
+      Comprueba_contraseña:
+        type: "string"
+        example: "pwd1233"
+        
+  cambiapassword-res:
+    properties:
+      CodigoRespuesta:
+        type: "integer"
+        format: "int64"
+        example: "Long"
+        
   consultaProductosContratados-in:
     required:
       - idPersona
@@ -110,6 +172,29 @@ definitions:
         type: "string"
         example: ""
         
+  Validaotp-res:
+     properties:
+      CodigoRespuesta:
+        type: "integer"
+        example: "integer"
+      DescRespuesta:
+        type: "string"
+        example: "string"
+      Antiphishing:
+        type: "integer"
+        example: "integer"
+        
+  validaOTP:
+    properties:
+      Usuario:
+        type: "string"
+        example: "123456789"
+      OTP:
+        type: "string"
+        example: "12345tftg56577654"
+      Tipo:
+        type: "integer"
+        example: 1
   
 
 
