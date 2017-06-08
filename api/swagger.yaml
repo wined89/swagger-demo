@@ -103,12 +103,114 @@ paths:
           description: "Tipos de datos de respuesta"
           schema:
             $ref: "#/definitions/Validacontrato-res"
+            
+            
+            
+        
+  /v1/consultaDatosBasicos:
+    post:
+      tags:
+      - "Middleware"
+      description: "Consolidar la información relevante respecto al diseño de la operacion /consultaDatosBasicos del servicio /cliente requerida para la integración de Multivanet con T24"
+      parameters:
+      - in: "body"
+        name: "consultaDatosBasicos,"
+        description: "Consumidor  que dibuja encabezado con datos de cliente"
+        required: true
+        schema:
+          $ref: "#/definitions/ValidacontratoMiddleware-in"
+      responses:
+        200:
+          description: "En esta interfaz se describe un servicio dummy que se publicara para el uso del consumidor en tanto se completa la integracion del ESB a T24. Bajo el entendido de que la firma expuesta en este servicio dummy no cambiara cuando el desarrollo termine"
+          schema:
+            $ref: "#/definitions/consultaDatosBasicos-res"
+            
+  /v1/consultaServiciosContratados:
+    post:
+      tags:
+      - "Middleware"
+      description: "Consolidar la información relevante respecto al diseño de la operacion /consultaServiciosContratados del servicio /cliente requerida para la integración de Multivanet con T24"
+      parameters:
+      - in: "body"
+        name: "consultaServiciosContratados"
+        description: "Devuelve un listado de los servicios existentes para personas morales, indicando cuales de ellos han sido contratados por la persona proporcionada"
+        required: true
+        schema:
+          $ref: "#/definitions/ValidacontratoMiddleware-in"
+      responses:
+        200:
+          description: "Devuelve un listado de los servicios existentes para personas morales, indicando cuales de ellos han sido contratados por la persona proporcionada."
+          schema:
+            $ref: "#/definitions/consultaServiciosContratados-res"
+            
+  /v1/consultaProductosContratados:
+    post:
+      tags:
+      - "Middleware"
+      description: "Consolidar la información relevante respecto al diseño de la operacion /consultaProductosContratados del servicio /cliente requerida para la integración de Multivanet con T24"
+      parameters:
+      - in: "body"
+        name: "consultaProductosContratados"
+        description: "Devuelve un listado de los productos bancarios que han sido contratados por la persona proporcionada"
+        required: true
+        schema:
+          $ref: "#/definitions/ValidacontratoMiddleware-in"
+      responses:
+        200:
+          description: "Devuelve un listado de los productos bancarios que han sido contratados por la persona proporcionada"
+          schema:
+            $ref: "#/definitions/consultaProductosContratados-res"
+  /v1/Validaotp:
+    post:
+      tags:
+      - "Middleware"
+      description: "Servicio que realiza la validación del OTP"
+      parameters:
+      - in: "body"
+        name: "validaOTP"
+        description: "Se requiere la validación de VACMAN del usuario y su OTP"
+        required: true
+        schema:
+          $ref: "#/definitions/ValidacontratoMiddleware-in"
+      responses:
+        200:
+          description: "Tipos de datos de la respuesta del servicio"
+          schema:
+            $ref: "#/definitions/Validaotp-res"
+        
+ 
+            
+  /v1/Validacontrato:
+    post:
+      tags:
+      - "Middleware"
+      description: "Este servicio es para  cambiar la bandera de que el usuario acepto el contrato"
+      parameters:
+      - in: "body"
+        name: "contrato"
+        description: "Se requiere la validacion de la contraseña actual"
+        required: true
+        schema:
+          $ref: "#/definitions/Validacontrato-in"
+      responses:
+        200:
+          description: "Tipos de datos de respuesta"
+          schema:
+            $ref: "#/definitions/Validacontrato-res"
         
        
   
   
  
 definitions:
+  ValidacontratoMiddleware-in:
+    properties:
+      token:
+        type: "string"
+        example: "4333534"
+    
+        
+        
   Validacontrato-in:
     properties:
       Usuario:
