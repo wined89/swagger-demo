@@ -10,7 +10,7 @@ tags:
 - name: "Core Bancario"
   description: "Grupo Financiero Multiva"
   externalDocs:
-    description: "Primer Login"
+    description: "Servicios Multiva"
     url: "http://200.39.24.141:9090/docs"
 paths:
   /consultaDatosBasicos:
@@ -246,7 +246,7 @@ definitions:
     required:
       - responseStatus
     properties:
-      listaServicios:
+      ListaProductos:
          type: "array"
          items:
           $ref: "#/definitions/ServiciosContratadosListaServicios"
