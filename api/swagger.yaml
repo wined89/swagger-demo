@@ -4,8 +4,8 @@ info:
   description: "Documentación de los servicios Multiva Sprint 1  <a href='https://drive.google.com/open?id=0B_OaZlYG0i2ndHJUT3VFem5LWlk'>Documento Compartido</a>" 
   version: "0.1.0"
   title: "Grupo Financiero Multiva"
-host: "200.39.24.141"
-basePath: "/BEO"
+host: "200.39.24.141:9090"
+basePath: "/"
 tags:
 - name: "Core Bancario"
   description: "Primer Login (Dinámico  y Estático)"
@@ -17,32 +17,16 @@ paths:
     post:
       tags:
       - "ESB Fuse"
+      summary: "/consultaDatosCliente"
       description: "Realiza la consulta de los datos del cliente"
+      operationId: "clientePOST"
       parameters:
       - in: "body"
-        name: "/consultaDatosClientes"
+        name: "Cliente"
         description: "Estructura de la respuesta del cliente"
         required: true
         schema:
-          $ref: "#/definitions/consultaDatosCliente-in"
-      responses:
-        200:
-          description: "estructura de la respuesta del cliente"
-          schema:
-            $ref: "#/definitions/consultaDatosCliente-res"
-  
-  /consultaServiciosContratados:
-    post:
-      tags:
-      - "ESB Fuse"
-      description: "Realiza la consulta de los datos del cliente"
-      parameters:
-      - in: "body"
-        name: "/consultaServiciosContratados"
-        description: "Estructura de la respuesta del cliente"
-        required: true
-        schema:
-          $ref: "#/definitions/consultaDatosCliente-in"
+          $ref: "#/definitions/Cliente"
       responses:
         200:
           description: "estructura de la respuesta del cliente"
@@ -56,110 +40,21 @@ paths:
           description: "no se encuentra el recurso"
           schema:
             $ref: "#/definitions/inline_response_200_2"
-      x-swagger-router-controller: "/consultaServiciosContratados"
-  /consultaProductosContratados:
-    post:
-      tags:
-      - "ESB Fuse"
-      summary: "/MessagingCentral"
-      description: "Realiza la consulta de los datos del cliente"
-      operationId: "/MessagingCentral"
-      parameters:
-      - in: "body"
-        name: "/MessagingCentral"
-        description: "Estructura de la respuesta del cliente"
-        required: true
-        schema:
-          $ref: "#/definitions/consultaDatosCliente-in"
-      responses:
-        200:
-          description: "estructura de la respuesta del cliente"
-          schema:
-            $ref: "#/definitions/inline_response_200"
-        500:
-          description: "el servicio tiene un error"
-          schema:
-            $ref: "#/definitions/inline_response_200_2"
-        404:
-          description: "no se encuentra el recurso"
-          schema:
-            $ref: "#/definitions/inline_response_200_2"
-      x-swagger-router-controller: "/MessagingCentral"
-  /validaotp:
-    post:
-      tags:
-      - "ESB Fuse"
-      description: "Servicio que realiza la validación del OTP"
-      operationId: "validaOtp"
-      parameters:
-      - in: "body"
-        name: "validaOTP"
-        description: "Se requiere la validación de VACMAN del usuario y su OTP"
-        required: true
-        schema:
-          $ref: "#/definitions/validaOTP"
-      responses:
-        200:
-          description: "Tipos de datos de la respuesta del servicio"
-          schema:
-            $ref: "#/definitions/inline_response_403_1"
-        500:
-          description: "error en el servicio"
-          schema:
-            $ref: "#/definitions/inline_response_200_2"
-        404:
-          description: "no se encuentra el recurso"
-          schema:
-            $ref: "#/definitions/inline_response_200_2"
-      x-swagger-router-controller: "OTP"
-
-  /cambiapassword:
-    post:
-      tags:
-      - "ESB Fuse"
-      description: "Se requiere la validacion de la contraseña actual despues que\
-        \ se compare la nueva contraseña si los dos pasos son exitoso se requiere\
-        \ realizar una modificacion al atributo userPassword en LDAP para el numero\
-        \ del cleinte (uid=$numCliente,ou=people,dc=multiva,dc=mx) previamente obtenido\
-        \ en la entradas y se coloca el nuevo password proporcionado."
-      operationId: "cambioPwdd"
-      parameters:
-      - in: "body"
-        name: "cambioPwd"
-        description: "Se requiere la validacion de la contraseña actual  "
-        required: true
-        schema:
-          $ref: "#/definitions/cambioPwd"
-      responses:
-        200:
-          description: "Estructura de la respuesta del servicio"
-          schema:
-            $ref: "#/definitions/inline_response_200_3"
-        500:
-          description: "error en el servicio"
-          schema:
-            $ref: "#/definitions/inline_response_200_2"
-        404:
-          description: "no se encuentra el recurso"
-          schema:
-            $ref: "#/definitions/inline_response_200_2"
-        
-      x-swagger-router-controller: "Contrasea"
-    x-swagger-router-controller: "cambioPwd"
+      x-swagger-router-controller: "Cliente"
   /ConsultaDatosCliente:
     post:
       tags:
       - "Middleware"
-      summary: "/ConsultaDatosCliente"
+      summary: "/consultaDatosCliente"
       description: "Realiza la consulta de los datos del cliente"
-      operationId: "ConsultaDatosCliente"
+      operationId: "clientePOST"
       parameters:
       - in: "body"
-        name: "ConsultaDatosCliente"
+        name: "Cliente"
         description: "Estructura de la respuesta del cliente"
         required: true
         schema:
-          $ref: "#/definitions/consultaDatosCliente-in"
+          $ref: "#/definitions/Cliente"
       responses:
         200:
           description: "estructura de la respuesta del cliente"
@@ -173,14 +68,14 @@ paths:
           description: "no se encuentra el recurso"
           schema:
             $ref: "#/definitions/inline_response_200_2"
-      x-swagger-router-controller: "ConsultaDatosCliente"
+      x-swagger-router-controller: "Cliente"
   /primerAcceso:
     post:
       tags:
       - "Middleware"
       summary: "/primerAcceso"
       description: "Realiza la consulta de los datos del cliente"
-      operationId: "primerAcceso"
+      operationId: "clientePOST"
       parameters:
       - name: id
         in: "header"
@@ -202,42 +97,105 @@ paths:
           schema:
             $ref: "#/definitions/inline_response_200_2"
       x-swagger-router-controller: "Cliente"
-#-------------------------------------------------------------------      
   /MessagingCentralService:
     post:
       tags:
       - "Middleware"
       summary: "/MessagingCentralService"
-      description: "Realiza el envio de email"
-      operationId: "MessagingCentralServicePOST"
+      description: "Realiza la consulta de los datos del cliente"
+      operationId: "clientePOST"
       parameters:
       - in: "body"
-        name: "MessagingCentralService"
-        description: "Realiza el envio de email"
+        name: "Cliente"
+        description: "Estructura de la respuesta del cliente"
         required: true
         schema:
-          $ref: "#/definitions/sendEmail-in"
+          $ref: "#/definitions/Cliente"
       responses:
         200:
-          description: "Realiza el envio de email"
+          description: "estructura de la respuesta del cliente"
           schema:
-            $ref: "#/definitions/sendEmail-res" 
-      x-swagger-router-controller: "MessagingCentralService"
-#-------------------------------------------------------------------
+            $ref: "#/definitions/inline_response_200"
+        500:
+          description: "el servicio tiene un error"
+          schema:
+            $ref: "#/definitions/inline_response_200_2"
+        404:
+          description: "no se encuentra el recurso"
+          schema:
+            $ref: "#/definitions/inline_response_200_2"
+      x-swagger-router-controller: "Cliente"
+  /consultaServiciosContratados:
+    post:
+      tags:
+      - "ESB Fuse"
+      summary: "/MessagingCentralService"
+      description: "Realiza la consulta de los datos del cliente"
+      operationId: "clientePOST"
+      parameters:
+      - in: "body"
+        name: "Cliente"
+        description: "Estructura de la respuesta del cliente"
+        required: true
+        schema:
+          $ref: "#/definitions/Cliente"
+      responses:
+        200:
+          description: "estructura de la respuesta del cliente"
+          schema:
+            $ref: "#/definitions/inline_response_200"
+        500:
+          description: "el servicio tiene un error"
+          schema:
+            $ref: "#/definitions/inline_response_200_2"
+        404:
+          description: "no se encuentra el recurso"
+          schema:
+            $ref: "#/definitions/inline_response_200_2"
+      x-swagger-router-controller: "Cliente"
+  /consultaProductosContratados:
+    post:
+      tags:
+      - "ESB Fuse"
+      summary: "/MessagingCentralService"
+      description: "Realiza la consulta de los datos del cliente"
+      operationId: "clientePOST"
+      parameters:
+      - in: "body"
+        name: "Cliente"
+        description: "Estructura de la respuesta del cliente"
+        required: true
+        schema:
+          $ref: "#/definitions/Cliente"
+      responses:
+        200:
+          description: "estructura de la respuesta del cliente"
+          schema:
+            $ref: "#/definitions/inline_response_200"
+        500:
+          description: "el servicio tiene un error"
+          schema:
+            $ref: "#/definitions/inline_response_200_2"
+        404:
+          description: "no se encuentra el recurso"
+          schema:
+            $ref: "#/definitions/inline_response_200_2"
+      x-swagger-router-controller: "Cliente"
+
   /ServiciosContratados:
     post:
       tags:
       - "Middleware"
-      summary: "CentralService"
+      summary: "/MessagingCentralService"
       description: "Realiza la consulta de los datos del cliente"
-      operationId: "CentralService"
+      operationId: "clientePOST"
       parameters:
       - in: "body"
-        name: "CentralService"
+        name: "Cliente"
         description: "Estructura de la respuesta del cliente"
         required: true
         schema:
-          $ref: "#/definitions/consultaDatosCliente-in"
+          $ref: "#/definitions/Cliente"
       responses:
         200:
           description: "estructura de la respuesta del cliente"
@@ -251,21 +209,21 @@ paths:
           description: "no se encuentra el recurso"
           schema:
             $ref: "#/definitions/inline_response_200_2"
-      x-swagger-router-controller: "CentralService"
+      x-swagger-router-controller: "Cliente"
   /ProductosContratados:
     post:
       tags:
       - "Middleware"
-      summary: "/MessagingService"
+      summary: "/MessagingCentralService"
       description: "Realiza la consulta de los datos del cliente"
-      operationId: "/MessagingService"
+      operationId: "clientePOST"
       parameters:
       - in: "body"
-        name: "/MessagingService"
+        name: "Cliente"
         description: "Estructura de la respuesta del cliente"
         required: true
         schema:
-          $ref: "#/definitions/consultaDatosCliente-in"
+          $ref: "#/definitions/Cliente"
       responses:
         200:
           description: "estructura de la respuesta del cliente"
@@ -279,7 +237,7 @@ paths:
           description: "no se encuentra el recurso"
           schema:
             $ref: "#/definitions/inline_response_200_2"
-      x-swagger-router-controller: "/MessagingService"
+      x-swagger-router-controller: "Cliente"
 
   /Validaotp:
     post:
@@ -371,13 +329,73 @@ paths:
       x-swagger-router-controller: "Contrato"
     x-swagger-router-controller: "contrato"
  
-
+  /validaotp:
+    post:
+      tags:
+      - "ESB Fuse"
+      description: "Servicio que realiza la validación del OTP"
+      operationId: "validaOTP"
+      parameters:
+      - in: "body"
+        name: "validaOTP"
+        description: "Se requiere la validación de VACMAN del usuario y su OTP"
+        required: true
+        schema:
+          $ref: "#/definitions/validaOTP"
+      responses:
+        200:
+          description: "Tipos de datos de la respuesta del servicio"
+          schema:
+            $ref: "#/definitions/inline_response_403_1"
+        500:
+          description: "error en el servicio"
+          schema:
+            $ref: "#/definitions/inline_response_200_2"
+        404:
+          description: "no se encuentra el recurso"
+          schema:
+            $ref: "#/definitions/inline_response_200_2"
+      x-swagger-router-controller: "OTP"
+    x-swagger-router-controller: "validaOTP"
+  /cambiapassword:
+    post:
+      tags:
+      - "ESB Fuse"
+      description: "Se requiere la validacion de la contraseña actual despues que\
+        \ se compare la nueva contraseña si los dos pasos son exitoso se requiere\
+        \ realizar una modificacion al atributo userPassword en LDAP para el numero\
+        \ del cleinte (uid=$numCliente,ou=people,dc=multiva,dc=mx) previamente obtenido\
+        \ en la entradas y se coloca el nuevo password proporcionado."
+      operationId: "cambioPwd"
+      parameters:
+      - in: "body"
+        name: "cambioPwd"
+        description: "Se requiere la validacion de la contraseña actual  "
+        required: true
+        schema:
+          $ref: "#/definitions/cambioPwd"
+      responses:
+        200:
+          description: "Estructura de la respuesta del servicio"
+          schema:
+            $ref: "#/definitions/inline_response_200_3"
+        500:
+          description: "error en el servicio"
+          schema:
+            $ref: "#/definitions/inline_response_200_2"
+        404:
+          description: "no se encuentra el recurso"
+          schema:
+            $ref: "#/definitions/inline_response_200_2"
+        
+      x-swagger-router-controller: "Contrasea"
+    x-swagger-router-controller: "cambioPwd"
   /validacontrato:
     post:
       tags:
       - "Seguridad Nologin"
       description: "Este servicio es para  cambiar la bandera de que el usuario acepto el contrato"
-      operationId: "contratoo"
+      operationId: "contrato"
       parameters:
       - in: "body"
         name: "contrato"
@@ -401,113 +419,12 @@ paths:
       x-swagger-router-controller: "Contrato"
     x-swagger-router-controller: "contrato"
 definitions:
-  consultaDatosCliente-in:
-    required:
-      - idPersona
-      - ticket
-      - canal
-    properties:
-      idPersona:
-        type: number
-        example: "1025478963"
-      ticket:
-        type: "string"
-        minLength: 1
-        maxLength: 16
-        example: "CUBA1234575SDF"
-      canal:
-        type: "string"
-        minLength: 1
-        maxLength: 5
-        example: "CUBA1234575SDF"
   
-  consultaDatosCliente-res:
+  Cliente:
     properties:
-      numCliente:
-        type: "integer"
-        format: "int64"
-        example: "Long"
-      Nombre:
+      Numerocliente:
         type: "string"
-        example: "String"
-      listaDirecciones:
-         type: "array"
-         items:
-          $ref: "#/definitions/listaDeDirecciones"
-      rfc:
-        type: "string"
-        example: "String"
-      listaTelefonos:
-        type: "array"
-        items:
-          $ref: "#/definitions/listaDeTelefonos"
-      listaEmails:
-        type: "array"
-        items:
-          $ref: "#/definitions/listaDeEmail"
-      tipoPersona:
-        type: "string"
-        example: "String"
-      estatus:
-        type: "string"
-        example: "String"
-      vip:
-        type: "string"
-        example: "String"
-      responseStatus:
-        type: "string"
-        example: "String"
-      responseError:
-        type: "string"
-        example: "String"
-      
-       
-          
-  listaDeEmail:
-    properties:
-      mail:
-        type: "string"
-        example: "String"
-      activo:
-        type: boolean
-        example: "Boolean"
-      tipoEmail:
-        type: "string"
-        example: "String"
-     
-        
-  listaDeTelefonos:
-    properties:
-      telefono:
-        type: integer
-        example: "Integer"
-      tipoTelefono:
-        type: "string"
-        example: "String"
-    
-        
-        
-  listaDeDirecciones:
-    properties:
-      direccion:
-        type: "string"
-        example: "String"
-      poblacion:
-        type: "string"
-        example: "String"
-      ciudad:
-        type: "string"
-        example: "String"
-      estado:
-        type: "string"
-        example: "String"
-      cp:
-        type: "string"
-        example: "String"
-      tipoDireccion:
-        type: "string"
-        example: "String"
-     
+        example: "1"
   inline_response_200:
     properties:
       CodigoRespuesta:
@@ -631,33 +548,5 @@ definitions:
       CodigoRespuesta:
         type: "integer"
         example: "integer"
-        
-#------------------------------------------------------------------------------------------
-  sendEmail-in:
-    properties:
-      constante:
-        type: "string"
-        example: "integer"
-      idMensaje:
-        type: "string"
-        example: "integer"
-      correo:
-        type: "string"
-        example: "string"
-      nombreUsu:
-        type: "string"
-        example: "string"       
-      fechaHora:
-        type: "string"
-        example: "string" 
 
-
-
-  sendEmail-res:
-    properties:
-      CodigoRespuesta:
-        type: "string"
-        example: "integer"
-
-#-----------------------------------------------------------------------------------------        
-  
+ 
