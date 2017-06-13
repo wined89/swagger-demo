@@ -7,7 +7,7 @@ info:
 host: "200.39.24.141"
 basePath: "/BEO"
 tags:
-- name: "Core Bancario"
+- name: ""
   description: "Grupo Financiero Multiva"
   externalDocs:
     description: "Servicios Multiva"
@@ -121,8 +121,7 @@ paths:
           $ref: "#/definitions/cambioContrasena-in"
       responses:
         200:
-          description: "Devuelve un listado de los productos bancarios que han sido\
-            \ contratados por la persona proporcionada."
+          description: "Devuelve un listado de los productos bancarios que han sido contratados por la persona proporcionada"
           schema:
             $ref: "#/definitions/cambioContrasena-res"
             
@@ -130,8 +129,7 @@ paths:
     post:
       tags:
       - "ESB Fuse"
-      description: "Devuelve un listado de los productos bancarios que han sido contratados\
-        \ por la persona proporcionada. "
+      description: "Devuelve un listado de los productos bancarios que han sido contratados por la persona proporcionada. "
       operationId: "consultaCuentasAgregadasClientePOST"
       parameters:
       - in: "body"
@@ -325,11 +323,165 @@ paths:
             $ref: "#/definitions/envioNotificaciones-res"
         
         
+  /login:
+    post:
+      tags:
+        - "LoginMiddleware"
+      description: 'Servicio que permite enviar un archivo comprimido (.ZIP) para ser persistido en base de datos'
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      parameters:
+        - name: iv-user
+          in: header
+          description: 'Nombre del usuario autenticado (numérico y tempralmete con algunos alfanuméricos)'
+          required: true
+          type: integer
+          
+        - name: iv-creds
+          in: header
+          description: 'Elemento con la representación en base64 de la credencial de usuario de TAM. Se requiere para algunas operaciones de los Servicios de Seguridad.'
+          required: true
+          type: integer
+          
+        - name: iv-groups
+          in: header
+          description: 'Lista separada por comas de los grupos de TAM/LDAP a los que pertenece el usuario.'
+          required: true
+          type: integer
+        
+        - name: numero-cliente
+          in: header
+          description: 'El dato de NumeroCliente del usuario (numero de 10 digitos).'
+          required: true
+          type: integer
+          
+        - name: nombre-completo
+          in: header
+          description: 'El dato de nombre completo del usuario. Almacenado en LDAP como el atributo CN, en el caso de Persona Física es el nombre completo, en el caso de Persona Moral se trata de la razón social.'
+          required: true
+          type: integer
+          
+        - name: tipo-authenticacion
+          in: header
+          description: 'El tipo de autenticación que se realizó con el Token. Generado por el módulo de autenticación de token, puede ser RO (ResponseOnly) o CR (Challenge/Response), dependiendo del tipo de autenticación realizado'
+          required: true
+          type: integer
+          
+        - name: contratoAceptado
+          in: header
+          description: 'El dato de primerAcceso del usuario.'
+          required: true
+          type: integer
+          
+        - name: fechaUltimoAcceso
+          in: header
+          description: 'El dato de fechaUltimoAcceso del usuario. Se devuelve en un formato estándar de yyyyMMddHHmmss.0Z utilizado por Tivoli Directory Server.'
+          required: true
+          type: integer
+          
+        - name: Tipocanal
+          in: header
+          description: 'El canal de acceso. Para banca en línea se regresara el valor 1, para los demás canales se deberán definir el catalogo completo'
+          required: true
+          type: integer
+          
+        - name: mail
+          in: header
+          description: 'El canal de acceso. Para banca en línea se regresara el valor 1, para los demás canales se deberán definir el catalogo completo'
+          required: true
+          type: integer
+        
        
-  
-  
+      responses:
+          '200':
+            description: 'Valida la estructura del archivo que se adjunta'
+            schema:
+              $ref: '#/definitions/todo-res'
  
 definitions:
+  todo-res:
+    properties:
+      consultaDatosBasicos:
+         type: "array"
+         items:
+          $ref: "#/definitions/consultaDatosBasicos-Login-res"
+          
+      consultaServiciosContratados:
+         type: "array"
+         items:
+          $ref: "#/definitions/consultaServiciosContratados-res"
+          
+      consultaProductosContratados:
+         type: "array"
+         items:
+          $ref: "#/definitions/consultaProductosContratados-res"
+          
+      consultaCuentasAgregadasCliente:
+         type: "array"
+         items:
+          $ref: "#/definitions/consultaCuentasAgregadasCliente-res"
+      
+     
+          
+  consultaDatosBasicos-Login-res:
+    required:
+      - numCliente
+      - nombre
+      - fecha-ultimo-acceso
+      - mail
+    properties:
+      fecha-ultimo-acceso:
+        type: "string"
+        format: date
+        example: "date"
+      mail:
+        type: "string"
+        example: "string"
+      numCliente:
+        type: "integer"
+        format: "int64"
+        example: "Long"
+      nombre:
+        type: "string"
+        example: "String"
+      listaDirecciones:
+         type: "array"
+         items:
+          $ref: "#/definitions/listaDeDirecciones"
+      rfc:
+        type: "string"
+        example: "String"
+      listaTelefonos:
+        type: "array"
+        items:
+          $ref: "#/definitions/listaDeTelefonos"
+      listaEmails:
+        type: "array"
+        items:
+          $ref: "#/definitions/listaDeEmail"
+      tipoPersona:
+        type: "string"
+        example: "String"
+      estatus:
+        type: "string"
+        example: "String"
+      sucursal:
+        type: "string"
+        example: "String"
+      vip:
+        type: "string"
+        example: "String"
+      responseStatus:
+        type: "string"
+        example: "String"
+      responseError:
+        type: "string"
+        example: "String"
+          
+
+  
   envioNotificaciones-res:
     properties:
       responseStatus:
@@ -713,8 +865,7 @@ definitions:
       
      
 
-
-  
+ 
   consultaDatosBasicos-in:
     required:
       - idPersona
@@ -833,5 +984,6 @@ definitions:
       tipoDireccion:
         type: "string"
         example: "String"
+        
      
  
