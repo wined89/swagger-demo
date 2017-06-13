@@ -323,10 +323,10 @@ paths:
             $ref: "#/definitions/envioNotificaciones-res"
         
         
-  /login:
+  /v1/login:
     post:
       tags:
-        - "LoginMiddleware"
+        - "Middleware"
       description: 'Servicio que permite enviar un archivo comprimido (.ZIP) para ser persistido en base de datos'
       consumes:
         - multipart/form-data
