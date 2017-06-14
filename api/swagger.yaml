@@ -110,8 +110,7 @@ paths:
     post:
       tags:
       - "ESB Fuse"
-      description: "Devuelve un listado de los productos bancarios que han sido contratados\
-        \ por la persona proporcionada. "
+      description: "Cambia la contraseña existente por una nueva en el sistema TAM de la persona proporcionada. "
       parameters:
       - in: "body"
         name: "CambioContrasena"
@@ -121,27 +120,26 @@ paths:
           $ref: "#/definitions/cambioContrasena-in"
       responses:
         200:
-          description: "Devuelve un listado de los productos bancarios que han sido contratados por la persona proporcionada"
+          description: "Cambia la contraseña existente por una nueva en el sistema TAM de la persona proporcionada."
           schema:
             $ref: "#/definitions/cambioContrasena-res"
             
-  /ConsultaCuentasAgregadasCliente:
+  /ConsultaCuentas:
     post:
       tags:
       - "ESB Fuse"
-      description: "Devuelve un listado de los productos bancarios que han sido contratados por la persona proporcionada. "
+      description: "Devuelve un listado de cuentas, inversiones y credito, existentes de la persona proporcionada."
       operationId: "consultaCuentasAgregadasClientePOST"
       parameters:
       - in: "body"
         name: "ConsultaCuentasAgregadasCliente"
-        description: " Consulta Productos Contratadose"
+        description: " Consulta Cuentas Agregadas Cliente"
         required: true
         schema:
           $ref: "#/definitions/consultaProductosContratados-in"
       responses:
         200:
-          description: "Devuelve un listado de los productos bancarios que han sido\
-            \ contratados por la persona proporcionada."
+          description: "Devuelve un listado de cuentas, inversiones y credito, existentes de la persona proporcionada."
           schema:
             $ref: "#/definitions/consultaCuentasAgregadasCliente-res"
             
@@ -266,8 +264,7 @@ paths:
     post:
       tags:
       - "Middleware"
-      description: "Devuelve un listado de los productos bancarios que han sido contratados\
-        \ por la persona proporcionada. "
+      description: "Cambia la contraseña existente por una nueva en el sistema TAM de la persona proporcionada."
       parameters:
       - in: "body"
         name: "CambioContrasena"
@@ -277,28 +274,18 @@ paths:
           $ref: "#/definitions/cambioContrasena-in-v1"
       responses:
         200:
-          description: "Devuelve un listado de los productos bancarios que han sido\
-            \ contratados por la persona proporcionada."
+          description: "Cambia la contraseña existente por una nueva en el sistema TAM de la persona proporcionada."
           schema:
             $ref: "#/definitions/cambioContrasena-res"
             
-  /v1/ConsultaCuentasAgregadasCliente:
+  /v1/ConsultaCuentas:
     post:
       tags:
       - "Middleware"
-      description: "Devuelve un listado de los productos bancarios que han sido contratados\
-        \ por la persona proporcionada. " 
-      parameters:
-      - in: "body"
-        name: "ConsultaCuentasAgregadasCliente"
-        description: " Consulta Productos Contratadose"
-        required: true
-        schema:
-          $ref: "#/definitions/consultaProductosContratados-in-v1"
+      description: "Devuelve un listado de cuentas, inversiones y credito, existentes de la persona proporcionada. "  
       responses:
         200:
-          description: "Devuelve un listado de los productos bancarios que han sido\
-            \ contratados por la persona proporcionada."
+          description: "Devuelve un listado de cuentas, inversiones y credito, existentes de la persona proporcionada."
           schema:
             $ref: "#/definitions/consultaCuentasAgregadasCliente-res"
             
@@ -644,22 +631,11 @@ definitions:
         
   cambioContrasena-in-v1:
     required:
-    - "confirmNewPassword"
-    - "idPersona"
-    - "token"
-    - "newPassword"
-    - "oldPassword"
     - "otp"
-    properties:
-      idPersona:
-        type: "string"
-        example: "123"
-      token:
-        type: "string"
-        example: "87897"        
-      confirmNewPassword:
-        type: "string"
-        example: "1"
+    - "oldPassword"     
+    - "newPassword"
+    - "confirmNewPassword"     
+    properties:      
       otp:
         type: "string"
         example: "1"
@@ -668,7 +644,10 @@ definitions:
         example: "123"
       newPassword:
         type: "string"
-        example: "123"        
+        example: "123"    
+      confirmNewPassword:
+        type: "string"
+        example: "1"       
         
         
   cambioContrasenain_ticket:
@@ -743,14 +722,7 @@ definitions:
         minLength: 1
         maxLength: 5
         example: "CUBA1234575SDF"
-        
-  consultaProductosContratados-in-v1:
-    required:
-      - token 
-    properties:
-      token:
-        type: "string"
-        example: "1025478963"        
+         
         
   consultaProductosContratados-res:
     required:
