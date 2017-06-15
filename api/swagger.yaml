@@ -220,7 +220,7 @@ paths:
           description: "Devuelve un listado de los productos bancarios que han sido contratados por la persona proporcionada"
           schema:
             $ref: "#/definitions/consultaProductosContratados-res"
-  /v1/Validaotp:
+  /v1/validaOtp:
     post:
       tags:
       - "Middleware"
@@ -240,7 +240,7 @@ paths:
         
  
             
-  /v1/Validacontrato:
+  /v1/validaContrato:
     post:
       tags:
       - "Middleware"
@@ -306,14 +306,12 @@ paths:
             $ref: "#/definitions/envioNotificaciones-res"
         
         
-  /v1/login:
+  /v1/accesoCliente:
     post:
       tags:
         - "Middleware"
-      description: 'Servicio que permite enviar un archivo comprimido (.ZIP) para ser persistido en base de datos'
+      description: 'La página de inicio de sesión podrá utilizar esta información para iniciar sesión. Todos estos datos vendran de otro servicio agregador por cabecera'
       consumes:
-        - multipart/form-data
-      produces:
         - application/json
       parameters:
         - name: iv-user
@@ -375,93 +373,62 @@ paths:
           description: 'El canal de acceso. Para banca en línea se regresara el valor 1, para los demás canales se deberán definir el catalogo completo'
           required: true
           type: integer
+          
+        - in: "body"
+          name: "banderaAcceso"
+          description: "cookie valida generada por TAM"
+          required: false
+          schema:
+            $ref: "#/definitions/login-in-v1"
         
        
       responses:
           '200':
-            description: 'Valida la estructura del archivo que se adjunta'
+            description: 'Validacion de bandera Acceso, vendran valores por cabecera'
             schema:
-              $ref: '#/definitions/todo-res'
+              $ref: '#/definitions/login-res'
  
 definitions:
-  todo-res:
+  login-in-v1:
     properties:
+      banderaAcceso:
+        type: "string"
+        example: "1"
+  login-res:
+    properties:
+      fechaUltimoAcceso:
+        type: "string"
+        format: date
+        example: "date"
+      nombreUsuario:
+        type: "string"
+        example: "String"
+      fechaHoraAcceso:
+        type: "string"
+        format: "date"
+        example: "Date"
+      ultimoAcceso:
+        type: "string"
+        example: "string"
+      mail:
+        type: "string"
+        example: "string"
+      canal:
+        type: "string"
+        example: "string"
       consultaDatosBasicos:
          type: "array"
          items:
-          $ref: "#/definitions/consultaDatosBasicos-Login-res"
-          
+          $ref: "#/definitions/consultaDatosBasicos-res"
+        
       consultaServiciosContratados:
          type: "array"
          items:
           $ref: "#/definitions/consultaServiciosContratados-res"
-          
-      consultaProductosContratados:
-         type: "array"
-         items:
-          $ref: "#/definitions/consultaProductosContratados-res"
-          
-      consultaCuentasAgregadasCliente:
-         type: "array"
-         items:
-          $ref: "#/definitions/consultaCuentasAgregadasCliente-res"
       
      
           
-  consultaDatosBasicos-Login-res:
-    required:
-      - numCliente
-      - nombre
-      - fecha-ultimo-acceso
-      - mail
-    properties:
-      fecha-ultimo-acceso:
-        type: "string"
-        format: date
-        example: "date"
-      mail:
-        type: "string"
-        example: "string"
-      numCliente:
-        type: "integer"
-        format: "int64"
-        example: "Long"
-      nombre:
-        type: "string"
-        example: "String"
-      listaDirecciones:
-         type: "array"
-         items:
-          $ref: "#/definitions/listaDeDirecciones"
-      rfc:
-        type: "string"
-        example: "String"
-      listaTelefonos:
-        type: "array"
-        items:
-          $ref: "#/definitions/listaDeTelefonos"
-      listaEmails:
-        type: "array"
-        items:
-          $ref: "#/definitions/listaDeEmail"
-      tipoPersona:
-        type: "string"
-        example: "String"
-      estatus:
-        type: "string"
-        example: "String"
-      sucursal:
-        type: "string"
-        example: "String"
-      vip:
-        type: "string"
-        example: "String"
-      responseStatus:
-        type: "string"
-        example: "String"
-      responseError:
-        type: "string"
-        example: "String"
+ 
           
 
   
@@ -865,39 +832,12 @@ definitions:
         example: "Boolean"
   
   consultaDatosBasicos-res:
-    required:
-      - numCliente
-      - nombre
     properties:
-      numCliente:
-        type: "integer"
-        format: "int64"
-        example: "Long"
-      nombre:
-        type: "string"
-        example: "String"
-      listaDirecciones:
-         type: "array"
-         items:
-          $ref: "#/definitions/listaDeDirecciones"
-      rfc:
-        type: "string"
-        example: "String"
       listaTelefonos:
         type: "array"
         items:
           $ref: "#/definitions/listaDeTelefonos"
-      listaEmails:
-        type: "array"
-        items:
-          $ref: "#/definitions/listaDeEmail"
-      tipoPersona:
-        type: "string"
-        example: "String"
-      estatus:
-        type: "string"
-        example: "String"
-      sucursal:
+      nombreRazonSocial:
         type: "string"
         example: "String"
       vip:
@@ -909,50 +849,13 @@ definitions:
       responseError:
         type: "string"
         example: "String"
-      
- 
-          
-  listaDeEmail:
-    properties:
-      mail:
-        type: "string"
-        example: "String"
-      activo:
-        type: boolean
-        example: "Boolean"
-      tipoEmail:
-        type: "string"
-        example: "String"
-     
         
   listaDeTelefonos:
+    description: "Solo se tomara el primer numero telefonico"
     properties:
       telefono:
         type: integer
         example: "Integer"
       tipoTelefono:
-        type: "string"
-        example: "String"
-    
-        
-        
-  listaDeDirecciones:
-    properties:
-      direccion:
-        type: "string"
-        example: "String"
-      poblacion:
-        type: "string"
-        example: "String"
-      ciudad:
-        type: "string"
-        example: "String"
-      estado:
-        type: "string"
-        example: "String"
-      cp:
-        type: "string"
-        example: "String"
-      tipoDireccion:
         type: "string"
         example: "String"
