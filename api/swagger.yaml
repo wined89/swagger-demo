@@ -106,11 +106,11 @@ paths:
             
             
             
-  /CambioContrasena:
+  /cambioContrasena:
     post:
       tags:
       - "ESB Fuse"
-      description: "Cambia la contraseña existente por una nueva en el sistema TAM de la persona proporcionada. "
+      description: "Interfaz  que le permitira cambiar la informacion de contraseña de un usuario activo en el sistema TAM de Multiva. "
       parameters:
       - in: "body"
         name: "CambioContrasena"
@@ -124,11 +124,11 @@ paths:
           schema:
             $ref: "#/definitions/cambioContrasena-res"
             
-  /ConsultaCuentas:
+  /consultaCuentasAgregadasCliente:
     post:
       tags:
       - "ESB Fuse"
-      description: "Devuelve un listado de cuentas, inversiones y credito, existentes de la persona proporcionada."
+      description: "Interfaz  que le permitira consultar informacion de las cuentas agregadas de los clientes desde el core bancario T24 de Multiva."
       operationId: "consultaCuentasAgregadasClientePOST"
       parameters:
       - in: "body"
@@ -143,12 +143,11 @@ paths:
           schema:
             $ref: "#/definitions/consultaCuentasAgregadasCliente-res"
             
-  /EnvioNotificaciones:
+  /envioNotificaciones:
     post:
       tags:
       - "ESB Fuse"
-      description: "Devuelve un listado de los productos bancarios que han sido contratados\
-        \ por la persona proporcionada. "
+      description: "Interfaz  que le permitirá a un usuario o sistema enviar notifiaciones de varios tipos."
       operationId: "envioNotificacionesPOST"
       parameters:
       - in: "body"
@@ -159,8 +158,7 @@ paths:
           $ref: "#/definitions/envioNotificaciones-in"
       responses:
         200:
-          description: "Devuelve un listado de los productos bancarios que han sido\
-            \ contratados por la persona proporcionada."
+          description: "Representa una ejecución exitosa. Para efectos de este servicio, será indicativo de que la notificación solicitada se envió correctamente."
           schema:
             $ref: "#/definitions/envioNotificaciones-res"
         
@@ -260,11 +258,11 @@ paths:
           schema:
             $ref: "#/definitions/Validacontrato-res"
             
-  /v1/CambioContrasena:
+  /v1/cambioContrasena:
     post:
       tags:
       - "Middleware"
-      description: "Cambia la contraseña existente por una nueva en el sistema TAM de la persona proporcionada."
+      description: "Interfaz  que le permitira cambiar la informacion de contraseña de un usuario activo en el sistema TAM de Multiva."
       parameters:
       - in: "body"
         name: "CambioContrasena"
@@ -278,23 +276,22 @@ paths:
           schema:
             $ref: "#/definitions/cambioContrasena-res"
             
-  /v1/ConsultaCuentas:
+  /v1/consultaCuentas:
     post:
       tags:
       - "Middleware"
-      description: "Devuelve un listado de cuentas, inversiones y credito, existentes de la persona proporcionada. "  
+      description: "Interfaz  que le permitira consultar informacion de las cuentas agregadas de los clientes desde el core bancario T24 de Multiva. "  
       responses:
         200:
           description: "Devuelve un listado de cuentas, inversiones y credito, existentes de la persona proporcionada."
           schema:
             $ref: "#/definitions/consultaCuentasAgregadasCliente-res"
             
-  /v1/EnvioNotificaciones:
+  /v1/envioNotificaciones:
     post:
       tags:
       - "Middleware"
-      description: "Devuelve un listado de los productos bancarios que han sido contratados\
-        \ por la persona proporcionada. " 
+      description: "Interfaz  que le permitirá a un usuario o sistema enviar notifiaciones de varios tipos." 
       parameters:
       - in: "body"
         name: "EnvioNotificaciones"
@@ -304,8 +301,7 @@ paths:
           $ref: "#/definitions/envioNotificaciones-in-v1"
       responses:
         200:
-          description: "Devuelve un listado de los productos bancarios que han sido\
-            \ contratados por la persona proporcionada."
+          description: "Representa una ejecución exitosa. Para efectos de este servicio, será indicativo de que la notificación solicitada se envió correctamente."
           schema:
             $ref: "#/definitions/envioNotificaciones-res"
         
@@ -609,6 +605,7 @@ definitions:
     - "newPassword"
     - "oldPassword"
     - "otp"
+    - "confirmNewPassword"    
     properties:
       idPersona:
         type: "string"
@@ -626,7 +623,10 @@ definitions:
         example: "123"
       newPassword:
         type: "string"
-        example: "123"
+        example: "123"    
+      confirmNewPassword:
+        type: "string"
+        example: "1"   
         
         
   cambioContrasena-in-v1:
@@ -956,6 +956,3 @@ definitions:
       tipoDireccion:
         type: "string"
         example: "String"
-        
-     
- 
