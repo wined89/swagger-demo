@@ -407,7 +407,7 @@ definitions:
         type: "string"
         format: "date"
         example: "Date"
-      ultimoAcceso:
+      medioAcceso:
         type: "string"
         example: "string"
       mail:
