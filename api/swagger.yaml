@@ -27,7 +27,7 @@ paths:
           $ref: "#/definitions/consultaDatosBasicos-in"
       responses:
         200:
-          description: "En esta interfaz se describe un servicio dummy que se publicara para el uso del consumidor en tanto se completa la integracion del ESB a T24. Bajo el entendido de que la firma expuesta en este servicio dummy no cambiara cuando el desarrollo termine"
+          description: "Servicio dummy que se publicara para el uso del consumidor en tanto se completa la integracion del ESB a T24. Bajo el entendido de que la firma expuesta en este servicio dummy no cambiara cuando el desarrollo termine"
           schema:
             $ref: "#/definitions/consultaDatosBasicos-res"
             
@@ -93,8 +93,8 @@ paths:
       description: "Este servicio es para  cambiar la bandera de que el usuario acepto el contrato"
       parameters:
       - in: "body"
-        name: "contrato"
-        description: "Se requiere la validacion de la contraseña actual"
+        name: "contrato" 
+        description: "Se requiere del idCLiente del usuario y la bandera en un valor=1"
         required: true
         schema:
           $ref: "#/definitions/Validacontrato-in"
@@ -110,7 +110,7 @@ paths:
     post:
       tags:
       - "ESB Fuse"
-      description: "Interfaz  que le permitira cambiar la informacion de contraseña de un usuario activo en el sistema TAM de Multiva. "
+      description: "Servicio  que le permitira cambiar la informacion de contraseña de un usuario activo en el sistema TAM de Multiva. "
       parameters:
       - in: "body"
         name: "CambioContrasena"
@@ -162,23 +162,7 @@ paths:
           schema:
             $ref: "#/definitions/envioNotificaciones-res"
             
-  /v1/validaContrato:
-    post:
-      tags:
-      - "Middleware"
-      description: "Este servicio es para  cambiar la bandera de que el usuario acepto el contrato"
-      parameters:
-      - in: "body"
-        name: "contrato"
-        description: "Se requiere la validacion de la contraseña actual"
-        required: true
-        schema:
-          $ref: "#/definitions/Validacontrato-in"
-      responses:
-        200:
-          description: "Tipos de datos de respuesta"
-          schema:
-            $ref: "#/definitions/Validacontrato-res"
+
             
   /v1/cambioContrasena:
     post:
@@ -220,7 +204,7 @@ paths:
         description: " Consulta Productos Contratadose"
         required: true
         schema:
-          $ref: "#/definitions/envioNotificaciones-in-v1"
+          $ref: "#/definitions/envioNotificaciones-in"
       responses:
         200:
           description: "Representa una ejecución exitosa. Para efectos de este servicio, será indicativo de que la notificación solicitada se envió correctamente."
@@ -232,73 +216,73 @@ paths:
     post:
       tags:
         - "Middleware"
-      description: 'La página de inicio de sesión podrá utilizar esta información para iniciar sesión. Todos estos datos vendran de otro servicio agregador por cabecera'
+      description: 'Este servicio es el punto de entrada para el acceso a la aplicacion de Banca Electronica Omnicanal el cual valida si el cliente cuenta con la aceptacion del contrato y genera una sessión de la aplicación'
       consumes:
         - application/json
       parameters:
         - name: iv-user
           in: header
-          description: 'Nombre del usuario autenticado (numérico y tempralmete con algunos alfanuméricos)'
+          description: '(Header de NoLogin) Nombre del usuario autenticado (numérico y tempralmete con algunos alfanuméricos)'
           required: true
           type: integer
           
         - name: iv-creds
           in: header
-          description: 'Elemento con la representación en base64 de la credencial de usuario de TAM. Se requiere para algunas operaciones de los Servicios de Seguridad.'
+          description: '(Header de NoLogin) Elemento con la representación en base64 de la credencial de usuario de TAM. Se requiere para algunas operaciones de los Servicios de Seguridad.'
           required: true
           type: integer
           
         - name: iv-groups
           in: header
-          description: 'Lista separada por comas de los grupos de TAM/LDAP a los que pertenece el usuario.'
+          description: '(Header de NoLogin) Lista separada por comas de los grupos de TAM/LDAP a los que pertenece el usuario.'
           required: true
           type: integer
         
         - name: numero-cliente
           in: header
-          description: 'El dato de NumeroCliente del usuario (numero de 10 digitos).'
+          description: '(Header de NoLogin) El dato de NumeroCliente del usuario (numero de 10 digitos).'
           required: true
           type: integer
           
         - name: nombre-completo
           in: header
-          description: 'El dato de nombre completo del usuario. Almacenado en LDAP como el atributo CN, en el caso de Persona Física es el nombre completo, en el caso de Persona Moral se trata de la razón social.'
+          description: '(Header de NoLogin) El dato de nombre completo del usuario. Almacenado en LDAP como el atributo CN, en el caso de Persona Física es el nombre completo, en el caso de Persona Moral se trata de la razón social.'
           required: true
           type: integer
           
         - name: tipo-authenticacion
           in: header
-          description: 'El tipo de autenticación que se realizó con el Token. Generado por el módulo de autenticación de token, puede ser RO (ResponseOnly) o CR (Challenge/Response), dependiendo del tipo de autenticación realizado'
+          description: '(Header de NoLogin)  El tipo de autenticación que se realizó con el Token. Generado por el módulo de autenticación de token, puede ser RO (ResponseOnly) o CR (Challenge/Response), dependiendo del tipo de autenticación realizado'
           required: true
           type: integer
           
         - name: contratoAceptado
           in: header
-          description: 'El dato de primerAcceso del usuario.'
+          description: '(Header de NoLogin) El dato de primerAcceso del usuario.'
           required: true
           type: integer
           
         - name: fechaUltimoAcceso
           in: header
-          description: 'El dato de fechaUltimoAcceso del usuario. Se devuelve en un formato estándar de yyyyMMddHHmmss.0Z utilizado por Tivoli Directory Server.'
+          description: '(Header de NoLogin) El dato de fechaUltimoAcceso del usuario. Se devuelve en un formato estándar de yyyyMMddHHmmss.0Z utilizado por Tivoli Directory Server.'
           required: true
           type: integer
           
         - name: Tipocanal
           in: header
-          description: 'El canal de acceso. Para banca en línea se regresara el valor 1, para los demás canales se deberán definir el catalogo completo'
+          description: '(Header de NoLogin) El canal de acceso. Para banca en línea se regresara el valor 1, para los demás canales se deberán definir el catalogo completo'
           required: true
           type: integer
           
         - name: mail
           in: header
-          description: 'El canal de acceso. Para banca en línea se regresara el valor 1, para los demás canales se deberán definir el catalogo completo'
+          description: '(Header de NoLogin) El canal de acceso. Para banca en línea se regresara el valor 1, para los demás canales se deberán definir el catalogo completo'
           required: true
           type: integer
           
         - in: "body"
           name: "banderaAcceso"
-          description: "cookie valida generada por TAM"
+          description: "Indica si el contrato fue o no aceptado"
           required: false
           schema:
             $ref: "#/definitions/login-in-v1"
@@ -391,39 +375,6 @@ definitions:
         
 
 
-  envioNotificaciones-in-v1:
-    required:
-    - "canal"
-    - "idPersona"
-    - "token"
-    properties:
-      idPersona:
-        type: "string"
-        example: "123" 
-      token:
-        type: "string"
-        example: "1025478963"        
-      ticket:
-        $ref: "#/definitions/cambioContrasenain_ticket"
-      tipoMensaje:
-        type: "string"
-        example: "1"
-      tipoNotificacion:
-        type: "string"
-        example: "1"
-      from:
-        type: "string"
-        example: "q@r"
-      to:
-        type: "string"
-        example: "e@w"
-      mapParameters:
-        $ref: "#/definitions/envioNotificacionesin_mapParameters"
-      canal:
-        type: "string"
-        example: "1"
-        minLength: 1
-        maxLength: 5        
         
         
         
@@ -481,8 +432,6 @@ definitions:
         example: "string"
 
         
-  
-
   cambioContrasena-in:
     required:
     - "canal"
@@ -558,30 +507,15 @@ definitions:
       mensaje:
         type: "string"
         example: "string"
-
-
-
-
-
-
-
-  ValidacontratoMiddleware-in:
-    properties:
-      token:
-        type: "string"
-        example: "4333534"
-    
         
-        
-        
-        
+      
         
   Validacontrato-in:
     properties:
-      ContratoAceptado:
+      Usuario:
         type: "integer"
         example: 1
-      token:
+      ContratoAceptado:
         type: "integer"
         example: 1
       
