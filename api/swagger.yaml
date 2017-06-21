@@ -315,9 +315,7 @@ definitions:
       mail:
         type: "string"
         example: "string"
-      tipoCanal:
-        type: "string"
-        example: "string"
+      
       consultaDatosBasicos:
          type: "array"
          items:
