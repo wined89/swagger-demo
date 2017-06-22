@@ -293,8 +293,222 @@ paths:
             description: 'Validacion de bandera Acceso, vendran valores por cabecera'
             schema:
               $ref: '#/definitions/login-res'
+              
+              
+  /v1/listarTokensOTP:
+    post:
+      tags:
+      - "Middleware"
+      description: "Interfaz  que le permitira Listar los Tokens de OTP en el sistema TAM de Multiva." 
+      parameters:
+      - in: "body"
+        name: "listarTokensOTP"
+        description: "Se requiere obtener los atributos (uid, cn, sn, createtimestamp,vascoTokenSerialNumber) para todos los usuarios asociados a la persona representada por idPersona; además se requiere obtener el atributo estadoToken para cada UID que fue obtenido en esta consulta."
+        required: true
+        schema:
+          $ref: "#/definitions/listarTokensOTP-in"
+      responses:
+        200:
+          description: "Al obtener dichas listas se deberá asociar el atributo estadoToken para cada UID (haciendo match entre las dos listas), creando solo una lista."
+          schema:
+            $ref: "#/definitions/listarTokensOTP-res"
+            
+  /v1/activacionOTP:
+    post:
+      tags:
+      - "Middleware"
+      description: "Interfaz  que permitirá activar el OTP en el sistema TAM de Multiva." 
+      parameters:
+      - in: "body"
+        name: "activacionOTP"
+        description: "En esta interfaz se describe un servicio que se publicará para el uso del consumidor en tanto se completa la integración del ESB a TAM; bajo el entendido de que la firma expuesta en este servicio no cambiara cuando el desarrollo termine."
+        required: true
+        schema:
+          $ref: "#/definitions/activacionOTP-in"
+      responses:
+        200:
+          description: "Al obtener dichas listas se deberá asociar el atributo estadoToken para cada UID (haciendo match entre las dos listas), creando solo una lista."
+          schema:
+            $ref: "#/definitions/activacionOTP-res"
+            
+  /v1/bloqueoOTP:
+    post:
+      tags:
+      - "Middleware"
+      description: "Interfaz  que permitirá activar el OTP en el sistema TAM de Multiva." 
+      parameters:
+      - in: "body"
+        name: "bloqueoOTP"
+        description: "TAM validará si el token existe en la rama tokens de LDAP, si es correcto, verificará si el valor la bandera no está en 'f'. Si ambas cosas son ciertas, TAM realizará una modificación al valor del atributo estadoToken colocando el valor 'f' para el valor del token asociado."
+        required: true
+        schema:
+          $ref: "#/definitions/bloqueoOTP-in"
+      responses:
+        200:
+          description: "Al obtener dichas listas se deberá asociar el atributo estadoToken para cada UID (haciendo match entre las dos listas), creando solo una lista."
+          schema:
+            $ref: "#/definitions/bloqueoOTP-res"
+        
  
 definitions:
+  bloqueoOTP-in:
+    required:
+    - "canal"
+    - "idPersona"
+    properties:
+      idPersona:
+        type: "string"
+        example: "2222"
+      ticket:
+        $ref: "#/definitions/bloqueoOTP"
+      canal:
+        type: "string"
+        example: "1"
+        minLength: 1
+        maxLength: 5
+      numeroSerie:
+        type: "string"
+        example: "1"
+        
+        
+         
+  bloqueoOTP:
+    properties:
+      id_user:
+        type: "string"
+        example: "123"
+      id_creds:
+        type: "string"
+        example: "123"
+        
+  bloqueoOTP-res:
+    required:
+    - "responseStatus"
+    - "responseError"
+    properties:
+      responseStatus:
+        type: "integer"
+        format: int64
+        example: "long"
+      responseError:
+        type: "string"
+        example: "string"
+       
+  
+  activacionOTP-in:
+    required:
+    - "canal"
+    - "idPersona"
+    properties:
+      idPersona:
+        type: "string"
+        example: "2222"
+      ticket:
+        $ref: "#/definitions/activacionOTP"
+      canal:
+        type: "string"
+        example: "1"
+        minLength: 1
+        maxLength: 5
+      numeroSerie:
+        type: "string"
+        example: "1"
+        
+        
+         
+  activacionOTP:
+    properties:
+      id_user:
+        type: "string"
+        example: "123"
+      id_creds:
+        type: "string"
+        example: "123"
+        
+  activacionOTP-res:
+    required:
+    - "responseStatus"
+    - "responseError"
+    properties:
+      responseStatus:
+        type: "integer"
+        format: int64
+        example: "long"
+      responseError:
+        type: "string"
+        example: "string"
+       
+
+
+
+
+
+
+
+
+
+
+        
+  listarTokensOTP-in:
+    required:
+    - "canal"
+    - "idPersona"
+    properties:
+      idPersona:
+        type: "string"
+        example: "2222"
+      ticket:
+        $ref: "#/definitions/cambioContrasenain_ticket"
+      canal:
+        type: "string"
+        example: "1"
+        minLength: 1
+        maxLength: 5
+        
+  listarTokensOTP-res:
+    required:
+    - "responseStatus"
+    - "responseError"
+    properties:
+      listTokens:
+        type: "array"
+        items:
+          $ref: "#/definitions/listarTokensOTP"
+       
+      responseStatus:
+        type: "integer"
+        format: int64
+        example: "long"
+      responseError:
+        type: "string"
+        example: "string"
+       
+        
+  
+  listarTokensOTP:
+    required:
+    - "usuario"
+    - "tokenSerial"
+    - "nombreUsuario"
+    - "fechaAlta"
+    - "tokenStatus"
+    properties:
+      usuario:
+        type: "string"
+        example: "string"
+      tokenSerial:
+        type: "string"
+        example: "string"
+      nombreUsuario:
+        type: "string"
+        example: "string"
+      fechaAlta:
+        type: "string"
+        format: "date"
+        example: "Date"
+      tokenStatus:
+        type: "string"
+        example: "1"
   login-in-v1:
     properties:
       banderaAcceso:
