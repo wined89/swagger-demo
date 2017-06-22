@@ -902,7 +902,7 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/listaDeTelefonos"
-      nombreRazonSocial:
+      nombre:
         type: "string"
         example: "String"
       responseStatus:
