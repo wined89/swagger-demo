@@ -509,6 +509,7 @@ definitions:
       tokenStatus:
         type: "string"
         example: "1"
+        
   login-in-v1:
     properties:
       banderaAcceso:
@@ -529,12 +530,19 @@ definitions:
       mail:
         type: "string"
         example: "string"
-      
-      consultaDatosBasicos:
-         type: "array"
-         items:
-          $ref: "#/definitions/consultaDatosBasicos-res"
-        
+      nombreRazonSocial:
+        type: "string"
+        example: "String"
+      responseStatus:
+        type: "string"
+        example: "String"
+      responseError:
+        type: "string"
+        example: "String"
+      listaTelefonos:
+        type: "array"
+        items:
+          $ref: "#/definitions/listaDeTelefonos"
       consultaServiciosContratados:
          type: "array"
          items:
@@ -852,19 +860,12 @@ definitions:
   
   
   consultaServiciosContratados-res:
-    required:
-      - responseStatus
     properties:
       listaServicios:
          type: "array"
          items:
           $ref: "#/definitions/ServiciosContratadosListaServicios"
-      responseStatus:
-        type: integer
-        example: "String"
-      responseError:
-        type: "string"
-        example: "String"
+
       
      
 
@@ -902,9 +903,6 @@ definitions:
         items:
           $ref: "#/definitions/listaDeTelefonos"
       nombreRazonSocial:
-        type: "string"
-        example: "String"
-      vip:
         type: "string"
         example: "String"
       responseStatus:
