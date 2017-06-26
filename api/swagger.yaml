@@ -920,4 +920,4 @@ definitions:
         example: "Integer"
       tipoTelefono:
         type: "string"
-        example: "String"
+        example: "String" 
