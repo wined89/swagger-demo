@@ -463,7 +463,7 @@ definitions:
         $ref: "#/definitions/cambioContrasenain_ticket"
       canal:
         type: "string"
-        example: "1"
+        example: "String"
         minLength: 1
         maxLength: 5
         
