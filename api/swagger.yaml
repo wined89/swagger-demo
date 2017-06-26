@@ -368,7 +368,8 @@ definitions:
         example: "1"
         minLength: 1
         maxLength: 5
-      numeroSerie:
+      noSerie:
+        maxLength: 21
         type: "string"
         example: "1"
         
@@ -393,8 +394,10 @@ definitions:
         format: int64
         example: "long"
       responseError:
+        maxLength: 21
         type: "string"
         example: "string"
+        
        
   
   activacionOTP-in:
@@ -410,11 +413,12 @@ definitions:
       canal:
         type: "string"
         example: "1"
-        minLength: 1
         maxLength: 5
-      numeroSerie:
+      noSerie:
         type: "string"
         example: "1"
+        maxLength: 21
+        
         
         
          
@@ -439,6 +443,7 @@ definitions:
       responseError:
         type: "string"
         example: "string"
+        maxLength: 21
        
 
 
@@ -464,7 +469,6 @@ definitions:
       canal:
         type: "string"
         example: "String"
-        minLength: 1
         maxLength: 5
         
   listarTokensOTP-res:
@@ -500,6 +504,7 @@ definitions:
         type: "string"
         example: "string"
       tokenSerial:
+        maxLength: 21
         type: "string"
         example: "string"
       nombreUsuario:
@@ -922,3 +927,4 @@ definitions:
       tipoTelefono:
         type: "string"
         example: "String" 
+litsa
