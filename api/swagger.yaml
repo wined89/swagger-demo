@@ -526,6 +526,7 @@ definitions:
   login-res:
     properties:
       fechaUltimoAcceso:
+        description: "El dato de fechaUltimoAcceso del usuario. Se devuelve en un formato estándar de yyyyMMddHHmmss.0Z utilizado por Tivoli Directory Server."
         type: "string"
         format: date
         example: "date"
@@ -927,4 +928,4 @@ definitions:
       tipoTelefono:
         type: "string"
         example: "String" 
-litsa
+
