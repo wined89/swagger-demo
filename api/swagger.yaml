@@ -29,7 +29,7 @@ paths:
         200:
           description: "Servicio dummy que se publicara para el uso del consumidor en tanto se completa la integracion del ESB a T24. Bajo el entendido de que la firma expuesta en este servicio dummy no cambiara cuando el desarrollo termine"
           schema:
-            $ref: "#/definitions/consultaDatosBasicos-res"
+            $ref: "#/definitions/consultaDatosBasicos-fuse-res"
             
   /consultaServiciosContratados:
     post:
@@ -531,24 +531,31 @@ definitions:
         format: date
         example: "date"
       nombreUsuario:
+        description: "El dato de NumeroCliente del usuario (numero de 10 digitos)."
         type: "string"
         example: "String"
       medioAcceso:
+        description: "El canal de acceso. Para banca en línea se regresara el valor 1, para los demás canales se deberán definir el catalogo completo"
         type: "string"
         example: "string"
       mail:
+        description: "La cuenta de correo del usuario"
         type: "string"
         example: "string"
       nombreRazonSocial:
+        description: "Nombre completo de RazonSocial"
         type: "string"
         example: "String"
       responseStatus:
+        description: "Código de respuesta del servicio. 200 denotará una respuesta exitosa."
         type: "string"
         example: "String"
       responseError:
+        description: "Mensaje descriptivo del error, si el código de respuesta es diferente de 200."
         type: "string"
         example: "String"
       listaTelefonos:
+        description: "Número de teléfono, Indica el tipo de este teléfono (casa, oficina, fax, móvil, etc.)."
         type: "array"
         items:
           $ref: "#/definitions/listaDeTelefonos"
@@ -897,35 +904,129 @@ definitions:
   ServiciosContratadosListaServicios:
     properties:
       nombre:
+        description: "Nombre del servicio"
         type: "string"
         example: "String"
       contratado:
+        description: "Bandera que indica si el servicio ha sido contratado por la persona."
         type: boolean
         example: "Boolean"
   
-  consultaDatosBasicos-res:
+ 
+        
+  consultaDatosBasicos-fuse-res:
+    required:
+      - numCliente
+      - nombre
     properties:
+      numCliente:
+        type: "integer"
+        format: int64
+        example: "Long"
+      nombre:
+        type: "string"
+        example: "String"
+      listaDirecciones:
+        type: "array"
+        items:
+          $ref: "#/definitions/listadirecciones"
+      rfc:
+        description: "RFC del cliente"
+        type: string
+        example: "String"
       listaTelefonos:
         type: "array"
         items:
           $ref: "#/definitions/listaDeTelefonos"
-      nombre:
-        type: "string"
+      listaEmails:
+        type: "array"
+        items:
+          $ref: "#/definitions/listaEmails"
+          
+      tipoPersona:
+        description: "Régimen fiscal de la persona, PM, PF o PFAE."
+        type: string
         example: "String"
+      estatus:
+        description: "Estatus del cliente."
+        type: string
+        example: "String"
+      sucursal:
+        description: "Identificador de la sucursal asociada con el cliente."
+        type: string
+        example: "String"
+      vip:
+        description: "Indica si el cliente es VIP"
+        type: string
+        example: "String"
+      
       responseStatus:
+        description: "Código de respuesta del servicio. 200 denotará una respuesta exitosa."
         type: "string"
         example: "String"
       responseError:
+        description: "Mensaje descriptivo del error, si el código de respuesta es diferente de 200."
         type: "string"
         example: "String"
+            
+  
+        
+  listadirecciones:
+    properties:
+      direccion:
+        description: "Dirección del cliente, agrega calle y número"
+        type: string
+        example: "String"
+      poblacion:
+        description: "Delegación o municipio."
+        type: string
+        example: "String"
+      ciudad:
+        description: "Ciudad."
+        type: string
+        example: "String"
+      estado:
+        description: "Estado"
+        type: string
+        example: "String"
+      cp:
+        description: "Código postal."
+        type: string
+        example: "String"
+      tipoDireccion:
+        description: "Indica el tipo de dirección (fiscal, jurídica, de mensajes, etc.)."
+        type: string
+        example: "String"
+     
+      
+  listaEmails:
+    description: "Solo se tomara el primer numero telefonico"
+    properties:
+      mail:
+        description: "Correo electrónico."
+        type: string
+        example: "String"
+      activo:
+        description: "Bandera que indica si el correo en cuestión está activo o no."
+        type: "boolean"
+        example: "Boolena"
+      tipoEmail:
+        description: "Indica el uso que se le da al correo del cliente."
+        type: "string"
+        example: "String" 
+        
+      
+      
         
   listaDeTelefonos:
     description: "Solo se tomara el primer numero telefonico"
     properties:
       telefono:
-        type: integer
-        example: "Integer"
+        description: "Número de teléfono"
+        type: string
+        example: "String"
       tipoTelefono:
+        description: "Indica el tipo de este teléfono (casa, oficina, fax, móvil, etc.)."
         type: "string"
         example: "String" 
 
