@@ -390,10 +390,12 @@ definitions:
     - "responseError"
     properties:
       responseStatus:
+        description: "Código de respuesta del servicio. 200 denotará una respuesta exitosa."
         type: "integer"
         format: int64
         example: "long"
       responseError:
+        description: "Mensaje descriptivo del error, si el código de respuesta es diferente de 200."
         maxLength: 21
         type: "string"
         example: "string"
@@ -437,10 +439,12 @@ definitions:
     - "responseError"
     properties:
       responseStatus:
+        description: "Código de respuesta del servicio. 200 denotará una respuesta exitosa."
         type: "integer"
         format: int64
         example: "long"
       responseError:
+        description: "Mensaje descriptivo del error, si el código de respuesta es diferente de 200."
         type: "string"
         example: "string"
         maxLength: 21
@@ -482,10 +486,12 @@ definitions:
           $ref: "#/definitions/listarTokensOTP"
        
       responseStatus:
+        description: "Código de respuesta del servicio. 200 denotará una respuesta exitosa."
         type: "integer"
         format: int64
         example: "long"
       responseError:
+        description: "Mensaje descriptivo del error, si el código de respuesta es diferente de 200."
         type: "string"
         example: "string"
        
@@ -500,21 +506,26 @@ definitions:
     - "tokenStatus"
     properties:
       usuario:
+        description: "Clave de usuario asociado al token."
         maxLength: 14
         type: "string"
         example: "string"
       tokenSerial:
+        description: "Número de serie que viene en el Token Físico."
         maxLength: 21
         type: "string"
         example: "string"
       nombreUsuario:
+        description: "Nombre del usuario asociado al token."
         type: "string"
         example: "string"
       fechaAlta:
+        description: "Fecha de alta del usuario en LDAP en formato dd-MM-yyyy’T’hh:mm:ss"
         type: "string"
         format: "date"
         example: "Date"
       tokenStatus:
+        description: "Bandera de estado del Token."
         type: "string"
         example: "1"
         
@@ -571,9 +582,11 @@ definitions:
   envioNotificaciones-res:
     properties:
       responseStatus:
+        description: "Código de respuesta del servicio. 200 denotará una respuesta exitosa."
         type: "string"
         example: "string"
       responseError:
+        description: "Mensaje descriptivo del error, si el código de respuesta es diferente de 200."
         type: "string"
         example: "string"
 
@@ -623,6 +636,7 @@ definitions:
   consultaCuentasAgregadasCliente-res:
     properties:
       listCuentasCliente:
+        description: ""
         type: "array"
         items:
           $ref: "#/definitions/consultaCuentasAgregadasCliente-res-array"
@@ -635,33 +649,45 @@ definitions:
         items:
           $ref: "#/definitions/consultaCuentasAgregadasCliente-res-array"
       responseStatus:
+        description: "Código de respuesta del servicio. 200 denotará una respuesta exitosa."
         type: "string"
         example: "string"
       responseError:
+        description: "Mensaje descriptivo del error, si el código de respuesta es diferente de 200."
         type: "string"
         example: "string"
         
   consultaCuentasAgregadasCliente-res-array:
     properties:
       numeroDeCuenta:
+        description: "Número de cuenta"
         type: "string"
         example: "string"
       idProducto:
+        description: "Identificador del producto"
         type: "string"
         example: "string"
+        maxLength: 10
       descripcionProducto:
+        description: "Nombre comercial del producto."
         type: "string"
         example: "string"
+        maxLength: 100
       divisa:
+        description: "Clave de 3 letras de la divisa. Pesos Mexicanos será MXN."
         type: "string"
         example: "string"
+        maxLength: 3
       saldo:
+        description: "Saldo de la cuenta."
         type: "string"
         example: "Big Decimal"
       idSucursal:
+        description: "Identificador de la sucursal."
         type: "string"
         example: "integer"
       nombreSucursal:
+        description: "Nombre de la sucursal."
         type: "string"
         example: "string"
 
@@ -672,29 +698,32 @@ definitions:
     - "idPersona"
     - "newPassword"
     - "oldPassword"
-    - "otp"
-    - "confirmNewPassword"    
+    - "otp"  
     properties:
       idPersona:
+        description: "Identificador único de la persona en los sistemas institucionales."
         type: "string"
         example: "1222"
       ticket:
         $ref: "#/definitions/cambioContrasenain_ticket"
       canal:
+        description: "dentificador del canal a través del cual se recibió la petición. Se utilizarán los identificadores de canal definidos por T24."
         type: "string"
         example: "1"
+        maxLength: 5
       otp:
+        description: "One time password"
         type: "string"
         example: "otp"
       oldPassword:
+        description: "Contraseña antigua que se va a modificar."
         type: "string"
         example: "123"
       newPassword:
+        description: "Contraseña nueva que reemplazara la vieja."
         type: "string"
         example: "123"    
-      confirmNewPassword:
-        type: "string"
-        example: "1"   
+  
         
         
   cambioContrasena-in-v1:
@@ -705,15 +734,19 @@ definitions:
     - "confirmNewPassword"     
     properties:      
       otp:
+        description: "One time password"
         type: "string"
         example: "1"
       oldPassword:
+        description: "Contraseña antigua que se va a modificar."
         type: "string"
         example: "123"
       newPassword:
+        description: "Contraseña nueva que reemplazara la vieja."
         type: "string"
         example: "123"    
       confirmNewPassword:
+        description: ""
         type: "string"
         example: "1"       
         
@@ -721,9 +754,11 @@ definitions:
   cambioContrasenain_ticket:
     properties:
       id_user:
+        description: "Usuario logeado, idealmente debería ser el idPersona."
         type: "string"
         example: "123"
       id_creds:
+        description: "Cadena representativa de la sesión del usuario logeado."
         type: "string"
         example: "123"
         
@@ -732,15 +767,26 @@ definitions:
     properties:
       listCambioContrasena:
         $ref: "#/definitions/cambioContrasenares_listCambioContrasena"
+      responseStatus:
+        description: "Código de respuesta del servicio. 200 denotará una respuesta exitosa."
+        type: integer
+        example: "String"
+      responseError:
+        description: "Mensaje descriptivo del error, si el código de respuesta es diferente de 200."
+        type: "string"
+        example: "String"
         
   cambioContrasenares_listCambioContrasena:
     properties:
       codigo:
+        description: "Codigo que regresa TAM con el tipo de respuesta si fue exitoso o no"
         type: "string"
         example: "integer"
       mensaje:
+        description: "Mensaje que representa el codigo de TAM"
         type: "string"
         example: "string"
+      
         
       
         
@@ -766,13 +812,14 @@ definitions:
       - canal
     properties:
       idPersona:
+        description: "Identificador único de la persona en los sistemas institucionales."
         type: number
         example: "1025478963"
       ticket:
           $ref: "#/definitions/consultaProductosContratadosticket"
       canal:
+        description: "Identificador del canal a través del cual se recibió la petición. Se utilizarán los identificadores de canal definidos por T24."
         type: "string"
-        minLength: 1
         maxLength: 5
         example: "CUBA1234575SDF"
          
@@ -786,9 +833,11 @@ definitions:
          items:
           $ref: "#/definitions/ServiciosContratadosListaServicios"
       responseStatus:
+        description: "Código de respuesta del servicio. 200 denotará una respuesta exitosa."
         type: integer
         example: "String"
       responseError:
+        description: "Mensaje descriptivo del error, si el código de respuesta es diferente de 200."
         type: "string"
         example: "String"
         
@@ -796,9 +845,11 @@ definitions:
   consultaProductosContratadosticket:
     properties:
       id_user:
+        description: "Usuario logeado, idealmente debería ser el idPersona."
         type: "string"
         example: "123"
       id_creds:
+        description: "Cadena representativa de la sesión del usuario logeado."
         type: "string"
         example: "321"
         
@@ -920,10 +971,12 @@ definitions:
       - nombre
     properties:
       numCliente:
+        description: "Número de cliente de T24"
         type: "integer"
         format: int64
         example: "Long"
       nombre:
+        description: "Nombre del cliente (agrega apellidos)"
         type: "string"
         example: "String"
       listaDirecciones:
@@ -1029,4 +1082,12 @@ definitions:
         description: "Indica el tipo de este teléfono (casa, oficina, fax, móvil, etc.)."
         type: "string"
         example: "String" 
+      cvePais:
+        description: "Clave Pais"
+        type: "integer"
+        example: "integer" 
+      codArea:
+        description: "Codigo Area"
+        type: "integer"
+        example: "integer" 
 
