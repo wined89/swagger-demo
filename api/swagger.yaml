@@ -930,6 +930,15 @@ definitions:
          type: "array"
          items:
           $ref: "#/definitions/ServiciosContratadosListaServicios"
+          
+      responseStatus:
+        description: "Código de respuesta del servicio. 200 denotará una respuesta exitosa."
+        type: "string"
+        example: "String"
+      responseError:
+        description: "Mensaje descriptivo del error, si el código de respuesta es diferente de 200."
+        type: "string"
+        example: "String"
 
       
      
