@@ -357,101 +357,164 @@ definitions:
     required:
     - "canal"
     - "idPersona"
+    - "otp"
+    
     properties:
       idPersona:
-        type: "string"
+        description: "Identificador único de la persona solicitante."
+        type: "integer"
+        format: int64
         example: "2222"
+      listTokens:
+        $ref: "#/definitions/listTokens-bloqueoOTP"
       ticket:
-        $ref: "#/definitions/bloqueoOTP"
+        $ref: "#/definitions/ticket-bloqueoOTP"
+      
       canal:
         type: "string"
         example: "1"
-        minLength: 1
         maxLength: 5
-      noSerie:
-        maxLength: 21
+      otp:
         type: "string"
         example: "1"
         
-        
-         
-  bloqueoOTP:
+  ticket-bloqueoOTP:
     properties:
       id_user:
+        description: "Usuario logeado,idealmente debería ser el idPersona."
         type: "string"
         example: "123"
       id_creds:
+        description: "Cadena representativa de la sesión del usuario logeado."
         type: "string"
         example: "123"
         
+  listTokens-bloqueoOTP:
+    required: 
+      - idPersonaPropietaria
+      - noSerie
+    properties:
+      idPersonaPropietaria:
+        description: "Usuario logeado,idealmente debería ser el idPersona."
+        type: "integer"
+        format: int64
+        example: "123"
+      noSerie:
+        description: "Cadena representativa de la sesión del usuario logeado."
+        type: "string"
+        example: "123"  
+        maxLength: 21
+        
   bloqueoOTP-res:
+   properties:
+      listTokens:
+        $ref: "#/definitions/bloqueoOTP-res-listaTokens"
+        
+        
+  bloqueoOTP-res-listaTokens:
     required:
+    - "usuario"
     - "responseStatus"
     - "responseError"
     properties:
+      usuario:
+        description: "Identificador único de la persona solicitante."
+        type: "string"
+        example: "String"
       responseStatus:
-        description: "Código de respuesta del servicio. 200 denotará una respuesta exitosa."
+        description: "Código de respuesta del servicio. 200 Representa una ejecución exitosa."
         type: "integer"
         format: int64
-        example: "long"
+        example: "Long"
       responseError:
-        description: "Mensaje descriptivo del error, si el código de respuesta es diferente de 200."
-        maxLength: 21
+        description: "Mensaje de error, si aplica. Si se trata de una ejecución exitosa, este mensaje va vacío en la respuesta."
         type: "string"
-        example: "string"
-        
+        example: "String"
+        maxLength: 21
        
   
   activacionOTP-in:
     required:
     - "canal"
     - "idPersona"
+    - "otp"
+    
     properties:
       idPersona:
-        type: "string"
+        description: "Identificador único de la persona solicitante."
+        type: "integer"
+        format: int64
         example: "2222"
+      listTokens:
+        $ref: "#/definitions/listTokens"
       ticket:
         $ref: "#/definitions/activacionOTP"
+      
       canal:
         type: "string"
         example: "1"
         maxLength: 5
-      noSerie:
+      otp:
         type: "string"
         example: "1"
+      
+        
+        
+  listTokens:
+    required: 
+      - idPersonaPropietaria
+      - noSerie
+    properties:
+      idPersonaPropietaria:
+        description: "Usuario logeado,idealmente debería ser el idPersona."
+        type: "integer"
+        format: int64
+        example: "123"
+      noSerie:
+        description: "Cadena representativa de la sesión del usuario logeado."
+        type: "string"
+        example: "123"  
         maxLength: 21
-        
-        
-        
          
   activacionOTP:
     properties:
       id_user:
+        description: "Usuario logeado,idealmente debería ser el idPersona."
         type: "string"
         example: "123"
       id_creds:
+        description: "Cadena representativa de la sesión del usuario logeado."
         type: "string"
         example: "123"
         
   activacionOTP-res:
+   properties:
+      listTokens:
+        $ref: "#/definitions/activacionOTP-res-listaTokens"
+      
+
+
+  activacionOTP-res-listaTokens:
     required:
+    - "usuario"
     - "responseStatus"
     - "responseError"
     properties:
+      usuario:
+        description: "Identificador único de la persona solicitante."
+        type: "string"
+        example: "String"
       responseStatus:
-        description: "Código de respuesta del servicio. 200 denotará una respuesta exitosa."
+        description: "Código de respuesta del servicio. 200 Representa una ejecución exitosa."
         type: "integer"
         format: int64
-        example: "long"
+        example: "Long"
       responseError:
-        description: "Mensaje descriptivo del error, si el código de respuesta es diferente de 200."
+        description: "Mensaje de error, si aplica. Si se trata de una ejecución exitosa, este mensaje va vacío en la respuesta."
         type: "string"
-        example: "string"
+        example: "String"
         maxLength: 21
-       
-
-
-
+   
 
 
 
@@ -466,14 +529,31 @@ definitions:
     - "idPersona"
     properties:
       idPersona:
-        type: "string"
+        description: "Identificador único de la persona solicitante."
+        type: "integer"
+        format: int64
         example: "2222"
       ticket:
-        $ref: "#/definitions/cambioContrasenain_ticket"
+        $ref: "#/definitions/listarTokensOTP-ticket"
       canal:
+        description: "Identificador del canal a través del cual se recibió la petición. Se utilizarán los identificadores de canal definidos por T24."
         type: "string"
         example: "String"
         maxLength: 5
+        
+  listarTokensOTP-ticket:
+    required:
+      - id_user
+      - id_creds
+    properties:
+      id_user:
+        description: "Usuario logeado, idealmente debería ser el idPersona."
+        type: "string"
+        example: "String"
+      id_creds:
+        description: "Cadena representativa de la sesión del usuario logeado."
+        type: "string"
+        example: "String"
         
   listarTokensOTP-res:
     required:
@@ -509,16 +589,16 @@ definitions:
         description: "Clave de usuario asociado al token."
         maxLength: 14
         type: "string"
-        example: "string"
+        example: "String"
       tokenSerial:
         description: "Número de serie que viene en el Token Físico."
         maxLength: 21
         type: "string"
-        example: "string"
+        example: "String"
       nombreUsuario:
         description: "Nombre del usuario asociado al token."
         type: "string"
-        example: "string"
+        example: "String"
       fechaAlta:
         description: "Fecha de alta del usuario en LDAP en formato dd-MM-yyyy’T’hh:mm:ss"
         type: "string"
@@ -527,7 +607,7 @@ definitions:
       tokenStatus:
         description: "Bandera de estado del Token."
         type: "string"
-        example: "1"
+        example: "String"
         
   login-in-v1:
     properties:
