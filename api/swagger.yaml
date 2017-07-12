@@ -5,7 +5,6 @@ info:
   version: "0.1.0"
   title: "Grupo Financiero Multiva"
 host: "200.39.24.141"
-basePath: "/BEO"
 tags:
 - name: ""
   description: "Grupo Financiero Multiva"
@@ -13,7 +12,7 @@ tags:
     description: "Servicios Multiva"
     url: "http://200.39.24.141:9090/docs"
 paths:
-  /consultaDatosBasicos:
+  /BEO/consultaDatosBasicos:
     post:
       tags:
       - "ESB Fuse"
@@ -31,7 +30,7 @@ paths:
           schema:
             $ref: "#/definitions/consultaDatosBasicos-fuse-res"
             
-  /consultaServiciosContratados:
+  /BEO/consultaServiciosContratados:
     post:
       tags:
       - "ESB Fuse"
@@ -49,7 +48,10 @@ paths:
           schema:
             $ref: "#/definitions/consultaServiciosContratados-res"
             
-  /consultaProductosContratados:
+            
+            
+            
+  /BEO/consultaProductosContratados:
     post:
       tags:
       - "ESB Fuse"
@@ -66,7 +68,7 @@ paths:
           description: "Devuelve un listado de los productos bancarios que han sido contratados por la persona proporcionada"
           schema:
             $ref: "#/definitions/consultaProductosContratados-res"
-  /Validaotp:
+  /BEO/Validaotp:
     post:
       tags:
       - "ESB Fuse"
@@ -86,7 +88,7 @@ paths:
         
  
             
-  /Validacontrato:
+  /BEO/Validacontrato:
     post:
       tags:
       - "ESB Fuse"
@@ -106,7 +108,7 @@ paths:
             
             
             
-  /cambioContrasena:
+  /BEO/cambioContrasena:
     post:
       tags:
       - "ESB Fuse"
@@ -124,7 +126,7 @@ paths:
           schema:
             $ref: "#/definitions/cambioContrasena-res"
             
-  /consultaCuentasAgregadasCliente:
+  /BEO/consultaCuentasAgregadasCliente:
     post:
       tags:
       - "ESB Fuse"
@@ -143,7 +145,7 @@ paths:
           schema:
             $ref: "#/definitions/consultaCuentasAgregadasCliente-res"
             
-  /envioNotificaciones:
+  /BEO/envioNotificaciones:
     post:
       tags:
       - "ESB Fuse"
@@ -162,7 +164,7 @@ paths:
           schema:
             $ref: "#/definitions/envioNotificaciones-res"
             
-  /listarTokensOTP:
+  /BEO/listarTokensOTP:
     post:
       tags:
       - "ESB Fuse"
@@ -180,7 +182,7 @@ paths:
           schema:
             $ref: "#/definitions/listarTokensOTP-res"
             
-  /activacionOTP:
+  /BEO/activacionOTP:
     post:
       tags:
       - "ESB Fuse"
@@ -198,7 +200,7 @@ paths:
           schema:
             $ref: "#/definitions/activacionOTP-res"
             
-  /bloqueoOTP:
+  /BEO/bloqueoOTP:
     post:
       tags:
       - "ESB Fuse"
@@ -220,7 +222,7 @@ paths:
             
             
             
-  /consultaPerfiles:
+  /BEO/consultaPerfiles:
     post:
       tags:
       - "ESB Fuse"
@@ -244,47 +246,235 @@ paths:
             
 
             
-  /v1/cambioContrasena:
+  /autenticacion/cambioContrasena:
     post:
       tags:
       - "Middleware"
       description: "Interfaz  que le permitira cambiar la informacion de contraseña de un usuario activo en el sistema TAM de Multiva."
+      consumes:
+        - application/json
       parameters:
-      - in: "body"
-        name: "CambioContrasena"
-        description: " cambio de Contrasena"
-        required: true
-        schema:
-          $ref: "#/definitions/cambioContrasena-in-v1"
+        - name: iv-user
+          in: header
+          description: '(Header de NoLogin) Nombre del usuario autenticado (numérico y tempralmete con algunos alfanuméricos)'
+          required: true
+          type: integer
+          
+        - name: iv-creds
+          in: header
+          description: '(Header de NoLogin) Elemento con la representación en base64 de la credencial de usuario de TAM. Se requiere para algunas operaciones de los Servicios de Seguridad.'
+          required: true
+          type: integer
+          
+        - name: iv-groups
+          in: header
+          description: '(Header de NoLogin) Lista separada por comas de los grupos de TAM/LDAP a los que pertenece el usuario.'
+          required: true
+          type: integer
+        
+        - name: numero-cliente
+          in: header
+          description: '(Header de NoLogin) El dato de NumeroCliente del usuario (numero de 10 digitos).'
+          required: true
+          type: integer
+          
+        - name: nombre-completo
+          in: header
+          description: '(Header de NoLogin) El dato de nombre completo del usuario. Almacenado en LDAP como el atributo CN, en el caso de Persona Física es el nombre completo, en el caso de Persona Moral se trata de la razón social.'
+          required: true
+          type: integer
+          
+        - name: tipo-authenticacion
+          in: header
+          description: '(Header de NoLogin)  El tipo de autenticación que se realizó con el Token. Generado por el módulo de autenticación de token, puede ser RO (ResponseOnly) o CR (Challenge/Response), dependiendo del tipo de autenticación realizado'
+          required: true
+          type: integer
+          
+        - name: contratoAceptado
+          in: header
+          description: '(Header de NoLogin) El dato de primerAcceso del usuario.'
+          required: true
+          type: integer
+          
+        - name: fechaUltimoAcceso
+          in: header
+          description: '(Header de NoLogin) El dato de fechaUltimoAcceso del usuario. Se devuelve en un formato estándar de yyyyMMddHHmmss.0Z utilizado por Tivoli Directory Server.'
+          required: true
+          type: integer
+          
+        - name: Tipocanal
+          in: header
+          description: '(Header de NoLogin) El canal de acceso. Para banca en línea se regresara el valor 1, para los demás canales se deberán definir el catalogo completo'
+          required: true
+          type: integer
+          
+        - name: mail
+          in: header
+          description: '(Header de NoLogin) El canal de acceso. Para banca en línea se regresara el valor 1, para los demás canales se deberán definir el catalogo completo'
+          required: true
+          type: integer
+          
+        - in: "body"
+          name: "CambioContrasena"
+          description: " cambio de Contrasena"
+          required: true
+          schema:
+            $ref: "#/definitions/cambioContrasena-in-v1"
+          
       responses:
         200:
           description: "Cambia la contraseña existente por una nueva en el sistema TAM de la persona proporcionada."
           schema:
             $ref: "#/definitions/cambioContrasena-res"
             
-  /v1/consultaCuentas:
+  /BEO/v1/consultaCuentas:
     post:
       tags:
       - "Middleware"
-      description: "Interfaz  que le permitira consultar informacion de las cuentas agregadas de los clientes desde el core bancario T24 de Multiva. "  
+      description: "Interfaz  que le permitira consultar informacion de las cuentas agregadas de los clientes desde el core bancario T24 de Multiva. "
+      consumes:
+        - application/json
+      parameters:
+        - name: iv-user
+          in: header
+          description: '(Header de NoLogin) Nombre del usuario autenticado (numérico y tempralmete con algunos alfanuméricos)'
+          required: true
+          type: integer
+          
+        - name: iv-creds
+          in: header
+          description: '(Header de NoLogin) Elemento con la representación en base64 de la credencial de usuario de TAM. Se requiere para algunas operaciones de los Servicios de Seguridad.'
+          required: true
+          type: integer
+          
+        - name: iv-groups
+          in: header
+          description: '(Header de NoLogin) Lista separada por comas de los grupos de TAM/LDAP a los que pertenece el usuario.'
+          required: true
+          type: integer
+        
+        - name: numero-cliente
+          in: header
+          description: '(Header de NoLogin) El dato de NumeroCliente del usuario (numero de 10 digitos).'
+          required: true
+          type: integer
+          
+        - name: nombre-completo
+          in: header
+          description: '(Header de NoLogin) El dato de nombre completo del usuario. Almacenado en LDAP como el atributo CN, en el caso de Persona Física es el nombre completo, en el caso de Persona Moral se trata de la razón social.'
+          required: true
+          type: integer
+          
+        - name: tipo-authenticacion
+          in: header
+          description: '(Header de NoLogin)  El tipo de autenticación que se realizó con el Token. Generado por el módulo de autenticación de token, puede ser RO (ResponseOnly) o CR (Challenge/Response), dependiendo del tipo de autenticación realizado'
+          required: true
+          type: integer
+          
+        - name: contratoAceptado
+          in: header
+          description: '(Header de NoLogin) El dato de primerAcceso del usuario.'
+          required: true
+          type: integer
+          
+        - name: fechaUltimoAcceso
+          in: header
+          description: '(Header de NoLogin) El dato de fechaUltimoAcceso del usuario. Se devuelve en un formato estándar de yyyyMMddHHmmss.0Z utilizado por Tivoli Directory Server.'
+          required: true
+          type: integer
+          
+        - name: Tipocanal
+          in: header
+          description: '(Header de NoLogin) El canal de acceso. Para banca en línea se regresara el valor 1, para los demás canales se deberán definir el catalogo completo'
+          required: true
+          type: integer
+          
+        - name: mail
+          in: header
+          description: '(Header de NoLogin) El canal de acceso. Para banca en línea se regresara el valor 1, para los demás canales se deberán definir el catalogo completo'
+          required: true
+          type: integer
+          
       responses:
         200:
           description: "Devuelve un listado de cuentas, inversiones y credito, existentes de la persona proporcionada."
           schema:
             $ref: "#/definitions/consultaCuentasAgregadasCliente-res"
             
-  /v1/envioNotificaciones:
+  /BEO/v1/envioNotificaciones:
     post:
       tags:
       - "Middleware"
-      description: "Interfaz  que le permitirá a un usuario o sistema enviar notifiaciones de varios tipos." 
+      description: "Interfaz  que le permitirá a un usuario o sistema enviar notifiaciones de varios tipos."
+      consumes:
+        - application/json
       parameters:
-      - in: "body"
-        name: "EnvioNotificaciones"
-        description: " Consulta Productos Contratadose"
-        required: true
-        schema:
-          $ref: "#/definitions/envioNotificaciones-in"
+        - name: iv-user
+          in: header
+          description: '(Header de NoLogin) Nombre del usuario autenticado (numérico y tempralmete con algunos alfanuméricos)'
+          required: true
+          type: integer
+          
+        - name: iv-creds
+          in: header
+          description: '(Header de NoLogin) Elemento con la representación en base64 de la credencial de usuario de TAM. Se requiere para algunas operaciones de los Servicios de Seguridad.'
+          required: true
+          type: integer
+          
+        - name: iv-groups
+          in: header
+          description: '(Header de NoLogin) Lista separada por comas de los grupos de TAM/LDAP a los que pertenece el usuario.'
+          required: true
+          type: integer
+        
+        - name: numero-cliente
+          in: header
+          description: '(Header de NoLogin) El dato de NumeroCliente del usuario (numero de 10 digitos).'
+          required: true
+          type: integer
+          
+        - name: nombre-completo
+          in: header
+          description: '(Header de NoLogin) El dato de nombre completo del usuario. Almacenado en LDAP como el atributo CN, en el caso de Persona Física es el nombre completo, en el caso de Persona Moral se trata de la razón social.'
+          required: true
+          type: integer
+          
+        - name: tipo-authenticacion
+          in: header
+          description: '(Header de NoLogin)  El tipo de autenticación que se realizó con el Token. Generado por el módulo de autenticación de token, puede ser RO (ResponseOnly) o CR (Challenge/Response), dependiendo del tipo de autenticación realizado'
+          required: true
+          type: integer
+          
+        - name: contratoAceptado
+          in: header
+          description: '(Header de NoLogin) El dato de primerAcceso del usuario.'
+          required: true
+          type: integer
+          
+        - name: fechaUltimoAcceso
+          in: header
+          description: '(Header de NoLogin) El dato de fechaUltimoAcceso del usuario. Se devuelve en un formato estándar de yyyyMMddHHmmss.0Z utilizado por Tivoli Directory Server.'
+          required: true
+          type: integer
+          
+        - name: Tipocanal
+          in: header
+          description: '(Header de NoLogin) El canal de acceso. Para banca en línea se regresara el valor 1, para los demás canales se deberán definir el catalogo completo'
+          required: true
+          type: integer
+          
+        - name: mail
+          in: header
+          description: '(Header de NoLogin) El canal de acceso. Para banca en línea se regresara el valor 1, para los demás canales se deberán definir el catalogo completo'
+          required: true
+          type: integer
+          
+        - in: "body"
+          name: "EnvioNotificaciones"
+          description: " Consulta Productos Contratadose"
+          required: true
+          schema:
+            $ref: "#/definitions/envioNotificaciones-in"
       responses:
         200:
           description: "Representa una ejecución exitosa. Para efectos de este servicio, será indicativo de que la notificación solicitada se envió correctamente."
@@ -292,7 +482,7 @@ paths:
             $ref: "#/definitions/envioNotificaciones-res"
         
         
-  /v1/accesoCliente:
+  /autenticacion/accesoCliente:
     post:
       tags:
         - "Middleware"
@@ -370,9 +560,16 @@ paths:
        
       responses:
           '200':
-            description: 'Validacion de bandera Acceso, vendran valores por cabecera'
+            description: 'Validacion de bandera Acceso, vendran valores por cabecera Si el contrato este manda dos JSON diferentes 1- Es en caso de que el contrato aun no este aceptado manda los atributos: mostrarContrato: donde trae true para mandar mostrar el contrato,responseError: Este viene sin valor "" y en responseStatus donde mandamos un 200. En caso de que manden en la banderaAcceso manden otro valor diferente que 1 o "" mandara los atributos de responseError y responseStatus'
             schema:
               $ref: '#/definitions/login-res'
+          '403':
+            description: 'Toma este error en caso de que un servicio de los que esta consumiendo no responda o uno de los headers no lleve algun dato'
+            schema:
+              $ref: '#/definitions/error403'
+              
+              
+           
               
               
   
@@ -461,7 +658,9 @@ definitions:
         format: int64
         example: "2222"
       listTokens:
-        $ref: "#/definitions/listTokens-bloqueoOTP"
+        type: "array"
+        items:
+          $ref: "#/definitions/listTokens-bloqueoOTP"
       ticket:
         $ref: "#/definitions/ticket-bloqueoOTP"
       
@@ -748,10 +947,12 @@ definitions:
           $ref: "#/definitions/listaDeTelefonos"
       consultaServiciosContratados:
           $ref: "#/definitions/consultaServiciosContratados-res"
-      
-     
-          
- 
+      facultadesSimples:
+        type: array
+        items:
+          type: string
+          example: "String"
+          description: 'Lista de nombres de facultades simples asociadas con el usuario consultado.'
           
 
   
@@ -1270,4 +1471,23 @@ definitions:
         description: "Codigo Area"
         type: "integer"
         example: "integer" 
+        
+  
+  error403:
+    description: "Toma este error en caso de que un servicio de los que esta consumiendo no responda o uno de los headers no lleve algun dato"
+    properties:
+      responseError:
+        description: "Nos manda un codigo de error"
+        type: "integer"
+        example: 403
+      responseStatus:
+        description: "Nos trae un mensaje Por Definir"
+        type: "string"
+        example: "Por Definir"  
+  
+   
+        
+        
+        
+        
 
